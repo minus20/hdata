@@ -1,0 +1,36 @@
+# For a quick start check out our HTTP Requests collection (Tools|HTTP Client|Open HTTP Requests Collection).
+#
+# Following HTTP Request Live Templates are available:
+# * 'gtrp' and 'gtr' create a GET request with or without query parameters;
+# * 'ptr' and 'ptrp' create a POST request with a simple or parameter-like body;
+# * 'mptr' and 'fptr' create a POST request to submit a form with a text or file field (multipart/form-data);
+POST http://127.0.0.1:8000/api/register
+Accept: application/json
+Content-Type: application/json
+
+{"name": "John Snow", "email":"john@snow.com", "password": "johnsnow", "password_confirmation": "johnsnow"}
+
+###
+POST http://127.0.0.1:8000/api/login
+Accept: application/json
+Content-Type: application/json
+
+{"email":"john@snow.com", "password": "johnsnow"}
+
+###
+POST http://127.0.0.1:8000/api/companies
+Accept: application/json
+Content-Type: application/json
+Authorization: Bearer 5cc1901aa3977
+
+{"name": "<script>alert('boo!');</script>"}
+
+###
+POST http://127.0.0.1:8000/api/reviews
+Accept: application/json
+Content-Type: application/json
+Authorization: Bearer 5cc2b02a71cf7
+
+{"company_id": 999, "rating":  4, "comment":  "meh"}
+
+###
