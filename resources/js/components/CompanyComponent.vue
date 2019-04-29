@@ -23,6 +23,16 @@
                 v-bind:review="review"
             ></company-review>
         </div>
+        <div v-if="signedIn">
+            <button v-on:click="showForm = !showForm">Write review</button>
+            <form v-if="showForm" v-on:submit.prevent="newReview">
+                {{ rating }}<br>
+
+                <input type="range" min="1" max="5" step="1" v-model="rating"><br>
+                <textarea v-model="comment"></textarea><br>
+                <button class="btn">Отправить</button>
+            </form>
+        </div>
     </div>
 </template>
 
@@ -34,16 +44,24 @@
     export default {
         name: "CompanyComponent",
         components: {CompanyReview},
+        data() {
+            return {
+                showForm: false,
+                rating: 1,
+                comment: ''
+            }
+        },
         computed: {
             ...mapGetters([
-                "getCompany"
+                "getCompany",
+                'signedIn'
             ]),
             company() {
                 return store.state.companies.find(com => com['id'] == this.$route.params.id);
             },
             reviews() {
                 return store.state.reviews.filter(rew => rew['company_id'] == this.$route.params.id);
-            }
+            },
         },
         methods: {
             averageRating() {
@@ -53,6 +71,13 @@
                 } else {
                     return '-';
                 }
+            },
+            newReview() {
+                this.$store.dispatch('addReview', {
+                    rating: this.rating,
+                    comment: this.comment,
+                    'company_id': this.company.id
+                })
             }
         }
     }

@@ -1,17 +1,29 @@
 <template>
-    <div class="card">
-        <div class="card-header">
-            <h2>{{ title }}</h2>
-        </div>
-        <div v-if="companies.length > 0">
-            <div class="list-group">
-                <rating-list-item
-                    v-for="company in companies"
-                    v-bind:key="company.id"
-                    v-bind:id="company.id"
-                    v-bind:name="company.name"
-                ></rating-list-item>
+    <div>
+        <div class="card">
+            <div class="card-header">
+                <h2>Rating</h2>
             </div>
+            <div v-if="companies.length > 0">
+                <div class="list-group">
+                    <rating-list-item
+                        v-for="company in companies"
+                        v-bind:key="company.id"
+                        v-bind:id="company.id"
+                        v-bind:name="company.name"
+                    ></rating-list-item>
+                </div>
+            </div>
+            <div v-else class="card-body">
+                <i>Loading...</i>
+            </div>
+        </div>
+        <div v-if="signedIn">
+            <button class="btn" v-on:click="showForm = !showForm">Заявка на добавление</button>
+            <form v-if="showForm" v-on:submit.prevent="newCompany">
+                <input type="text" v-model="name" placeholder="Name" required><br>
+                <button class="btn">Send</button>
+            </form>
         </div>
     </div>
 </template>
@@ -23,7 +35,8 @@
         name: "RatingListComponent",
         data() {
             return {
-                'title': "Rating"
+                showForm: false,
+                name: ''
             }
         },
         components: {
@@ -33,11 +46,15 @@
             companies() {
                 return this.$store.state.companies
             },
+            signedIn() {
+                return this.$store.state.profile.name
+            }
         },
-        // created() {
-        //     this.$store.dispatch('getCompanies');
-        //     this.$store.dispatch('getReviews');
-        // }
+        methods: {
+            newCompany() {
+                this.$store.dispatch('addCompany', {name: this.name})
+            }
+        }
     }
 </script>
 
