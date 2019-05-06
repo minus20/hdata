@@ -17,6 +17,8 @@ class CreateCompaniesTable extends Migration
             $table->bigIncrements('id');
             $table->timestamps();
             $table->string('name');
+            $table->text('description')->nullable();
+            $table->boolean('approved')->default(0);
         });
     }
 

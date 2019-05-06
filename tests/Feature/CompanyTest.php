@@ -69,4 +69,53 @@ class CompanyTest extends TestCase
         $this->assertEquals(
             Company::find(1)->toArray()['name'],'Параграф. Еще текст  alert(&#39;Boo!&#39;);');
     }
+
+    public function testCompanyNotApprovedOnCreation()
+    {
+        $user = factory(User::class)->create();
+        $token = $user->generateToken();
+        $headers = ['Authorization' => "Bearer $token"];
+
+        $payload = ['name' => 'Скучная компания'];
+        $this->json('POST', 'api/companies', $payload, $headers)
+            ->assertStatus(201);
+
+        $company = Company::find(1);
+        self::assertEquals(0, $company->approved);
+    }
+
+    public function testUserCanNotCreateApprovedCompany()
+    {
+        $user = factory(User::class)->create();
+        $token = $user->generateToken();
+        $headers = ['Authorization' => "Bearer $token"];
+
+        $payload = ['name' => 'Скучная компания', 'approved' => 1];
+        $this->json('POST', 'api/companies', $payload, $headers)
+            ->assertStatus(201);
+
+        $company = Company::find(1);
+        self::assertEquals(0, $company->approved);
+    }
+
+    public function testAdminCanApproveCompany()
+    {
+        factory(Company::class)->create();
+        $user = User::create([
+            'name' => 'Admin',
+            'email' => 'admin@admin.com',
+            'role' => 'admin',
+            'email_verified_at' => now(),
+            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
+        ]);
+        $token = $user->generateToken();
+        $headers = ['Authorization' => "Bearer $token"];
+
+        $this->json('PUT', 'api/companies/1', [
+            'approved' => 1
+        ], $headers)->assertStatus(200);
+
+        $company = Company::find(1);
+        self::assertEquals(1, $company->approved);
+    }
 }

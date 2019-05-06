@@ -19675,7 +19675,11 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_0__["default"].Store({
       this.dispatch('getReviews');
     },
     tryToLoadLocalProfile: function tryToLoadLocalProfile() {
-      this.commit('loadLocalProfile', JSON.parse(localStorage.getItem('hdata-profile')));
+      var storageProfile = localStorage.getItem('hdata-profile');
+
+      if (storageProfile) {
+        this.commit('loadLocalProfile', JSON.parse(storageProfile));
+      }
     }
   },
   getters: {

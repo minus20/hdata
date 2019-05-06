@@ -34,3 +34,14 @@ Authorization: Bearer 5cc2b02a71cf7
 {"company_id": 999, "rating":  4, "comment":  "meh"}
 
 ###
+# admin api token: 5cd00b973e156
+# not admin api token: 5cd00b973c9ea
+PUT http://127.0.0.1:8000/api/companies/1
+Accept: application/json
+Content-Type: application/json
+Authorization: Bearer 5cd00b973e156
+Cookie: XDEBUG_SESSION:XDEBUG_ECLIPSE
+
+{"approved": 0}
+
+###

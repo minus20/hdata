@@ -23,4 +23,6 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::post('logout', 'Auth\LoginController@logout');
     Route::post('companies', 'CompanyController@store');
     Route::post('reviews', 'ReviewController@store');
+
+    Route::put('companies/{company}', 'CompanyController@update');
 });

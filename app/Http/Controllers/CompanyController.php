@@ -26,7 +26,9 @@ class CompanyController extends Controller
     public function validator($data)
     {
         return Validator::make($data, [
-            'name' => ['required', 'string', 'max:191', 'unique:companies']
+            'name' => ['required', 'string', 'max:191', 'unique:companies'],
+            'description' => ['nullable', 'string'],
+            'approved' => ['nullable', 'boolean']
         ]);
     }
 
@@ -73,10 +75,10 @@ class CompanyController extends Controller
      */
     public function update(Request $request, Company $company)
     {
-        $company = $this->sanitize($request->all());
-        $this->validator($company)->validate();
-        $company->update($request->all());
-
+        if (\Auth::user()->can('update', $company)) {
+            $company->approved = $request->all()['approved'];
+            $company->save();
+        }
         return response()->json($company);
     }
 

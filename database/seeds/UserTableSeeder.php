@@ -13,14 +13,21 @@ class UserTableSeeder extends Seeder
     {
         \App\User::truncate();
         $faker = \Faker\Factory::create();
-
         foreach(range(0, 10) as $i) {
             \App\User::create([
                 'name' => $faker->name,
                 'email' => $faker->email,
                 'password' => bcrypt('password'),
-                'api_token' => uniqid()
+                'api_token' => uniqid(),
             ]);
         }
+
+        \App\User::create([
+            'name' => 'Administrator',
+            'email' => 'admin@admin.com',
+            'password' => 'admin',
+            'api_token' => uniqid(),
+            'role' => 'admin'
+        ]);
     }
 }

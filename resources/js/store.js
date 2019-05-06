@@ -86,7 +86,10 @@ export const store =  new Vuex.Store({
             this.dispatch('getReviews');
         },
         tryToLoadLocalProfile() {
-            this.commit('loadLocalProfile', JSON.parse(localStorage.getItem('hdata-profile')));
+            const storageProfile = localStorage.getItem('hdata-profile')
+            if (storageProfile) {
+                this.commit('loadLocalProfile', JSON.parse(storageProfile));
+            }
         }
     },
     getters: {
