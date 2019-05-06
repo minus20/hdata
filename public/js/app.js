@@ -1874,14 +1874,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     company: function company() {
       var _this = this;
 
-      return _store__WEBPACK_IMPORTED_MODULE_1__["store"].state.companies.find(function (com) {
+      return _store__WEBPACK_IMPORTED_MODULE_1__["default"].state.companies.find(function (com) {
         return com['id'] == _this.$route.params.id;
       });
     },
     reviews: function reviews() {
       var _this2 = this;
 
-      return _store__WEBPACK_IMPORTED_MODULE_1__["store"].state.reviews.filter(function (rew) {
+      return _store__WEBPACK_IMPORTED_MODULE_1__["default"].state.reviews.filter(function (rew) {
         return rew['company_id'] == _this2.$route.params.id;
       });
     }
@@ -19097,7 +19097,7 @@ __webpack_require__.r(__webpack_exports__);
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('app', _components_App__WEBPACK_IMPORTED_MODULE_1__["default"]);
 new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
   router: _router__WEBPACK_IMPORTED_MODULE_2__["default"],
-  store: _store__WEBPACK_IMPORTED_MODULE_3__["store"],
+  store: _store__WEBPACK_IMPORTED_MODULE_3__["default"],
   render: function render(h) {
     return h(_components_App__WEBPACK_IMPORTED_MODULE_1__["default"]);
   }
@@ -19558,12 +19558,11 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue_router__WEBPACK_IMPORTED_MODU
 /*!*******************************!*\
   !*** ./resources/js/store.js ***!
   \*******************************/
-/*! exports provided: store */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "store", function() { return store; });
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
@@ -19573,7 +19572,8 @@ __webpack_require__.r(__webpack_exports__);
 
 
 vue__WEBPACK_IMPORTED_MODULE_2___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_0__["default"]);
-var store = new vuex__WEBPACK_IMPORTED_MODULE_0__["default"].Store({
+var api = 'http://127.0.0.1:8000/api/';
+/* harmony default export */ __webpack_exports__["default"] = (new vuex__WEBPACK_IMPORTED_MODULE_0__["default"].Store({
   strict: true,
   state: {
     companies: [],
@@ -19607,66 +19607,72 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_0__["default"].Store({
   },
   actions: {
     getCompanies: function getCompanies() {
-      axios__WEBPACK_IMPORTED_MODULE_1___default.a.get('http://127.0.0.1:8000/api/companies').then(function (res) {
-        store.commit({
+      var _this = this;
+
+      axios__WEBPACK_IMPORTED_MODULE_1___default.a.get(api + 'companies').then(function (res) {
+        _this.commit({
           type: 'setCompanies',
           companies: res.data
         });
       });
     },
     getUsers: function getUsers() {
-      axios__WEBPACK_IMPORTED_MODULE_1___default.a.get('http://127.0.0.1:8000/api/users').then(function (res) {
-        store.commit({
+      var _this2 = this;
+
+      axios__WEBPACK_IMPORTED_MODULE_1___default.a.get(api + 'users').then(function (res) {
+        _this2.commit({
           'type': 'setUsers',
           'users': res.data
         });
       });
     },
     getReviews: function getReviews() {
-      axios__WEBPACK_IMPORTED_MODULE_1___default.a.get('http://127.0.0.1:8000/api/reviews').then(function (res) {
-        store.commit({
+      var _this3 = this;
+
+      axios__WEBPACK_IMPORTED_MODULE_1___default.a.get(api + 'reviews').then(function (res) {
+        _this3.commit({
           'type': 'setReviews',
           'reviews': res.data
         });
       });
     },
     signIn: function signIn(commit, payload) {
-      var _this = this;
+      var _this4 = this;
 
-      axios__WEBPACK_IMPORTED_MODULE_1___default.a.post('http://127.0.0.1:8000/api/login', {
+      axios__WEBPACK_IMPORTED_MODULE_1___default.a.post(api + 'login', {
         'email': payload.email,
         'password': payload.password
       }).then(function (res) {
-        _this.commit({
+        _this4.commit({
           'type': 'setProfile',
           'profile': res.data.data
         });
 
-        localStorage.setItem('hdata-profile', JSON.stringify(_this.state.profile));
+        localStorage.setItem('hdata-profile', JSON.stringify(_this4.state.profile));
       });
     },
     signOut: function signOut() {
       this.commit('unsetProfile');
     },
     register: function register(commit, payload) {
-      var _this2 = this;
+      var _this5 = this;
 
-      axios__WEBPACK_IMPORTED_MODULE_1___default.a.post('http://127.0.0.1:8000/api/register', payload).then(function (response) {
-        _this2.commit({
+      axios__WEBPACK_IMPORTED_MODULE_1___default.a.post(api + 'register', payload).then(function (response) {
+        _this5.commit({
           'type': 'setProfile',
           'profile': response.data.data
         });
       });
     },
     addCompany: function addCompany(commit, payload) {
-      axios__WEBPACK_IMPORTED_MODULE_1___default.a.post('http://127.0.0.1:8000/api/companies', {
+      axios__WEBPACK_IMPORTED_MODULE_1___default.a.post(api + 'companies', {
         name: payload.name,
         'api_token': this.state.profile['api_token']
       });
       this.dispatch('getCompanies');
     },
     addReview: function addReview(commit, payload) {
-      axios__WEBPACK_IMPORTED_MODULE_1___default.a.post('http://127.0.0.1:8000/api/reviews', {
+      axios__WEBPACK_IMPORTED_MODULE_1___default.a.post(api + 'reviews', {
         'api_token': this.state.profile['api_token'],
         'company_id': payload['company_id'],
         rating: payload.rating,
@@ -19716,7 +19722,7 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_0__["default"].Store({
       return state.profile.name;
     }
   }
-});
+}));
 
 /***/ }),
 

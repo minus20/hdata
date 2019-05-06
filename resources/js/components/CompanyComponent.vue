@@ -38,7 +38,7 @@
 
 <script>
     import {mapGetters} from "vuex";
-    import {store} from '../store';
+    import store from '../store';
     import CompanyReview from "./CompanyReview";
 
     export default {

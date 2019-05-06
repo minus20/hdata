@@ -3,8 +3,8 @@ import Axios from "axios";
 import Vue from 'vue';
 
 Vue.use(Vuex);
-
-export const store =  new Vuex.Store({
+const api = 'http://127.0.0.1:8000/api/';
+export default new Vuex.Store({
     strict: true,
     state: {
         companies: [],
@@ -38,22 +38,22 @@ export const store =  new Vuex.Store({
     },
     actions: {
         getCompanies() {
-            Axios.get('http://127.0.0.1:8000/api/companies').then(function (res) {
-                store.commit({type: 'setCompanies', companies: res.data})
+            Axios.get(api + 'companies').then((res) => {
+                this.commit({type: 'setCompanies', companies: res.data})
             })
         },
         getUsers() {
-            Axios.get('http://127.0.0.1:8000/api/users').then(function (res) {
-                store.commit({'type': 'setUsers', 'users': res.data})
+            Axios.get(api + 'users').then((res) => {
+                this.commit({'type': 'setUsers', 'users': res.data})
             })
         },
         getReviews() {
-            Axios.get('http://127.0.0.1:8000/api/reviews').then(function (res) {
-                store.commit({'type': 'setReviews', 'reviews': res.data})
+            Axios.get(api + 'reviews').then((res) => {
+                this.commit({'type': 'setReviews', 'reviews': res.data})
             })
         },
         signIn(commit, payload) {
-            Axios.post('http://127.0.0.1:8000/api/login', {
+            Axios.post(api + 'login', {
                 'email': payload.email,
                 'password': payload.password
             }).then((res) => {
@@ -65,19 +65,19 @@ export const store =  new Vuex.Store({
             this.commit('unsetProfile')
         },
         register(commit, payload) {
-            Axios.post('http://127.0.0.1:8000/api/register', payload).then((response) => {
+            Axios.post(api + 'register', payload).then((response) => {
                 this.commit({'type': 'setProfile', 'profile': response.data.data})
             });
         },
         addCompany(commit, payload) {
-            Axios.post('http://127.0.0.1:8000/api/companies', {
+            Axios.post( api + 'companies', {
                 name: payload.name,
                 'api_token': this.state.profile['api_token']
             });
             this.dispatch('getCompanies');
         },
         addReview(commit, payload) {
-            Axios.post('http://127.0.0.1:8000/api/reviews', {
+            Axios.post(api + 'reviews', {
                 'api_token': this.state.profile['api_token'],
                 'company_id': payload['company_id'],
                 rating: payload.rating,
