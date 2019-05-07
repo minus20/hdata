@@ -3,7 +3,7 @@
 
 /**
  * A helper file for Laravel 5, to provide autocomplete information to your IDE
- * Generated for Laravel 5.8.14 on 2019-04-25 13:37:09.
+ * Generated for Laravel 5.8.14 on 2019-05-06 13:28:56.
  *
  * This file should not be included in your code, only analyzed by your IDE!
  *
@@ -14561,6 +14561,5722 @@ namespace Waavi\Sanitizer\Laravel {
  
 }
 
+namespace DaveJamesMiller\Breadcrumbs\Facades { 
+
+    /**
+     * Breadcrumbs facade - allows easy access to the Manager instance.
+     *
+     * @see BreadcrumbsManager
+     */ 
+    class Breadcrumbs {
+        
+        /**
+         * Register a breadcrumb-generating callback for a page.
+         *
+         * @param string $name The name of the page.
+         * @param callable $callback The callback, which should accept a Generator instance as the first parameter and may
+         *     accept additional parameters.
+         * @return void 
+         * @throws \DaveJamesMiller\Breadcrumbs\Exceptions\DuplicateBreadcrumbException If the given name has already been
+         *     used.
+         * @static 
+         */ 
+        public static function for($name, $callback)
+        {
+                        /** @var \DaveJamesMiller\Breadcrumbs\BreadcrumbsManager $instance */
+                        $instance->for($name, $callback);
+        }
+        
+        /**
+         * Register a breadcrumb-generating callback for a page.
+         * 
+         * For backwards-compatibility with v5.0.0 and below.
+         *
+         * @see self::for()
+         * @param string $name The name of the page.
+         * @param callable $callback The callback, which should accept a Generator instance as the first parameter and may
+         *     accept additional parameters.
+         * @return void 
+         * @throws \DaveJamesMiller\Breadcrumbs\Exceptions\DuplicateBreadcrumbException If the given name has already been
+         *     used.
+         * @static 
+         */ 
+        public static function register($name, $callback)
+        {
+                        /** @var \DaveJamesMiller\Breadcrumbs\BreadcrumbsManager $instance */
+                        $instance->register($name, $callback);
+        }
+        
+        /**
+         * Register a closure to call before generating breadcrumbs for the current page.
+         * 
+         * For example, this can be used to always prepend the homepage without needing to manually add it to each page.
+         *
+         * @param callable $callback The callback, which should accept a Generator instance as the first and only parameter.
+         * @return void 
+         * @static 
+         */ 
+        public static function before($callback)
+        {
+                        /** @var \DaveJamesMiller\Breadcrumbs\BreadcrumbsManager $instance */
+                        $instance->before($callback);
+        }
+        
+        /**
+         * Register a closure to call after generating breadcrumbs for the current page.
+         * 
+         * For example, this can be used to append the current page number when using pagination.
+         *
+         * @param callable $callback The callback, which should accept a Generator instance as the first and only parameter.
+         * @return void 
+         * @static 
+         */ 
+        public static function after($callback)
+        {
+                        /** @var \DaveJamesMiller\Breadcrumbs\BreadcrumbsManager $instance */
+                        $instance->after($callback);
+        }
+        
+        /**
+         * Check if a breadcrumb with the given name exists.
+         * 
+         * If no name is given, defaults to the current route name.
+         *
+         * @param string|null $name The page name.
+         * @return bool Whether there is a registered callback with that name.
+         * @static 
+         */ 
+        public static function exists($name = null)
+        {
+                        /** @var \DaveJamesMiller\Breadcrumbs\BreadcrumbsManager $instance */
+                        return $instance->exists($name);
+        }
+        
+        /**
+         * Generate a set of breadcrumbs for a page.
+         *
+         * @param string|null $name The name of the current page.
+         * @param mixed $params The parameters to pass to the closure for the current page.
+         * @return \Illuminate\Support\Collection The generated breadcrumbs.
+         * @throws \DaveJamesMiller\Breadcrumbs\Exceptions\UnnamedRouteException if no name is given and the current route
+         *     doesn't have an associated name.
+         * @throws \DaveJamesMiller\Breadcrumbs\Exceptions\InvalidBreadcrumbException if the name is (or any ancestor names
+         *     are) not registered.
+         * @static 
+         */ 
+        public static function generate($name = null, $params = null)
+        {
+                        /** @var \DaveJamesMiller\Breadcrumbs\BreadcrumbsManager $instance */
+                        return $instance->generate($name, $params);
+        }
+        
+        /**
+         * Render breadcrumbs for a page with the specified view.
+         *
+         * @param string $view The name of the view to render.
+         * @param string|null $name The name of the current page.
+         * @param mixed $params The parameters to pass to the closure for the current page.
+         * @return \Illuminate\Support\HtmlString The generated HTML.
+         * @throws \DaveJamesMiller\Breadcrumbs\Exceptions\InvalidBreadcrumbException if the name is (or any ancestor names are) not registered.
+         * @throws \DaveJamesMiller\Breadcrumbs\Exceptions\UnnamedRouteException if no name is given and the current route doesn't have an associated name.
+         * @throws \DaveJamesMiller\Breadcrumbs\Exceptions\ViewNotSetException if no view has been set.
+         * @static 
+         */ 
+        public static function view($view, $name = null, $params = null)
+        {
+                        /** @var \DaveJamesMiller\Breadcrumbs\BreadcrumbsManager $instance */
+                        return $instance->view($view, $name, $params);
+        }
+        
+        /**
+         * Render breadcrumbs for a page with the default view.
+         *
+         * @param string|null $name The name of the current page.
+         * @param mixed $params The parameters to pass to the closure for the current page.
+         * @return \Illuminate\Support\HtmlString The generated HTML.
+         * @throws \DaveJamesMiller\Breadcrumbs\Exceptions\InvalidBreadcrumbException if the name is (or any ancestor names are) not registered.
+         * @throws \DaveJamesMiller\Breadcrumbs\Exceptions\UnnamedRouteException if no name is given and the current route doesn't have an associated name.
+         * @throws \DaveJamesMiller\Breadcrumbs\Exceptions\ViewNotSetException if no view has been set.
+         * @static 
+         */ 
+        public static function render($name = null, $params = null)
+        {
+                        /** @var \DaveJamesMiller\Breadcrumbs\BreadcrumbsManager $instance */
+                        return $instance->render($name, $params);
+        }
+        
+        /**
+         * Get the last breadcrumb for the current page.
+         * 
+         * Optionally pass a
+         *
+         * @return \stdClass|null The breadcrumb for the current page.
+         * @throws \DaveJamesMiller\Breadcrumbs\Exceptions\UnnamedRouteException if the current route doesn't have an associated name.
+         * @throws \DaveJamesMiller\Breadcrumbs\Exceptions\InvalidBreadcrumbException if the name is (or any ancestor names are) not registered.
+         * @static 
+         */ 
+        public static function current()
+        {
+                        /** @var \DaveJamesMiller\Breadcrumbs\BreadcrumbsManager $instance */
+                        return $instance->current();
+        }
+        
+        /**
+         * Set the current route name and parameters to use when calling render() or generate() with no parameters.
+         *
+         * @param string $name The name of the current page.
+         * @param mixed $params The parameters to pass to the closure for the current page.
+         * @return void 
+         * @static 
+         */ 
+        public static function setCurrentRoute($name, $params = null)
+        {
+                        /** @var \DaveJamesMiller\Breadcrumbs\BreadcrumbsManager $instance */
+                        $instance->setCurrentRoute($name, $params);
+        }
+        
+        /**
+         * Clear the previously set route name and parameters to use when calling render() or generate() with no parameters.
+         * 
+         * Next time it will revert to the default behaviour of using the current route from Laravel.
+         *
+         * @return void 
+         * @static 
+         */ 
+        public static function clearCurrentRoute()
+        {
+                        /** @var \DaveJamesMiller\Breadcrumbs\BreadcrumbsManager $instance */
+                        $instance->clearCurrentRoute();
+        }
+        
+        /**
+         * Register a custom macro.
+         *
+         * @param string $name
+         * @param object|callable $macro
+         * @return void 
+         * @static 
+         */ 
+        public static function macro($name, $macro)
+        {
+                        \DaveJamesMiller\Breadcrumbs\BreadcrumbsManager::macro($name, $macro);
+        }
+        
+        /**
+         * Mix another object into the class.
+         *
+         * @param object $mixin
+         * @param bool $replace
+         * @return void 
+         * @throws \ReflectionException
+         * @static 
+         */ 
+        public static function mixin($mixin, $replace = true)
+        {
+                        \DaveJamesMiller\Breadcrumbs\BreadcrumbsManager::mixin($mixin, $replace);
+        }
+        
+        /**
+         * Checks if macro is registered.
+         *
+         * @param string $name
+         * @return bool 
+         * @static 
+         */ 
+        public static function hasMacro($name)
+        {
+                        return \DaveJamesMiller\Breadcrumbs\BreadcrumbsManager::hasMacro($name);
+        }
+         
+    }
+ 
+}
+
+namespace Collective\Html { 
+
+    /**
+     * 
+     *
+     * @see \Collective\Html\FormBuilder
+     */ 
+    class FormFacade {
+        
+        /**
+         * Open up a new HTML form.
+         *
+         * @param array $options
+         * @return \Illuminate\Support\HtmlString 
+         * @static 
+         */ 
+        public static function open($options = array())
+        {
+                        /** @var \Collective\Html\FormBuilder $instance */
+                        return $instance->open($options);
+        }
+        
+        /**
+         * Create a new model based form builder.
+         *
+         * @param mixed $model
+         * @param array $options
+         * @return \Illuminate\Support\HtmlString 
+         * @static 
+         */ 
+        public static function model($model, $options = array())
+        {
+                        /** @var \Collective\Html\FormBuilder $instance */
+                        return $instance->model($model, $options);
+        }
+        
+        /**
+         * Set the model instance on the form builder.
+         *
+         * @param mixed $model
+         * @return void 
+         * @static 
+         */ 
+        public static function setModel($model)
+        {
+                        /** @var \Collective\Html\FormBuilder $instance */
+                        $instance->setModel($model);
+        }
+        
+        /**
+         * Get the current model instance on the form builder.
+         *
+         * @return mixed $model
+         * @static 
+         */ 
+        public static function getModel()
+        {
+                        /** @var \Collective\Html\FormBuilder $instance */
+                        return $instance->getModel();
+        }
+        
+        /**
+         * Close the current form.
+         *
+         * @return string 
+         * @static 
+         */ 
+        public static function close()
+        {
+                        /** @var \Collective\Html\FormBuilder $instance */
+                        return $instance->close();
+        }
+        
+        /**
+         * Generate a hidden field with the current CSRF token.
+         *
+         * @return string 
+         * @static 
+         */ 
+        public static function token()
+        {
+                        /** @var \Collective\Html\FormBuilder $instance */
+                        return $instance->token();
+        }
+        
+        /**
+         * Create a form label element.
+         *
+         * @param string $name
+         * @param string $value
+         * @param array $options
+         * @param bool $escape_html
+         * @return \Illuminate\Support\HtmlString 
+         * @static 
+         */ 
+        public static function label($name, $value = null, $options = array(), $escape_html = true)
+        {
+                        /** @var \Collective\Html\FormBuilder $instance */
+                        return $instance->label($name, $value, $options, $escape_html);
+        }
+        
+        /**
+         * Create a form input field.
+         *
+         * @param string $type
+         * @param string $name
+         * @param string $value
+         * @param array $options
+         * @return \Illuminate\Support\HtmlString 
+         * @static 
+         */ 
+        public static function input($type, $name, $value = null, $options = array())
+        {
+                        /** @var \Collective\Html\FormBuilder $instance */
+                        return $instance->input($type, $name, $value, $options);
+        }
+        
+        /**
+         * Create a text input field.
+         *
+         * @param string $name
+         * @param string $value
+         * @param array $options
+         * @return \Illuminate\Support\HtmlString 
+         * @static 
+         */ 
+        public static function text($name, $value = null, $options = array())
+        {
+                        /** @var \Collective\Html\FormBuilder $instance */
+                        return $instance->text($name, $value, $options);
+        }
+        
+        /**
+         * Create a password input field.
+         *
+         * @param string $name
+         * @param array $options
+         * @return \Illuminate\Support\HtmlString 
+         * @static 
+         */ 
+        public static function password($name, $options = array())
+        {
+                        /** @var \Collective\Html\FormBuilder $instance */
+                        return $instance->password($name, $options);
+        }
+        
+        /**
+         * Create a range input field.
+         *
+         * @param string $name
+         * @param string $value
+         * @param array $options
+         * @return \Illuminate\Support\HtmlString 
+         * @static 
+         */ 
+        public static function range($name, $value = null, $options = array())
+        {
+                        /** @var \Collective\Html\FormBuilder $instance */
+                        return $instance->range($name, $value, $options);
+        }
+        
+        /**
+         * Create a hidden input field.
+         *
+         * @param string $name
+         * @param string $value
+         * @param array $options
+         * @return \Illuminate\Support\HtmlString 
+         * @static 
+         */ 
+        public static function hidden($name, $value = null, $options = array())
+        {
+                        /** @var \Collective\Html\FormBuilder $instance */
+                        return $instance->hidden($name, $value, $options);
+        }
+        
+        /**
+         * Create a search input field.
+         *
+         * @param string $name
+         * @param string $value
+         * @param array $options
+         * @return \Illuminate\Support\HtmlString 
+         * @static 
+         */ 
+        public static function search($name, $value = null, $options = array())
+        {
+                        /** @var \Collective\Html\FormBuilder $instance */
+                        return $instance->search($name, $value, $options);
+        }
+        
+        /**
+         * Create an e-mail input field.
+         *
+         * @param string $name
+         * @param string $value
+         * @param array $options
+         * @return \Illuminate\Support\HtmlString 
+         * @static 
+         */ 
+        public static function email($name, $value = null, $options = array())
+        {
+                        /** @var \Collective\Html\FormBuilder $instance */
+                        return $instance->email($name, $value, $options);
+        }
+        
+        /**
+         * Create a tel input field.
+         *
+         * @param string $name
+         * @param string $value
+         * @param array $options
+         * @return \Illuminate\Support\HtmlString 
+         * @static 
+         */ 
+        public static function tel($name, $value = null, $options = array())
+        {
+                        /** @var \Collective\Html\FormBuilder $instance */
+                        return $instance->tel($name, $value, $options);
+        }
+        
+        /**
+         * Create a number input field.
+         *
+         * @param string $name
+         * @param string $value
+         * @param array $options
+         * @return \Illuminate\Support\HtmlString 
+         * @static 
+         */ 
+        public static function number($name, $value = null, $options = array())
+        {
+                        /** @var \Collective\Html\FormBuilder $instance */
+                        return $instance->number($name, $value, $options);
+        }
+        
+        /**
+         * Create a date input field.
+         *
+         * @param string $name
+         * @param string $value
+         * @param array $options
+         * @return \Illuminate\Support\HtmlString 
+         * @static 
+         */ 
+        public static function date($name, $value = null, $options = array())
+        {
+                        /** @var \Collective\Html\FormBuilder $instance */
+                        return $instance->date($name, $value, $options);
+        }
+        
+        /**
+         * Create a datetime input field.
+         *
+         * @param string $name
+         * @param string $value
+         * @param array $options
+         * @return \Illuminate\Support\HtmlString 
+         * @static 
+         */ 
+        public static function datetime($name, $value = null, $options = array())
+        {
+                        /** @var \Collective\Html\FormBuilder $instance */
+                        return $instance->datetime($name, $value, $options);
+        }
+        
+        /**
+         * Create a datetime-local input field.
+         *
+         * @param string $name
+         * @param string $value
+         * @param array $options
+         * @return \Illuminate\Support\HtmlString 
+         * @static 
+         */ 
+        public static function datetimeLocal($name, $value = null, $options = array())
+        {
+                        /** @var \Collective\Html\FormBuilder $instance */
+                        return $instance->datetimeLocal($name, $value, $options);
+        }
+        
+        /**
+         * Create a time input field.
+         *
+         * @param string $name
+         * @param string $value
+         * @param array $options
+         * @return \Illuminate\Support\HtmlString 
+         * @static 
+         */ 
+        public static function time($name, $value = null, $options = array())
+        {
+                        /** @var \Collective\Html\FormBuilder $instance */
+                        return $instance->time($name, $value, $options);
+        }
+        
+        /**
+         * Create a url input field.
+         *
+         * @param string $name
+         * @param string $value
+         * @param array $options
+         * @return \Illuminate\Support\HtmlString 
+         * @static 
+         */ 
+        public static function url($name, $value = null, $options = array())
+        {
+                        /** @var \Collective\Html\FormBuilder $instance */
+                        return $instance->url($name, $value, $options);
+        }
+        
+        /**
+         * Create a week input field.
+         *
+         * @param string $name
+         * @param string $value
+         * @param array $options
+         * @return \Illuminate\Support\HtmlString 
+         * @static 
+         */ 
+        public static function week($name, $value = null, $options = array())
+        {
+                        /** @var \Collective\Html\FormBuilder $instance */
+                        return $instance->week($name, $value, $options);
+        }
+        
+        /**
+         * Create a file input field.
+         *
+         * @param string $name
+         * @param array $options
+         * @return \Illuminate\Support\HtmlString 
+         * @static 
+         */ 
+        public static function file($name, $options = array())
+        {
+                        /** @var \Collective\Html\FormBuilder $instance */
+                        return $instance->file($name, $options);
+        }
+        
+        /**
+         * Create a textarea input field.
+         *
+         * @param string $name
+         * @param string $value
+         * @param array $options
+         * @return \Illuminate\Support\HtmlString 
+         * @static 
+         */ 
+        public static function textarea($name, $value = null, $options = array())
+        {
+                        /** @var \Collective\Html\FormBuilder $instance */
+                        return $instance->textarea($name, $value, $options);
+        }
+        
+        /**
+         * Create a select box field.
+         *
+         * @param string $name
+         * @param array $list
+         * @param string|bool $selected
+         * @param array $selectAttributes
+         * @param array $optionsAttributes
+         * @param array $optgroupsAttributes
+         * @return \Illuminate\Support\HtmlString 
+         * @static 
+         */ 
+        public static function select($name, $list = array(), $selected = null, $selectAttributes = array(), $optionsAttributes = array(), $optgroupsAttributes = array())
+        {
+                        /** @var \Collective\Html\FormBuilder $instance */
+                        return $instance->select($name, $list, $selected, $selectAttributes, $optionsAttributes, $optgroupsAttributes);
+        }
+        
+        /**
+         * Create a select range field.
+         *
+         * @param string $name
+         * @param string $begin
+         * @param string $end
+         * @param string $selected
+         * @param array $options
+         * @return \Illuminate\Support\HtmlString 
+         * @static 
+         */ 
+        public static function selectRange($name, $begin, $end, $selected = null, $options = array())
+        {
+                        /** @var \Collective\Html\FormBuilder $instance */
+                        return $instance->selectRange($name, $begin, $end, $selected, $options);
+        }
+        
+        /**
+         * Create a select year field.
+         *
+         * @param string $name
+         * @param string $begin
+         * @param string $end
+         * @param string $selected
+         * @param array $options
+         * @return mixed 
+         * @static 
+         */ 
+        public static function selectYear()
+        {
+                        /** @var \Collective\Html\FormBuilder $instance */
+                        return $instance->selectYear();
+        }
+        
+        /**
+         * Create a select month field.
+         *
+         * @param string $name
+         * @param string $selected
+         * @param array $options
+         * @param string $format
+         * @return \Illuminate\Support\HtmlString 
+         * @static 
+         */ 
+        public static function selectMonth($name, $selected = null, $options = array(), $format = '%B')
+        {
+                        /** @var \Collective\Html\FormBuilder $instance */
+                        return $instance->selectMonth($name, $selected, $options, $format);
+        }
+        
+        /**
+         * Get the select option for the given value.
+         *
+         * @param string $display
+         * @param string $value
+         * @param string $selected
+         * @param array $attributes
+         * @param array $optgroupAttributes
+         * @return \Illuminate\Support\HtmlString 
+         * @static 
+         */ 
+        public static function getSelectOption($display, $value, $selected, $attributes = array(), $optgroupAttributes = array())
+        {
+                        /** @var \Collective\Html\FormBuilder $instance */
+                        return $instance->getSelectOption($display, $value, $selected, $attributes, $optgroupAttributes);
+        }
+        
+        /**
+         * Create a checkbox input field.
+         *
+         * @param string $name
+         * @param mixed $value
+         * @param bool $checked
+         * @param array $options
+         * @return \Illuminate\Support\HtmlString 
+         * @static 
+         */ 
+        public static function checkbox($name, $value = 1, $checked = null, $options = array())
+        {
+                        /** @var \Collective\Html\FormBuilder $instance */
+                        return $instance->checkbox($name, $value, $checked, $options);
+        }
+        
+        /**
+         * Create a radio button input field.
+         *
+         * @param string $name
+         * @param mixed $value
+         * @param bool $checked
+         * @param array $options
+         * @return \Illuminate\Support\HtmlString 
+         * @static 
+         */ 
+        public static function radio($name, $value = null, $checked = null, $options = array())
+        {
+                        /** @var \Collective\Html\FormBuilder $instance */
+                        return $instance->radio($name, $value, $checked, $options);
+        }
+        
+        /**
+         * Create a HTML reset input element.
+         *
+         * @param string $value
+         * @param array $attributes
+         * @return \Illuminate\Support\HtmlString 
+         * @static 
+         */ 
+        public static function reset($value, $attributes = array())
+        {
+                        /** @var \Collective\Html\FormBuilder $instance */
+                        return $instance->reset($value, $attributes);
+        }
+        
+        /**
+         * Create a HTML image input element.
+         *
+         * @param string $url
+         * @param string $name
+         * @param array $attributes
+         * @return \Illuminate\Support\HtmlString 
+         * @static 
+         */ 
+        public static function image($url, $name = null, $attributes = array())
+        {
+                        /** @var \Collective\Html\FormBuilder $instance */
+                        return $instance->image($url, $name, $attributes);
+        }
+        
+        /**
+         * Create a month input field.
+         *
+         * @param string $name
+         * @param string $value
+         * @param array $options
+         * @return \Illuminate\Support\HtmlString 
+         * @static 
+         */ 
+        public static function month($name, $value = null, $options = array())
+        {
+                        /** @var \Collective\Html\FormBuilder $instance */
+                        return $instance->month($name, $value, $options);
+        }
+        
+        /**
+         * Create a color input field.
+         *
+         * @param string $name
+         * @param string $value
+         * @param array $options
+         * @return \Illuminate\Support\HtmlString 
+         * @static 
+         */ 
+        public static function color($name, $value = null, $options = array())
+        {
+                        /** @var \Collective\Html\FormBuilder $instance */
+                        return $instance->color($name, $value, $options);
+        }
+        
+        /**
+         * Create a submit button element.
+         *
+         * @param string $value
+         * @param array $options
+         * @return \Illuminate\Support\HtmlString 
+         * @static 
+         */ 
+        public static function submit($value = null, $options = array())
+        {
+                        /** @var \Collective\Html\FormBuilder $instance */
+                        return $instance->submit($value, $options);
+        }
+        
+        /**
+         * Create a button element.
+         *
+         * @param string $value
+         * @param array $options
+         * @return \Illuminate\Support\HtmlString 
+         * @static 
+         */ 
+        public static function button($value = null, $options = array())
+        {
+                        /** @var \Collective\Html\FormBuilder $instance */
+                        return $instance->button($value, $options);
+        }
+        
+        /**
+         * Create a datalist box field.
+         *
+         * @param string $id
+         * @param array $list
+         * @return \Illuminate\Support\HtmlString 
+         * @static 
+         */ 
+        public static function datalist($id, $list = array())
+        {
+                        /** @var \Collective\Html\FormBuilder $instance */
+                        return $instance->datalist($id, $list);
+        }
+        
+        /**
+         * Get the ID attribute for a field name.
+         *
+         * @param string $name
+         * @param array $attributes
+         * @return string 
+         * @static 
+         */ 
+        public static function getIdAttribute($name, $attributes)
+        {
+                        /** @var \Collective\Html\FormBuilder $instance */
+                        return $instance->getIdAttribute($name, $attributes);
+        }
+        
+        /**
+         * Get the value that should be assigned to the field.
+         *
+         * @param string $name
+         * @param string $value
+         * @return mixed 
+         * @static 
+         */ 
+        public static function getValueAttribute($name, $value = null)
+        {
+                        /** @var \Collective\Html\FormBuilder $instance */
+                        return $instance->getValueAttribute($name, $value);
+        }
+        
+        /**
+         * Take Request in fill process
+         *
+         * @param bool $consider
+         * @static 
+         */ 
+        public static function considerRequest($consider = true)
+        {
+                        /** @var \Collective\Html\FormBuilder $instance */
+                        return $instance->considerRequest($consider);
+        }
+        
+        /**
+         * Get a value from the session's old input.
+         *
+         * @param string $name
+         * @return mixed 
+         * @static 
+         */ 
+        public static function old($name)
+        {
+                        /** @var \Collective\Html\FormBuilder $instance */
+                        return $instance->old($name);
+        }
+        
+        /**
+         * Determine if the old input is empty.
+         *
+         * @return bool 
+         * @static 
+         */ 
+        public static function oldInputIsEmpty()
+        {
+                        /** @var \Collective\Html\FormBuilder $instance */
+                        return $instance->oldInputIsEmpty();
+        }
+        
+        /**
+         * Get the session store implementation.
+         *
+         * @return \Illuminate\Contracts\Session\Session $session
+         * @static 
+         */ 
+        public static function getSessionStore()
+        {
+                        /** @var \Collective\Html\FormBuilder $instance */
+                        return $instance->getSessionStore();
+        }
+        
+        /**
+         * Set the session store implementation.
+         *
+         * @param \Illuminate\Contracts\Session\Session $session
+         * @return \Collective\Html\FormBuilder 
+         * @static 
+         */ 
+        public static function setSessionStore($session)
+        {
+                        /** @var \Collective\Html\FormBuilder $instance */
+                        return $instance->setSessionStore($session);
+        }
+        
+        /**
+         * Register a custom macro.
+         *
+         * @param string $name
+         * @param object|callable $macro
+         * @return void 
+         * @static 
+         */ 
+        public static function macro($name, $macro)
+        {
+                        \Collective\Html\FormBuilder::macro($name, $macro);
+        }
+        
+        /**
+         * Mix another object into the class.
+         *
+         * @param object $mixin
+         * @param bool $replace
+         * @return void 
+         * @throws \ReflectionException
+         * @static 
+         */ 
+        public static function mixin($mixin, $replace = true)
+        {
+                        \Collective\Html\FormBuilder::mixin($mixin, $replace);
+        }
+        
+        /**
+         * Checks if macro is registered.
+         *
+         * @param string $name
+         * @return bool 
+         * @static 
+         */ 
+        public static function hasMacro($name)
+        {
+                        return \Collective\Html\FormBuilder::hasMacro($name);
+        }
+        
+        /**
+         * Dynamically handle calls to the class.
+         *
+         * @param string $method
+         * @param array $parameters
+         * @return mixed 
+         * @throws \BadMethodCallException
+         * @static 
+         */ 
+        public static function macroCall($method, $parameters)
+        {
+                        /** @var \Collective\Html\FormBuilder $instance */
+                        return $instance->macroCall($method, $parameters);
+        }
+        
+        /**
+         * Register a custom component.
+         *
+         * @param $name
+         * @param $view
+         * @param array $signature
+         * @return void 
+         * @static 
+         */ 
+        public static function component($name, $view, $signature)
+        {
+                        \Collective\Html\FormBuilder::component($name, $view, $signature);
+        }
+        
+        /**
+         * Check if a component is registered.
+         *
+         * @param $name
+         * @return bool 
+         * @static 
+         */ 
+        public static function hasComponent($name)
+        {
+                        return \Collective\Html\FormBuilder::hasComponent($name);
+        }
+        
+        /**
+         * Dynamically handle calls to the class.
+         *
+         * @param string $method
+         * @param array $parameters
+         * @return \Illuminate\Contracts\View\View|mixed 
+         * @throws \BadMethodCallException
+         * @static 
+         */ 
+        public static function componentCall($method, $parameters)
+        {
+                        /** @var \Collective\Html\FormBuilder $instance */
+                        return $instance->componentCall($method, $parameters);
+        }
+         
+    }
+
+    /**
+     * 
+     *
+     * @see \Collective\Html\HtmlBuilder
+     */ 
+    class HtmlFacade {
+        
+        /**
+         * Convert an HTML string to entities.
+         *
+         * @param string $value
+         * @return string 
+         * @static 
+         */ 
+        public static function entities($value)
+        {
+                        /** @var \Collective\Html\HtmlBuilder $instance */
+                        return $instance->entities($value);
+        }
+        
+        /**
+         * Convert entities to HTML characters.
+         *
+         * @param string $value
+         * @return string 
+         * @static 
+         */ 
+        public static function decode($value)
+        {
+                        /** @var \Collective\Html\HtmlBuilder $instance */
+                        return $instance->decode($value);
+        }
+        
+        /**
+         * Generate a link to a JavaScript file.
+         *
+         * @param string $url
+         * @param array $attributes
+         * @param bool $secure
+         * @return \Illuminate\Support\HtmlString 
+         * @static 
+         */ 
+        public static function script($url, $attributes = array(), $secure = null)
+        {
+                        /** @var \Collective\Html\HtmlBuilder $instance */
+                        return $instance->script($url, $attributes, $secure);
+        }
+        
+        /**
+         * Generate a link to a CSS file.
+         *
+         * @param string $url
+         * @param array $attributes
+         * @param bool $secure
+         * @return \Illuminate\Support\HtmlString 
+         * @static 
+         */ 
+        public static function style($url, $attributes = array(), $secure = null)
+        {
+                        /** @var \Collective\Html\HtmlBuilder $instance */
+                        return $instance->style($url, $attributes, $secure);
+        }
+        
+        /**
+         * Generate an HTML image element.
+         *
+         * @param string $url
+         * @param string $alt
+         * @param array $attributes
+         * @param bool $secure
+         * @return \Illuminate\Support\HtmlString 
+         * @static 
+         */ 
+        public static function image($url, $alt = null, $attributes = array(), $secure = null)
+        {
+                        /** @var \Collective\Html\HtmlBuilder $instance */
+                        return $instance->image($url, $alt, $attributes, $secure);
+        }
+        
+        /**
+         * Generate a link to a Favicon file.
+         *
+         * @param string $url
+         * @param array $attributes
+         * @param bool $secure
+         * @return \Illuminate\Support\HtmlString 
+         * @static 
+         */ 
+        public static function favicon($url, $attributes = array(), $secure = null)
+        {
+                        /** @var \Collective\Html\HtmlBuilder $instance */
+                        return $instance->favicon($url, $attributes, $secure);
+        }
+        
+        /**
+         * Generate a HTML link.
+         *
+         * @param string $url
+         * @param string $title
+         * @param array $attributes
+         * @param bool $secure
+         * @param bool $escape
+         * @return \Illuminate\Support\HtmlString 
+         * @static 
+         */ 
+        public static function link($url, $title = null, $attributes = array(), $secure = null, $escape = true)
+        {
+                        /** @var \Collective\Html\HtmlBuilder $instance */
+                        return $instance->link($url, $title, $attributes, $secure, $escape);
+        }
+        
+        /**
+         * Generate a HTTPS HTML link.
+         *
+         * @param string $url
+         * @param string $title
+         * @param array $attributes
+         * @return \Illuminate\Support\HtmlString 
+         * @static 
+         */ 
+        public static function secureLink($url, $title = null, $attributes = array())
+        {
+                        /** @var \Collective\Html\HtmlBuilder $instance */
+                        return $instance->secureLink($url, $title, $attributes);
+        }
+        
+        /**
+         * Generate a HTML link to an asset.
+         *
+         * @param string $url
+         * @param string $title
+         * @param array $attributes
+         * @param bool $secure
+         * @return \Illuminate\Support\HtmlString 
+         * @static 
+         */ 
+        public static function linkAsset($url, $title = null, $attributes = array(), $secure = null)
+        {
+                        /** @var \Collective\Html\HtmlBuilder $instance */
+                        return $instance->linkAsset($url, $title, $attributes, $secure);
+        }
+        
+        /**
+         * Generate a HTTPS HTML link to an asset.
+         *
+         * @param string $url
+         * @param string $title
+         * @param array $attributes
+         * @return \Illuminate\Support\HtmlString 
+         * @static 
+         */ 
+        public static function linkSecureAsset($url, $title = null, $attributes = array())
+        {
+                        /** @var \Collective\Html\HtmlBuilder $instance */
+                        return $instance->linkSecureAsset($url, $title, $attributes);
+        }
+        
+        /**
+         * Generate a HTML link to a named route.
+         *
+         * @param string $name
+         * @param string $title
+         * @param array $parameters
+         * @param array $attributes
+         * @return \Illuminate\Support\HtmlString 
+         * @static 
+         */ 
+        public static function linkRoute($name, $title = null, $parameters = array(), $attributes = array())
+        {
+                        /** @var \Collective\Html\HtmlBuilder $instance */
+                        return $instance->linkRoute($name, $title, $parameters, $attributes);
+        }
+        
+        /**
+         * Generate a HTML link to a controller action.
+         *
+         * @param string $action
+         * @param string $title
+         * @param array $parameters
+         * @param array $attributes
+         * @return \Illuminate\Support\HtmlString 
+         * @static 
+         */ 
+        public static function linkAction($action, $title = null, $parameters = array(), $attributes = array())
+        {
+                        /** @var \Collective\Html\HtmlBuilder $instance */
+                        return $instance->linkAction($action, $title, $parameters, $attributes);
+        }
+        
+        /**
+         * Generate a HTML link to an email address.
+         *
+         * @param string $email
+         * @param string $title
+         * @param array $attributes
+         * @param bool $escape
+         * @return \Illuminate\Support\HtmlString 
+         * @static 
+         */ 
+        public static function mailto($email, $title = null, $attributes = array(), $escape = true)
+        {
+                        /** @var \Collective\Html\HtmlBuilder $instance */
+                        return $instance->mailto($email, $title, $attributes, $escape);
+        }
+        
+        /**
+         * Obfuscate an e-mail address to prevent spam-bots from sniffing it.
+         *
+         * @param string $email
+         * @return string 
+         * @static 
+         */ 
+        public static function email($email)
+        {
+                        /** @var \Collective\Html\HtmlBuilder $instance */
+                        return $instance->email($email);
+        }
+        
+        /**
+         * Generates non-breaking space entities based on number supplied.
+         *
+         * @param int $num
+         * @return string 
+         * @static 
+         */ 
+        public static function nbsp($num = 1)
+        {
+                        /** @var \Collective\Html\HtmlBuilder $instance */
+                        return $instance->nbsp($num);
+        }
+        
+        /**
+         * Generate an ordered list of items.
+         *
+         * @param array $list
+         * @param array $attributes
+         * @return \Illuminate\Support\HtmlString|string 
+         * @static 
+         */ 
+        public static function ol($list, $attributes = array())
+        {
+                        /** @var \Collective\Html\HtmlBuilder $instance */
+                        return $instance->ol($list, $attributes);
+        }
+        
+        /**
+         * Generate an un-ordered list of items.
+         *
+         * @param array $list
+         * @param array $attributes
+         * @return \Illuminate\Support\HtmlString|string 
+         * @static 
+         */ 
+        public static function ul($list, $attributes = array())
+        {
+                        /** @var \Collective\Html\HtmlBuilder $instance */
+                        return $instance->ul($list, $attributes);
+        }
+        
+        /**
+         * Generate a description list of items.
+         *
+         * @param array $list
+         * @param array $attributes
+         * @return \Illuminate\Support\HtmlString 
+         * @static 
+         */ 
+        public static function dl($list, $attributes = array())
+        {
+                        /** @var \Collective\Html\HtmlBuilder $instance */
+                        return $instance->dl($list, $attributes);
+        }
+        
+        /**
+         * Build an HTML attribute string from an array.
+         *
+         * @param array $attributes
+         * @return string 
+         * @static 
+         */ 
+        public static function attributes($attributes)
+        {
+                        /** @var \Collective\Html\HtmlBuilder $instance */
+                        return $instance->attributes($attributes);
+        }
+        
+        /**
+         * Obfuscate a string to prevent spam-bots from sniffing it.
+         *
+         * @param string $value
+         * @return string 
+         * @static 
+         */ 
+        public static function obfuscate($value)
+        {
+                        /** @var \Collective\Html\HtmlBuilder $instance */
+                        return $instance->obfuscate($value);
+        }
+        
+        /**
+         * Generate a meta tag.
+         *
+         * @param string $name
+         * @param string $content
+         * @param array $attributes
+         * @return \Illuminate\Support\HtmlString 
+         * @static 
+         */ 
+        public static function meta($name, $content, $attributes = array())
+        {
+                        /** @var \Collective\Html\HtmlBuilder $instance */
+                        return $instance->meta($name, $content, $attributes);
+        }
+        
+        /**
+         * Generate an html tag.
+         *
+         * @param string $tag
+         * @param mixed $content
+         * @param array $attributes
+         * @return \Illuminate\Support\HtmlString 
+         * @static 
+         */ 
+        public static function tag($tag, $content, $attributes = array())
+        {
+                        /** @var \Collective\Html\HtmlBuilder $instance */
+                        return $instance->tag($tag, $content, $attributes);
+        }
+        
+        /**
+         * Register a custom macro.
+         *
+         * @param string $name
+         * @param object|callable $macro
+         * @return void 
+         * @static 
+         */ 
+        public static function macro($name, $macro)
+        {
+                        \Collective\Html\HtmlBuilder::macro($name, $macro);
+        }
+        
+        /**
+         * Mix another object into the class.
+         *
+         * @param object $mixin
+         * @param bool $replace
+         * @return void 
+         * @throws \ReflectionException
+         * @static 
+         */ 
+        public static function mixin($mixin, $replace = true)
+        {
+                        \Collective\Html\HtmlBuilder::mixin($mixin, $replace);
+        }
+        
+        /**
+         * Checks if macro is registered.
+         *
+         * @param string $name
+         * @return bool 
+         * @static 
+         */ 
+        public static function hasMacro($name)
+        {
+                        return \Collective\Html\HtmlBuilder::hasMacro($name);
+        }
+        
+        /**
+         * Dynamically handle calls to the class.
+         *
+         * @param string $method
+         * @param array $parameters
+         * @return mixed 
+         * @throws \BadMethodCallException
+         * @static 
+         */ 
+        public static function macroCall($method, $parameters)
+        {
+                        /** @var \Collective\Html\HtmlBuilder $instance */
+                        return $instance->macroCall($method, $parameters);
+        }
+        
+        /**
+         * Register a custom component.
+         *
+         * @param $name
+         * @param $view
+         * @param array $signature
+         * @return void 
+         * @static 
+         */ 
+        public static function component($name, $view, $signature)
+        {
+                        \Collective\Html\HtmlBuilder::component($name, $view, $signature);
+        }
+        
+        /**
+         * Check if a component is registered.
+         *
+         * @param $name
+         * @return bool 
+         * @static 
+         */ 
+        public static function hasComponent($name)
+        {
+                        return \Collective\Html\HtmlBuilder::hasComponent($name);
+        }
+        
+        /**
+         * Dynamically handle calls to the class.
+         *
+         * @param string $method
+         * @param array $parameters
+         * @return \Illuminate\Contracts\View\View|mixed 
+         * @throws \BadMethodCallException
+         * @static 
+         */ 
+        public static function componentCall($method, $parameters)
+        {
+                        /** @var \Collective\Html\HtmlBuilder $instance */
+                        return $instance->componentCall($method, $parameters);
+        }
+         
+    }
+
+    /**
+     * 
+     *
+     * @see \Collective\Html\HtmlBuilder
+     */ 
+    class HtmlFacade {
+        
+        /**
+         * Convert an HTML string to entities.
+         *
+         * @param string $value
+         * @return string 
+         * @static 
+         */ 
+        public static function entities($value)
+        {
+                        /** @var \Collective\Html\HtmlBuilder $instance */
+                        return $instance->entities($value);
+        }
+        
+        /**
+         * Convert entities to HTML characters.
+         *
+         * @param string $value
+         * @return string 
+         * @static 
+         */ 
+        public static function decode($value)
+        {
+                        /** @var \Collective\Html\HtmlBuilder $instance */
+                        return $instance->decode($value);
+        }
+        
+        /**
+         * Generate a link to a JavaScript file.
+         *
+         * @param string $url
+         * @param array $attributes
+         * @param bool $secure
+         * @return \Illuminate\Support\HtmlString 
+         * @static 
+         */ 
+        public static function script($url, $attributes = array(), $secure = null)
+        {
+                        /** @var \Collective\Html\HtmlBuilder $instance */
+                        return $instance->script($url, $attributes, $secure);
+        }
+        
+        /**
+         * Generate a link to a CSS file.
+         *
+         * @param string $url
+         * @param array $attributes
+         * @param bool $secure
+         * @return \Illuminate\Support\HtmlString 
+         * @static 
+         */ 
+        public static function style($url, $attributes = array(), $secure = null)
+        {
+                        /** @var \Collective\Html\HtmlBuilder $instance */
+                        return $instance->style($url, $attributes, $secure);
+        }
+        
+        /**
+         * Generate an HTML image element.
+         *
+         * @param string $url
+         * @param string $alt
+         * @param array $attributes
+         * @param bool $secure
+         * @return \Illuminate\Support\HtmlString 
+         * @static 
+         */ 
+        public static function image($url, $alt = null, $attributes = array(), $secure = null)
+        {
+                        /** @var \Collective\Html\HtmlBuilder $instance */
+                        return $instance->image($url, $alt, $attributes, $secure);
+        }
+        
+        /**
+         * Generate a link to a Favicon file.
+         *
+         * @param string $url
+         * @param array $attributes
+         * @param bool $secure
+         * @return \Illuminate\Support\HtmlString 
+         * @static 
+         */ 
+        public static function favicon($url, $attributes = array(), $secure = null)
+        {
+                        /** @var \Collective\Html\HtmlBuilder $instance */
+                        return $instance->favicon($url, $attributes, $secure);
+        }
+        
+        /**
+         * Generate a HTML link.
+         *
+         * @param string $url
+         * @param string $title
+         * @param array $attributes
+         * @param bool $secure
+         * @param bool $escape
+         * @return \Illuminate\Support\HtmlString 
+         * @static 
+         */ 
+        public static function link($url, $title = null, $attributes = array(), $secure = null, $escape = true)
+        {
+                        /** @var \Collective\Html\HtmlBuilder $instance */
+                        return $instance->link($url, $title, $attributes, $secure, $escape);
+        }
+        
+        /**
+         * Generate a HTTPS HTML link.
+         *
+         * @param string $url
+         * @param string $title
+         * @param array $attributes
+         * @return \Illuminate\Support\HtmlString 
+         * @static 
+         */ 
+        public static function secureLink($url, $title = null, $attributes = array())
+        {
+                        /** @var \Collective\Html\HtmlBuilder $instance */
+                        return $instance->secureLink($url, $title, $attributes);
+        }
+        
+        /**
+         * Generate a HTML link to an asset.
+         *
+         * @param string $url
+         * @param string $title
+         * @param array $attributes
+         * @param bool $secure
+         * @return \Illuminate\Support\HtmlString 
+         * @static 
+         */ 
+        public static function linkAsset($url, $title = null, $attributes = array(), $secure = null)
+        {
+                        /** @var \Collective\Html\HtmlBuilder $instance */
+                        return $instance->linkAsset($url, $title, $attributes, $secure);
+        }
+        
+        /**
+         * Generate a HTTPS HTML link to an asset.
+         *
+         * @param string $url
+         * @param string $title
+         * @param array $attributes
+         * @return \Illuminate\Support\HtmlString 
+         * @static 
+         */ 
+        public static function linkSecureAsset($url, $title = null, $attributes = array())
+        {
+                        /** @var \Collective\Html\HtmlBuilder $instance */
+                        return $instance->linkSecureAsset($url, $title, $attributes);
+        }
+        
+        /**
+         * Generate a HTML link to a named route.
+         *
+         * @param string $name
+         * @param string $title
+         * @param array $parameters
+         * @param array $attributes
+         * @return \Illuminate\Support\HtmlString 
+         * @static 
+         */ 
+        public static function linkRoute($name, $title = null, $parameters = array(), $attributes = array())
+        {
+                        /** @var \Collective\Html\HtmlBuilder $instance */
+                        return $instance->linkRoute($name, $title, $parameters, $attributes);
+        }
+        
+        /**
+         * Generate a HTML link to a controller action.
+         *
+         * @param string $action
+         * @param string $title
+         * @param array $parameters
+         * @param array $attributes
+         * @return \Illuminate\Support\HtmlString 
+         * @static 
+         */ 
+        public static function linkAction($action, $title = null, $parameters = array(), $attributes = array())
+        {
+                        /** @var \Collective\Html\HtmlBuilder $instance */
+                        return $instance->linkAction($action, $title, $parameters, $attributes);
+        }
+        
+        /**
+         * Generate a HTML link to an email address.
+         *
+         * @param string $email
+         * @param string $title
+         * @param array $attributes
+         * @param bool $escape
+         * @return \Illuminate\Support\HtmlString 
+         * @static 
+         */ 
+        public static function mailto($email, $title = null, $attributes = array(), $escape = true)
+        {
+                        /** @var \Collective\Html\HtmlBuilder $instance */
+                        return $instance->mailto($email, $title, $attributes, $escape);
+        }
+        
+        /**
+         * Obfuscate an e-mail address to prevent spam-bots from sniffing it.
+         *
+         * @param string $email
+         * @return string 
+         * @static 
+         */ 
+        public static function email($email)
+        {
+                        /** @var \Collective\Html\HtmlBuilder $instance */
+                        return $instance->email($email);
+        }
+        
+        /**
+         * Generates non-breaking space entities based on number supplied.
+         *
+         * @param int $num
+         * @return string 
+         * @static 
+         */ 
+        public static function nbsp($num = 1)
+        {
+                        /** @var \Collective\Html\HtmlBuilder $instance */
+                        return $instance->nbsp($num);
+        }
+        
+        /**
+         * Generate an ordered list of items.
+         *
+         * @param array $list
+         * @param array $attributes
+         * @return \Illuminate\Support\HtmlString|string 
+         * @static 
+         */ 
+        public static function ol($list, $attributes = array())
+        {
+                        /** @var \Collective\Html\HtmlBuilder $instance */
+                        return $instance->ol($list, $attributes);
+        }
+        
+        /**
+         * Generate an un-ordered list of items.
+         *
+         * @param array $list
+         * @param array $attributes
+         * @return \Illuminate\Support\HtmlString|string 
+         * @static 
+         */ 
+        public static function ul($list, $attributes = array())
+        {
+                        /** @var \Collective\Html\HtmlBuilder $instance */
+                        return $instance->ul($list, $attributes);
+        }
+        
+        /**
+         * Generate a description list of items.
+         *
+         * @param array $list
+         * @param array $attributes
+         * @return \Illuminate\Support\HtmlString 
+         * @static 
+         */ 
+        public static function dl($list, $attributes = array())
+        {
+                        /** @var \Collective\Html\HtmlBuilder $instance */
+                        return $instance->dl($list, $attributes);
+        }
+        
+        /**
+         * Build an HTML attribute string from an array.
+         *
+         * @param array $attributes
+         * @return string 
+         * @static 
+         */ 
+        public static function attributes($attributes)
+        {
+                        /** @var \Collective\Html\HtmlBuilder $instance */
+                        return $instance->attributes($attributes);
+        }
+        
+        /**
+         * Obfuscate a string to prevent spam-bots from sniffing it.
+         *
+         * @param string $value
+         * @return string 
+         * @static 
+         */ 
+        public static function obfuscate($value)
+        {
+                        /** @var \Collective\Html\HtmlBuilder $instance */
+                        return $instance->obfuscate($value);
+        }
+        
+        /**
+         * Generate a meta tag.
+         *
+         * @param string $name
+         * @param string $content
+         * @param array $attributes
+         * @return \Illuminate\Support\HtmlString 
+         * @static 
+         */ 
+        public static function meta($name, $content, $attributes = array())
+        {
+                        /** @var \Collective\Html\HtmlBuilder $instance */
+                        return $instance->meta($name, $content, $attributes);
+        }
+        
+        /**
+         * Generate an html tag.
+         *
+         * @param string $tag
+         * @param mixed $content
+         * @param array $attributes
+         * @return \Illuminate\Support\HtmlString 
+         * @static 
+         */ 
+        public static function tag($tag, $content, $attributes = array())
+        {
+                        /** @var \Collective\Html\HtmlBuilder $instance */
+                        return $instance->tag($tag, $content, $attributes);
+        }
+        
+        /**
+         * Register a custom macro.
+         *
+         * @param string $name
+         * @param object|callable $macro
+         * @return void 
+         * @static 
+         */ 
+        public static function macro($name, $macro)
+        {
+                        \Collective\Html\HtmlBuilder::macro($name, $macro);
+        }
+        
+        /**
+         * Mix another object into the class.
+         *
+         * @param object $mixin
+         * @param bool $replace
+         * @return void 
+         * @throws \ReflectionException
+         * @static 
+         */ 
+        public static function mixin($mixin, $replace = true)
+        {
+                        \Collective\Html\HtmlBuilder::mixin($mixin, $replace);
+        }
+        
+        /**
+         * Checks if macro is registered.
+         *
+         * @param string $name
+         * @return bool 
+         * @static 
+         */ 
+        public static function hasMacro($name)
+        {
+                        return \Collective\Html\HtmlBuilder::hasMacro($name);
+        }
+        
+        /**
+         * Dynamically handle calls to the class.
+         *
+         * @param string $method
+         * @param array $parameters
+         * @return mixed 
+         * @throws \BadMethodCallException
+         * @static 
+         */ 
+        public static function macroCall($method, $parameters)
+        {
+                        /** @var \Collective\Html\HtmlBuilder $instance */
+                        return $instance->macroCall($method, $parameters);
+        }
+        
+        /**
+         * Register a custom component.
+         *
+         * @param $name
+         * @param $view
+         * @param array $signature
+         * @return void 
+         * @static 
+         */ 
+        public static function component($name, $view, $signature)
+        {
+                        \Collective\Html\HtmlBuilder::component($name, $view, $signature);
+        }
+        
+        /**
+         * Check if a component is registered.
+         *
+         * @param $name
+         * @return bool 
+         * @static 
+         */ 
+        public static function hasComponent($name)
+        {
+                        return \Collective\Html\HtmlBuilder::hasComponent($name);
+        }
+        
+        /**
+         * Dynamically handle calls to the class.
+         *
+         * @param string $method
+         * @param array $parameters
+         * @return \Illuminate\Contracts\View\View|mixed 
+         * @throws \BadMethodCallException
+         * @static 
+         */ 
+        public static function componentCall($method, $parameters)
+        {
+                        /** @var \Collective\Html\HtmlBuilder $instance */
+                        return $instance->componentCall($method, $parameters);
+        }
+         
+    }
+ 
+}
+
+namespace KodiCMS\Assets\Facades { 
+
+    /**
+     * 
+     *
+     */ 
+    class PackageManager {
+        
+        /**
+         * 
+         *
+         * @param string|\KodiCMS\Assets\PackageInterface $package
+         * @return \KodiCMS\Assets\Package 
+         * @static 
+         */ 
+        public static function add($package)
+        {
+                        /** @var \KodiCMS\Assets\PackageManager $instance */
+                        return $instance->add($package);
+        }
+        
+        /**
+         * 
+         *
+         * @param string $name
+         * @return \KodiCMS\Assets\PackageInterface|null 
+         * @static 
+         */ 
+        public static function load($name)
+        {
+                        /** @var \KodiCMS\Assets\PackageManager $instance */
+                        return $instance->load($name);
+        }
+        
+        /**
+         * Create a new collection instance if the value isn't one already.
+         *
+         * @param mixed $items
+         * @return static 
+         * @static 
+         */ 
+        public static function make($items = array())
+        {
+            //Method inherited from \Illuminate\Support\Collection            
+                        return \KodiCMS\Assets\PackageManager::make($items);
+        }
+        
+        /**
+         * Wrap the given value in a collection if applicable.
+         *
+         * @param mixed $value
+         * @return static 
+         * @static 
+         */ 
+        public static function wrap($value)
+        {
+            //Method inherited from \Illuminate\Support\Collection            
+                        return \KodiCMS\Assets\PackageManager::wrap($value);
+        }
+        
+        /**
+         * Get the underlying items from the given collection if applicable.
+         *
+         * @param array|static $value
+         * @return array 
+         * @static 
+         */ 
+        public static function unwrap($value)
+        {
+            //Method inherited from \Illuminate\Support\Collection            
+                        return \KodiCMS\Assets\PackageManager::unwrap($value);
+        }
+        
+        /**
+         * Create a new collection by invoking the callback a given amount of times.
+         *
+         * @param int $number
+         * @param callable $callback
+         * @return static 
+         * @static 
+         */ 
+        public static function times($number, $callback = null)
+        {
+            //Method inherited from \Illuminate\Support\Collection            
+                        return \KodiCMS\Assets\PackageManager::times($number, $callback);
+        }
+        
+        /**
+         * Get all of the items in the collection.
+         *
+         * @return array 
+         * @static 
+         */ 
+        public static function all()
+        {
+            //Method inherited from \Illuminate\Support\Collection            
+                        /** @var \KodiCMS\Assets\PackageManager $instance */
+                        return $instance->all();
+        }
+        
+        /**
+         * Get the average value of a given key.
+         *
+         * @param callable|string|null $callback
+         * @return mixed 
+         * @static 
+         */ 
+        public static function avg($callback = null)
+        {
+            //Method inherited from \Illuminate\Support\Collection            
+                        /** @var \KodiCMS\Assets\PackageManager $instance */
+                        return $instance->avg($callback);
+        }
+        
+        /**
+         * Alias for the "avg" method.
+         *
+         * @param callable|string|null $callback
+         * @return mixed 
+         * @static 
+         */ 
+        public static function average($callback = null)
+        {
+            //Method inherited from \Illuminate\Support\Collection            
+                        /** @var \KodiCMS\Assets\PackageManager $instance */
+                        return $instance->average($callback);
+        }
+        
+        /**
+         * Get the median of a given key.
+         *
+         * @param string|array|null $key
+         * @return mixed 
+         * @static 
+         */ 
+        public static function median($key = null)
+        {
+            //Method inherited from \Illuminate\Support\Collection            
+                        /** @var \KodiCMS\Assets\PackageManager $instance */
+                        return $instance->median($key);
+        }
+        
+        /**
+         * Get the mode of a given key.
+         *
+         * @param string|array|null $key
+         * @return array|null 
+         * @static 
+         */ 
+        public static function mode($key = null)
+        {
+            //Method inherited from \Illuminate\Support\Collection            
+                        /** @var \KodiCMS\Assets\PackageManager $instance */
+                        return $instance->mode($key);
+        }
+        
+        /**
+         * Collapse the collection of items into a single array.
+         *
+         * @return static 
+         * @static 
+         */ 
+        public static function collapse()
+        {
+            //Method inherited from \Illuminate\Support\Collection            
+                        /** @var \KodiCMS\Assets\PackageManager $instance */
+                        return $instance->collapse();
+        }
+        
+        /**
+         * Alias for the "contains" method.
+         *
+         * @param mixed $key
+         * @param mixed $operator
+         * @param mixed $value
+         * @return bool 
+         * @static 
+         */ 
+        public static function some($key, $operator = null, $value = null)
+        {
+            //Method inherited from \Illuminate\Support\Collection            
+                        /** @var \KodiCMS\Assets\PackageManager $instance */
+                        return $instance->some($key, $operator, $value);
+        }
+        
+        /**
+         * Determine if an item exists in the collection.
+         *
+         * @param mixed $key
+         * @param mixed $operator
+         * @param mixed $value
+         * @return bool 
+         * @static 
+         */ 
+        public static function contains($key, $operator = null, $value = null)
+        {
+            //Method inherited from \Illuminate\Support\Collection            
+                        /** @var \KodiCMS\Assets\PackageManager $instance */
+                        return $instance->contains($key, $operator, $value);
+        }
+        
+        /**
+         * Determine if an item exists in the collection using strict comparison.
+         *
+         * @param mixed $key
+         * @param mixed $value
+         * @return bool 
+         * @static 
+         */ 
+        public static function containsStrict($key, $value = null)
+        {
+            //Method inherited from \Illuminate\Support\Collection            
+                        /** @var \KodiCMS\Assets\PackageManager $instance */
+                        return $instance->containsStrict($key, $value);
+        }
+        
+        /**
+         * Cross join with the given lists, returning all possible permutations.
+         *
+         * @param mixed $lists
+         * @return static 
+         * @static 
+         */ 
+        public static function crossJoin($lists = null)
+        {
+            //Method inherited from \Illuminate\Support\Collection            
+                        /** @var \KodiCMS\Assets\PackageManager $instance */
+                        return $instance->crossJoin($lists);
+        }
+        
+        /**
+         * Dump the collection and end the script.
+         *
+         * @param mixed $args
+         * @return void 
+         * @static 
+         */ 
+        public static function dd($args = null)
+        {
+            //Method inherited from \Illuminate\Support\Collection            
+                        /** @var \KodiCMS\Assets\PackageManager $instance */
+                        $instance->dd($args);
+        }
+        
+        /**
+         * Dump the collection.
+         *
+         * @return \KodiCMS\Assets\PackageManager 
+         * @static 
+         */ 
+        public static function dump()
+        {
+            //Method inherited from \Illuminate\Support\Collection            
+                        /** @var \KodiCMS\Assets\PackageManager $instance */
+                        return $instance->dump();
+        }
+        
+        /**
+         * Get the items in the collection that are not present in the given items.
+         *
+         * @param mixed $items
+         * @return static 
+         * @static 
+         */ 
+        public static function diff($items)
+        {
+            //Method inherited from \Illuminate\Support\Collection            
+                        /** @var \KodiCMS\Assets\PackageManager $instance */
+                        return $instance->diff($items);
+        }
+        
+        /**
+         * Get the items in the collection that are not present in the given items.
+         *
+         * @param mixed $items
+         * @param callable $callback
+         * @return static 
+         * @static 
+         */ 
+        public static function diffUsing($items, $callback)
+        {
+            //Method inherited from \Illuminate\Support\Collection            
+                        /** @var \KodiCMS\Assets\PackageManager $instance */
+                        return $instance->diffUsing($items, $callback);
+        }
+        
+        /**
+         * Get the items in the collection whose keys and values are not present in the given items.
+         *
+         * @param mixed $items
+         * @return static 
+         * @static 
+         */ 
+        public static function diffAssoc($items)
+        {
+            //Method inherited from \Illuminate\Support\Collection            
+                        /** @var \KodiCMS\Assets\PackageManager $instance */
+                        return $instance->diffAssoc($items);
+        }
+        
+        /**
+         * Get the items in the collection whose keys and values are not present in the given items.
+         *
+         * @param mixed $items
+         * @param callable $callback
+         * @return static 
+         * @static 
+         */ 
+        public static function diffAssocUsing($items, $callback)
+        {
+            //Method inherited from \Illuminate\Support\Collection            
+                        /** @var \KodiCMS\Assets\PackageManager $instance */
+                        return $instance->diffAssocUsing($items, $callback);
+        }
+        
+        /**
+         * Get the items in the collection whose keys are not present in the given items.
+         *
+         * @param mixed $items
+         * @return static 
+         * @static 
+         */ 
+        public static function diffKeys($items)
+        {
+            //Method inherited from \Illuminate\Support\Collection            
+                        /** @var \KodiCMS\Assets\PackageManager $instance */
+                        return $instance->diffKeys($items);
+        }
+        
+        /**
+         * Get the items in the collection whose keys are not present in the given items.
+         *
+         * @param mixed $items
+         * @param callable $callback
+         * @return static 
+         * @static 
+         */ 
+        public static function diffKeysUsing($items, $callback)
+        {
+            //Method inherited from \Illuminate\Support\Collection            
+                        /** @var \KodiCMS\Assets\PackageManager $instance */
+                        return $instance->diffKeysUsing($items, $callback);
+        }
+        
+        /**
+         * Retrieve duplicate items from the collection.
+         *
+         * @param callable|null $callback
+         * @param bool $strict
+         * @return static 
+         * @static 
+         */ 
+        public static function duplicates($callback = null, $strict = false)
+        {
+            //Method inherited from \Illuminate\Support\Collection            
+                        /** @var \KodiCMS\Assets\PackageManager $instance */
+                        return $instance->duplicates($callback, $strict);
+        }
+        
+        /**
+         * Retrieve duplicate items from the collection using strict comparison.
+         *
+         * @param callable|null $callback
+         * @return static 
+         * @static 
+         */ 
+        public static function duplicatesStrict($callback = null)
+        {
+            //Method inherited from \Illuminate\Support\Collection            
+                        /** @var \KodiCMS\Assets\PackageManager $instance */
+                        return $instance->duplicatesStrict($callback);
+        }
+        
+        /**
+         * Execute a callback over each item.
+         *
+         * @param callable $callback
+         * @return \KodiCMS\Assets\PackageManager 
+         * @static 
+         */ 
+        public static function each($callback)
+        {
+            //Method inherited from \Illuminate\Support\Collection            
+                        /** @var \KodiCMS\Assets\PackageManager $instance */
+                        return $instance->each($callback);
+        }
+        
+        /**
+         * Execute a callback over each nested chunk of items.
+         *
+         * @param callable $callback
+         * @return static 
+         * @static 
+         */ 
+        public static function eachSpread($callback)
+        {
+            //Method inherited from \Illuminate\Support\Collection            
+                        /** @var \KodiCMS\Assets\PackageManager $instance */
+                        return $instance->eachSpread($callback);
+        }
+        
+        /**
+         * Determine if all items in the collection pass the given test.
+         *
+         * @param string|callable $key
+         * @param mixed $operator
+         * @param mixed $value
+         * @return bool 
+         * @static 
+         */ 
+        public static function every($key, $operator = null, $value = null)
+        {
+            //Method inherited from \Illuminate\Support\Collection            
+                        /** @var \KodiCMS\Assets\PackageManager $instance */
+                        return $instance->every($key, $operator, $value);
+        }
+        
+        /**
+         * Get all items except for those with the specified keys.
+         *
+         * @param \Illuminate\Support\Collection|mixed $keys
+         * @return static 
+         * @static 
+         */ 
+        public static function except($keys)
+        {
+            //Method inherited from \Illuminate\Support\Collection            
+                        /** @var \KodiCMS\Assets\PackageManager $instance */
+                        return $instance->except($keys);
+        }
+        
+        /**
+         * Run a filter over each of the items.
+         *
+         * @param callable|null $callback
+         * @return static 
+         * @static 
+         */ 
+        public static function filter($callback = null)
+        {
+            //Method inherited from \Illuminate\Support\Collection            
+                        /** @var \KodiCMS\Assets\PackageManager $instance */
+                        return $instance->filter($callback);
+        }
+        
+        /**
+         * Apply the callback if the value is truthy.
+         *
+         * @param bool $value
+         * @param callable $callback
+         * @param callable $default
+         * @return static|mixed 
+         * @static 
+         */ 
+        public static function when($value, $callback, $default = null)
+        {
+            //Method inherited from \Illuminate\Support\Collection            
+                        /** @var \KodiCMS\Assets\PackageManager $instance */
+                        return $instance->when($value, $callback, $default);
+        }
+        
+        /**
+         * Apply the callback if the collection is empty.
+         *
+         * @param callable $callback
+         * @param callable $default
+         * @return static|mixed 
+         * @static 
+         */ 
+        public static function whenEmpty($callback, $default = null)
+        {
+            //Method inherited from \Illuminate\Support\Collection            
+                        /** @var \KodiCMS\Assets\PackageManager $instance */
+                        return $instance->whenEmpty($callback, $default);
+        }
+        
+        /**
+         * Apply the callback if the collection is not empty.
+         *
+         * @param callable $callback
+         * @param callable $default
+         * @return static|mixed 
+         * @static 
+         */ 
+        public static function whenNotEmpty($callback, $default = null)
+        {
+            //Method inherited from \Illuminate\Support\Collection            
+                        /** @var \KodiCMS\Assets\PackageManager $instance */
+                        return $instance->whenNotEmpty($callback, $default);
+        }
+        
+        /**
+         * Apply the callback if the value is falsy.
+         *
+         * @param bool $value
+         * @param callable $callback
+         * @param callable $default
+         * @return static|mixed 
+         * @static 
+         */ 
+        public static function unless($value, $callback, $default = null)
+        {
+            //Method inherited from \Illuminate\Support\Collection            
+                        /** @var \KodiCMS\Assets\PackageManager $instance */
+                        return $instance->unless($value, $callback, $default);
+        }
+        
+        /**
+         * Apply the callback unless the collection is empty.
+         *
+         * @param callable $callback
+         * @param callable $default
+         * @return static|mixed 
+         * @static 
+         */ 
+        public static function unlessEmpty($callback, $default = null)
+        {
+            //Method inherited from \Illuminate\Support\Collection            
+                        /** @var \KodiCMS\Assets\PackageManager $instance */
+                        return $instance->unlessEmpty($callback, $default);
+        }
+        
+        /**
+         * Apply the callback unless the collection is not empty.
+         *
+         * @param callable $callback
+         * @param callable $default
+         * @return static|mixed 
+         * @static 
+         */ 
+        public static function unlessNotEmpty($callback, $default = null)
+        {
+            //Method inherited from \Illuminate\Support\Collection            
+                        /** @var \KodiCMS\Assets\PackageManager $instance */
+                        return $instance->unlessNotEmpty($callback, $default);
+        }
+        
+        /**
+         * Filter items by the given key value pair.
+         *
+         * @param string $key
+         * @param mixed $operator
+         * @param mixed $value
+         * @return static 
+         * @static 
+         */ 
+        public static function where($key, $operator = null, $value = null)
+        {
+            //Method inherited from \Illuminate\Support\Collection            
+                        /** @var \KodiCMS\Assets\PackageManager $instance */
+                        return $instance->where($key, $operator, $value);
+        }
+        
+        /**
+         * Filter items by the given key value pair using strict comparison.
+         *
+         * @param string $key
+         * @param mixed $value
+         * @return static 
+         * @static 
+         */ 
+        public static function whereStrict($key, $value)
+        {
+            //Method inherited from \Illuminate\Support\Collection            
+                        /** @var \KodiCMS\Assets\PackageManager $instance */
+                        return $instance->whereStrict($key, $value);
+        }
+        
+        /**
+         * Filter items by the given key value pair.
+         *
+         * @param string $key
+         * @param mixed $values
+         * @param bool $strict
+         * @return static 
+         * @static 
+         */ 
+        public static function whereIn($key, $values, $strict = false)
+        {
+            //Method inherited from \Illuminate\Support\Collection            
+                        /** @var \KodiCMS\Assets\PackageManager $instance */
+                        return $instance->whereIn($key, $values, $strict);
+        }
+        
+        /**
+         * Filter items by the given key value pair using strict comparison.
+         *
+         * @param string $key
+         * @param mixed $values
+         * @return static 
+         * @static 
+         */ 
+        public static function whereInStrict($key, $values)
+        {
+            //Method inherited from \Illuminate\Support\Collection            
+                        /** @var \KodiCMS\Assets\PackageManager $instance */
+                        return $instance->whereInStrict($key, $values);
+        }
+        
+        /**
+         * Filter items such that the value of the given key is between the given values.
+         *
+         * @param string $key
+         * @param array $values
+         * @return static 
+         * @static 
+         */ 
+        public static function whereBetween($key, $values)
+        {
+            //Method inherited from \Illuminate\Support\Collection            
+                        /** @var \KodiCMS\Assets\PackageManager $instance */
+                        return $instance->whereBetween($key, $values);
+        }
+        
+        /**
+         * Filter items such that the value of the given key is not between the given values.
+         *
+         * @param string $key
+         * @param array $values
+         * @return static 
+         * @static 
+         */ 
+        public static function whereNotBetween($key, $values)
+        {
+            //Method inherited from \Illuminate\Support\Collection            
+                        /** @var \KodiCMS\Assets\PackageManager $instance */
+                        return $instance->whereNotBetween($key, $values);
+        }
+        
+        /**
+         * Filter items by the given key value pair.
+         *
+         * @param string $key
+         * @param mixed $values
+         * @param bool $strict
+         * @return static 
+         * @static 
+         */ 
+        public static function whereNotIn($key, $values, $strict = false)
+        {
+            //Method inherited from \Illuminate\Support\Collection            
+                        /** @var \KodiCMS\Assets\PackageManager $instance */
+                        return $instance->whereNotIn($key, $values, $strict);
+        }
+        
+        /**
+         * Filter items by the given key value pair using strict comparison.
+         *
+         * @param string $key
+         * @param mixed $values
+         * @return static 
+         * @static 
+         */ 
+        public static function whereNotInStrict($key, $values)
+        {
+            //Method inherited from \Illuminate\Support\Collection            
+                        /** @var \KodiCMS\Assets\PackageManager $instance */
+                        return $instance->whereNotInStrict($key, $values);
+        }
+        
+        /**
+         * Filter the items, removing any items that don't match the given type.
+         *
+         * @param string $type
+         * @return static 
+         * @static 
+         */ 
+        public static function whereInstanceOf($type)
+        {
+            //Method inherited from \Illuminate\Support\Collection            
+                        /** @var \KodiCMS\Assets\PackageManager $instance */
+                        return $instance->whereInstanceOf($type);
+        }
+        
+        /**
+         * Get the first item from the collection.
+         *
+         * @param callable|null $callback
+         * @param mixed $default
+         * @return mixed 
+         * @static 
+         */ 
+        public static function first($callback = null, $default = null)
+        {
+            //Method inherited from \Illuminate\Support\Collection            
+                        /** @var \KodiCMS\Assets\PackageManager $instance */
+                        return $instance->first($callback, $default);
+        }
+        
+        /**
+         * Get the first item by the given key value pair.
+         *
+         * @param string $key
+         * @param mixed $operator
+         * @param mixed $value
+         * @return mixed 
+         * @static 
+         */ 
+        public static function firstWhere($key, $operator = null, $value = null)
+        {
+            //Method inherited from \Illuminate\Support\Collection            
+                        /** @var \KodiCMS\Assets\PackageManager $instance */
+                        return $instance->firstWhere($key, $operator, $value);
+        }
+        
+        /**
+         * Get a flattened array of the items in the collection.
+         *
+         * @param int $depth
+         * @return static 
+         * @static 
+         */ 
+        public static function flatten($depth = 'INF')
+        {
+            //Method inherited from \Illuminate\Support\Collection            
+                        /** @var \KodiCMS\Assets\PackageManager $instance */
+                        return $instance->flatten($depth);
+        }
+        
+        /**
+         * Flip the items in the collection.
+         *
+         * @return static 
+         * @static 
+         */ 
+        public static function flip()
+        {
+            //Method inherited from \Illuminate\Support\Collection            
+                        /** @var \KodiCMS\Assets\PackageManager $instance */
+                        return $instance->flip();
+        }
+        
+        /**
+         * Remove an item from the collection by key.
+         *
+         * @param string|array $keys
+         * @return \KodiCMS\Assets\PackageManager 
+         * @static 
+         */ 
+        public static function forget($keys)
+        {
+            //Method inherited from \Illuminate\Support\Collection            
+                        /** @var \KodiCMS\Assets\PackageManager $instance */
+                        return $instance->forget($keys);
+        }
+        
+        /**
+         * Get an item from the collection by key.
+         *
+         * @param mixed $key
+         * @param mixed $default
+         * @return mixed 
+         * @static 
+         */ 
+        public static function get($key, $default = null)
+        {
+            //Method inherited from \Illuminate\Support\Collection            
+                        /** @var \KodiCMS\Assets\PackageManager $instance */
+                        return $instance->get($key, $default);
+        }
+        
+        /**
+         * Group an associative array by a field or using a callback.
+         *
+         * @param array|callable|string $groupBy
+         * @param bool $preserveKeys
+         * @return static 
+         * @static 
+         */ 
+        public static function groupBy($groupBy, $preserveKeys = false)
+        {
+            //Method inherited from \Illuminate\Support\Collection            
+                        /** @var \KodiCMS\Assets\PackageManager $instance */
+                        return $instance->groupBy($groupBy, $preserveKeys);
+        }
+        
+        /**
+         * Key an associative array by a field or using a callback.
+         *
+         * @param callable|string $keyBy
+         * @return static 
+         * @static 
+         */ 
+        public static function keyBy($keyBy)
+        {
+            //Method inherited from \Illuminate\Support\Collection            
+                        /** @var \KodiCMS\Assets\PackageManager $instance */
+                        return $instance->keyBy($keyBy);
+        }
+        
+        /**
+         * Determine if an item exists in the collection by key.
+         *
+         * @param mixed $key
+         * @return bool 
+         * @static 
+         */ 
+        public static function has($key)
+        {
+            //Method inherited from \Illuminate\Support\Collection            
+                        /** @var \KodiCMS\Assets\PackageManager $instance */
+                        return $instance->has($key);
+        }
+        
+        /**
+         * Concatenate values of a given key as a string.
+         *
+         * @param string $value
+         * @param string $glue
+         * @return string 
+         * @static 
+         */ 
+        public static function implode($value, $glue = null)
+        {
+            //Method inherited from \Illuminate\Support\Collection            
+                        /** @var \KodiCMS\Assets\PackageManager $instance */
+                        return $instance->implode($value, $glue);
+        }
+        
+        /**
+         * Intersect the collection with the given items.
+         *
+         * @param mixed $items
+         * @return static 
+         * @static 
+         */ 
+        public static function intersect($items)
+        {
+            //Method inherited from \Illuminate\Support\Collection            
+                        /** @var \KodiCMS\Assets\PackageManager $instance */
+                        return $instance->intersect($items);
+        }
+        
+        /**
+         * Intersect the collection with the given items by key.
+         *
+         * @param mixed $items
+         * @return static 
+         * @static 
+         */ 
+        public static function intersectByKeys($items)
+        {
+            //Method inherited from \Illuminate\Support\Collection            
+                        /** @var \KodiCMS\Assets\PackageManager $instance */
+                        return $instance->intersectByKeys($items);
+        }
+        
+        /**
+         * Determine if the collection is empty or not.
+         *
+         * @return bool 
+         * @static 
+         */ 
+        public static function isEmpty()
+        {
+            //Method inherited from \Illuminate\Support\Collection            
+                        /** @var \KodiCMS\Assets\PackageManager $instance */
+                        return $instance->isEmpty();
+        }
+        
+        /**
+         * Determine if the collection is not empty.
+         *
+         * @return bool 
+         * @static 
+         */ 
+        public static function isNotEmpty()
+        {
+            //Method inherited from \Illuminate\Support\Collection            
+                        /** @var \KodiCMS\Assets\PackageManager $instance */
+                        return $instance->isNotEmpty();
+        }
+        
+        /**
+         * Join all items from the collection using a string. The final items can use a separate glue string.
+         *
+         * @param string $glue
+         * @param string $finalGlue
+         * @return string 
+         * @static 
+         */ 
+        public static function join($glue, $finalGlue = '')
+        {
+            //Method inherited from \Illuminate\Support\Collection            
+                        /** @var \KodiCMS\Assets\PackageManager $instance */
+                        return $instance->join($glue, $finalGlue);
+        }
+        
+        /**
+         * Get the keys of the collection items.
+         *
+         * @return static 
+         * @static 
+         */ 
+        public static function keys()
+        {
+            //Method inherited from \Illuminate\Support\Collection            
+                        /** @var \KodiCMS\Assets\PackageManager $instance */
+                        return $instance->keys();
+        }
+        
+        /**
+         * Get the last item from the collection.
+         *
+         * @param callable|null $callback
+         * @param mixed $default
+         * @return mixed 
+         * @static 
+         */ 
+        public static function last($callback = null, $default = null)
+        {
+            //Method inherited from \Illuminate\Support\Collection            
+                        /** @var \KodiCMS\Assets\PackageManager $instance */
+                        return $instance->last($callback, $default);
+        }
+        
+        /**
+         * Get the values of a given key.
+         *
+         * @param string|array $value
+         * @param string|null $key
+         * @return static 
+         * @static 
+         */ 
+        public static function pluck($value, $key = null)
+        {
+            //Method inherited from \Illuminate\Support\Collection            
+                        /** @var \KodiCMS\Assets\PackageManager $instance */
+                        return $instance->pluck($value, $key);
+        }
+        
+        /**
+         * Run a map over each of the items.
+         *
+         * @param callable $callback
+         * @return static 
+         * @static 
+         */ 
+        public static function map($callback)
+        {
+            //Method inherited from \Illuminate\Support\Collection            
+                        /** @var \KodiCMS\Assets\PackageManager $instance */
+                        return $instance->map($callback);
+        }
+        
+        /**
+         * Run a map over each nested chunk of items.
+         *
+         * @param callable $callback
+         * @return static 
+         * @static 
+         */ 
+        public static function mapSpread($callback)
+        {
+            //Method inherited from \Illuminate\Support\Collection            
+                        /** @var \KodiCMS\Assets\PackageManager $instance */
+                        return $instance->mapSpread($callback);
+        }
+        
+        /**
+         * Run a dictionary map over the items.
+         * 
+         * The callback should return an associative array with a single key/value pair.
+         *
+         * @param callable $callback
+         * @return static 
+         * @static 
+         */ 
+        public static function mapToDictionary($callback)
+        {
+            //Method inherited from \Illuminate\Support\Collection            
+                        /** @var \KodiCMS\Assets\PackageManager $instance */
+                        return $instance->mapToDictionary($callback);
+        }
+        
+        /**
+         * Run a grouping map over the items.
+         * 
+         * The callback should return an associative array with a single key/value pair.
+         *
+         * @param callable $callback
+         * @return static 
+         * @static 
+         */ 
+        public static function mapToGroups($callback)
+        {
+            //Method inherited from \Illuminate\Support\Collection            
+                        /** @var \KodiCMS\Assets\PackageManager $instance */
+                        return $instance->mapToGroups($callback);
+        }
+        
+        /**
+         * Run an associative map over each of the items.
+         * 
+         * The callback should return an associative array with a single key/value pair.
+         *
+         * @param callable $callback
+         * @return static 
+         * @static 
+         */ 
+        public static function mapWithKeys($callback)
+        {
+            //Method inherited from \Illuminate\Support\Collection            
+                        /** @var \KodiCMS\Assets\PackageManager $instance */
+                        return $instance->mapWithKeys($callback);
+        }
+        
+        /**
+         * Map a collection and flatten the result by a single level.
+         *
+         * @param callable $callback
+         * @return static 
+         * @static 
+         */ 
+        public static function flatMap($callback)
+        {
+            //Method inherited from \Illuminate\Support\Collection            
+                        /** @var \KodiCMS\Assets\PackageManager $instance */
+                        return $instance->flatMap($callback);
+        }
+        
+        /**
+         * Map the values into a new class.
+         *
+         * @param string $class
+         * @return static 
+         * @static 
+         */ 
+        public static function mapInto($class)
+        {
+            //Method inherited from \Illuminate\Support\Collection            
+                        /** @var \KodiCMS\Assets\PackageManager $instance */
+                        return $instance->mapInto($class);
+        }
+        
+        /**
+         * Get the max value of a given key.
+         *
+         * @param callable|string|null $callback
+         * @return mixed 
+         * @static 
+         */ 
+        public static function max($callback = null)
+        {
+            //Method inherited from \Illuminate\Support\Collection            
+                        /** @var \KodiCMS\Assets\PackageManager $instance */
+                        return $instance->max($callback);
+        }
+        
+        /**
+         * Merge the collection with the given items.
+         *
+         * @param mixed $items
+         * @return static 
+         * @static 
+         */ 
+        public static function merge($items)
+        {
+            //Method inherited from \Illuminate\Support\Collection            
+                        /** @var \KodiCMS\Assets\PackageManager $instance */
+                        return $instance->merge($items);
+        }
+        
+        /**
+         * Create a collection by using this collection for keys and another for its values.
+         *
+         * @param mixed $values
+         * @return static 
+         * @static 
+         */ 
+        public static function combine($values)
+        {
+            //Method inherited from \Illuminate\Support\Collection            
+                        /** @var \KodiCMS\Assets\PackageManager $instance */
+                        return $instance->combine($values);
+        }
+        
+        /**
+         * Union the collection with the given items.
+         *
+         * @param mixed $items
+         * @return static 
+         * @static 
+         */ 
+        public static function union($items)
+        {
+            //Method inherited from \Illuminate\Support\Collection            
+                        /** @var \KodiCMS\Assets\PackageManager $instance */
+                        return $instance->union($items);
+        }
+        
+        /**
+         * Get the min value of a given key.
+         *
+         * @param callable|string|null $callback
+         * @return mixed 
+         * @static 
+         */ 
+        public static function min($callback = null)
+        {
+            //Method inherited from \Illuminate\Support\Collection            
+                        /** @var \KodiCMS\Assets\PackageManager $instance */
+                        return $instance->min($callback);
+        }
+        
+        /**
+         * Create a new collection consisting of every n-th element.
+         *
+         * @param int $step
+         * @param int $offset
+         * @return static 
+         * @static 
+         */ 
+        public static function nth($step, $offset = 0)
+        {
+            //Method inherited from \Illuminate\Support\Collection            
+                        /** @var \KodiCMS\Assets\PackageManager $instance */
+                        return $instance->nth($step, $offset);
+        }
+        
+        /**
+         * Get the items with the specified keys.
+         *
+         * @param mixed $keys
+         * @return static 
+         * @static 
+         */ 
+        public static function only($keys)
+        {
+            //Method inherited from \Illuminate\Support\Collection            
+                        /** @var \KodiCMS\Assets\PackageManager $instance */
+                        return $instance->only($keys);
+        }
+        
+        /**
+         * "Paginate" the collection by slicing it into a smaller collection.
+         *
+         * @param int $page
+         * @param int $perPage
+         * @return static 
+         * @static 
+         */ 
+        public static function forPage($page, $perPage)
+        {
+            //Method inherited from \Illuminate\Support\Collection            
+                        /** @var \KodiCMS\Assets\PackageManager $instance */
+                        return $instance->forPage($page, $perPage);
+        }
+        
+        /**
+         * Partition the collection into two arrays using the given callback or key.
+         *
+         * @param callable|string $key
+         * @param mixed $operator
+         * @param mixed $value
+         * @return static 
+         * @static 
+         */ 
+        public static function partition($key, $operator = null, $value = null)
+        {
+            //Method inherited from \Illuminate\Support\Collection            
+                        /** @var \KodiCMS\Assets\PackageManager $instance */
+                        return $instance->partition($key, $operator, $value);
+        }
+        
+        /**
+         * Pass the collection to the given callback and return the result.
+         *
+         * @param callable $callback
+         * @return mixed 
+         * @static 
+         */ 
+        public static function pipe($callback)
+        {
+            //Method inherited from \Illuminate\Support\Collection            
+                        /** @var \KodiCMS\Assets\PackageManager $instance */
+                        return $instance->pipe($callback);
+        }
+        
+        /**
+         * Get and remove the last item from the collection.
+         *
+         * @return mixed 
+         * @static 
+         */ 
+        public static function pop()
+        {
+            //Method inherited from \Illuminate\Support\Collection            
+                        /** @var \KodiCMS\Assets\PackageManager $instance */
+                        return $instance->pop();
+        }
+        
+        /**
+         * Push an item onto the beginning of the collection.
+         *
+         * @param mixed $value
+         * @param mixed $key
+         * @return \KodiCMS\Assets\PackageManager 
+         * @static 
+         */ 
+        public static function prepend($value, $key = null)
+        {
+            //Method inherited from \Illuminate\Support\Collection            
+                        /** @var \KodiCMS\Assets\PackageManager $instance */
+                        return $instance->prepend($value, $key);
+        }
+        
+        /**
+         * Push an item onto the end of the collection.
+         *
+         * @param mixed $value
+         * @return \KodiCMS\Assets\PackageManager 
+         * @static 
+         */ 
+        public static function push($value)
+        {
+            //Method inherited from \Illuminate\Support\Collection            
+                        /** @var \KodiCMS\Assets\PackageManager $instance */
+                        return $instance->push($value);
+        }
+        
+        /**
+         * Push all of the given items onto the collection.
+         *
+         * @param \Illuminate\Support\iterable $source
+         * @return static 
+         * @static 
+         */ 
+        public static function concat($source)
+        {
+            //Method inherited from \Illuminate\Support\Collection            
+                        /** @var \KodiCMS\Assets\PackageManager $instance */
+                        return $instance->concat($source);
+        }
+        
+        /**
+         * Get and remove an item from the collection.
+         *
+         * @param mixed $key
+         * @param mixed $default
+         * @return mixed 
+         * @static 
+         */ 
+        public static function pull($key, $default = null)
+        {
+            //Method inherited from \Illuminate\Support\Collection            
+                        /** @var \KodiCMS\Assets\PackageManager $instance */
+                        return $instance->pull($key, $default);
+        }
+        
+        /**
+         * Put an item in the collection by key.
+         *
+         * @param mixed $key
+         * @param mixed $value
+         * @return \KodiCMS\Assets\PackageManager 
+         * @static 
+         */ 
+        public static function put($key, $value)
+        {
+            //Method inherited from \Illuminate\Support\Collection            
+                        /** @var \KodiCMS\Assets\PackageManager $instance */
+                        return $instance->put($key, $value);
+        }
+        
+        /**
+         * Get one or a specified number of items randomly from the collection.
+         *
+         * @param int|null $number
+         * @return static|mixed 
+         * @throws \InvalidArgumentException
+         * @static 
+         */ 
+        public static function random($number = null)
+        {
+            //Method inherited from \Illuminate\Support\Collection            
+                        /** @var \KodiCMS\Assets\PackageManager $instance */
+                        return $instance->random($number);
+        }
+        
+        /**
+         * Reduce the collection to a single value.
+         *
+         * @param callable $callback
+         * @param mixed $initial
+         * @return mixed 
+         * @static 
+         */ 
+        public static function reduce($callback, $initial = null)
+        {
+            //Method inherited from \Illuminate\Support\Collection            
+                        /** @var \KodiCMS\Assets\PackageManager $instance */
+                        return $instance->reduce($callback, $initial);
+        }
+        
+        /**
+         * Create a collection of all elements that do not pass a given truth test.
+         *
+         * @param callable|mixed $callback
+         * @return static 
+         * @static 
+         */ 
+        public static function reject($callback = true)
+        {
+            //Method inherited from \Illuminate\Support\Collection            
+                        /** @var \KodiCMS\Assets\PackageManager $instance */
+                        return $instance->reject($callback);
+        }
+        
+        /**
+         * Reverse items order.
+         *
+         * @return static 
+         * @static 
+         */ 
+        public static function reverse()
+        {
+            //Method inherited from \Illuminate\Support\Collection            
+                        /** @var \KodiCMS\Assets\PackageManager $instance */
+                        return $instance->reverse();
+        }
+        
+        /**
+         * Search the collection for a given value and return the corresponding key if successful.
+         *
+         * @param mixed $value
+         * @param bool $strict
+         * @return mixed 
+         * @static 
+         */ 
+        public static function search($value, $strict = false)
+        {
+            //Method inherited from \Illuminate\Support\Collection            
+                        /** @var \KodiCMS\Assets\PackageManager $instance */
+                        return $instance->search($value, $strict);
+        }
+        
+        /**
+         * Get and remove the first item from the collection.
+         *
+         * @return mixed 
+         * @static 
+         */ 
+        public static function shift()
+        {
+            //Method inherited from \Illuminate\Support\Collection            
+                        /** @var \KodiCMS\Assets\PackageManager $instance */
+                        return $instance->shift();
+        }
+        
+        /**
+         * Shuffle the items in the collection.
+         *
+         * @param int $seed
+         * @return static 
+         * @static 
+         */ 
+        public static function shuffle($seed = null)
+        {
+            //Method inherited from \Illuminate\Support\Collection            
+                        /** @var \KodiCMS\Assets\PackageManager $instance */
+                        return $instance->shuffle($seed);
+        }
+        
+        /**
+         * Slice the underlying collection array.
+         *
+         * @param int $offset
+         * @param int $length
+         * @return static 
+         * @static 
+         */ 
+        public static function slice($offset, $length = null)
+        {
+            //Method inherited from \Illuminate\Support\Collection            
+                        /** @var \KodiCMS\Assets\PackageManager $instance */
+                        return $instance->slice($offset, $length);
+        }
+        
+        /**
+         * Split a collection into a certain number of groups.
+         *
+         * @param int $numberOfGroups
+         * @return static 
+         * @static 
+         */ 
+        public static function split($numberOfGroups)
+        {
+            //Method inherited from \Illuminate\Support\Collection            
+                        /** @var \KodiCMS\Assets\PackageManager $instance */
+                        return $instance->split($numberOfGroups);
+        }
+        
+        /**
+         * Chunk the underlying collection array.
+         *
+         * @param int $size
+         * @return static 
+         * @static 
+         */ 
+        public static function chunk($size)
+        {
+            //Method inherited from \Illuminate\Support\Collection            
+                        /** @var \KodiCMS\Assets\PackageManager $instance */
+                        return $instance->chunk($size);
+        }
+        
+        /**
+         * Sort through each item with a callback.
+         *
+         * @param callable|null $callback
+         * @return static 
+         * @static 
+         */ 
+        public static function sort($callback = null)
+        {
+            //Method inherited from \Illuminate\Support\Collection            
+                        /** @var \KodiCMS\Assets\PackageManager $instance */
+                        return $instance->sort($callback);
+        }
+        
+        /**
+         * Sort the collection using the given callback.
+         *
+         * @param callable|string $callback
+         * @param int $options
+         * @param bool $descending
+         * @return static 
+         * @static 
+         */ 
+        public static function sortBy($callback, $options = 0, $descending = false)
+        {
+            //Method inherited from \Illuminate\Support\Collection            
+                        /** @var \KodiCMS\Assets\PackageManager $instance */
+                        return $instance->sortBy($callback, $options, $descending);
+        }
+        
+        /**
+         * Sort the collection in descending order using the given callback.
+         *
+         * @param callable|string $callback
+         * @param int $options
+         * @return static 
+         * @static 
+         */ 
+        public static function sortByDesc($callback, $options = 0)
+        {
+            //Method inherited from \Illuminate\Support\Collection            
+                        /** @var \KodiCMS\Assets\PackageManager $instance */
+                        return $instance->sortByDesc($callback, $options);
+        }
+        
+        /**
+         * Sort the collection keys.
+         *
+         * @param int $options
+         * @param bool $descending
+         * @return static 
+         * @static 
+         */ 
+        public static function sortKeys($options = 0, $descending = false)
+        {
+            //Method inherited from \Illuminate\Support\Collection            
+                        /** @var \KodiCMS\Assets\PackageManager $instance */
+                        return $instance->sortKeys($options, $descending);
+        }
+        
+        /**
+         * Sort the collection keys in descending order.
+         *
+         * @param int $options
+         * @return static 
+         * @static 
+         */ 
+        public static function sortKeysDesc($options = 0)
+        {
+            //Method inherited from \Illuminate\Support\Collection            
+                        /** @var \KodiCMS\Assets\PackageManager $instance */
+                        return $instance->sortKeysDesc($options);
+        }
+        
+        /**
+         * Splice a portion of the underlying collection array.
+         *
+         * @param int $offset
+         * @param int|null $length
+         * @param mixed $replacement
+         * @return static 
+         * @static 
+         */ 
+        public static function splice($offset, $length = null, $replacement = array())
+        {
+            //Method inherited from \Illuminate\Support\Collection            
+                        /** @var \KodiCMS\Assets\PackageManager $instance */
+                        return $instance->splice($offset, $length, $replacement);
+        }
+        
+        /**
+         * Get the sum of the given values.
+         *
+         * @param callable|string|null $callback
+         * @return mixed 
+         * @static 
+         */ 
+        public static function sum($callback = null)
+        {
+            //Method inherited from \Illuminate\Support\Collection            
+                        /** @var \KodiCMS\Assets\PackageManager $instance */
+                        return $instance->sum($callback);
+        }
+        
+        /**
+         * Take the first or last {$limit} items.
+         *
+         * @param int $limit
+         * @return static 
+         * @static 
+         */ 
+        public static function take($limit)
+        {
+            //Method inherited from \Illuminate\Support\Collection            
+                        /** @var \KodiCMS\Assets\PackageManager $instance */
+                        return $instance->take($limit);
+        }
+        
+        /**
+         * Pass the collection to the given callback and then return it.
+         *
+         * @param callable $callback
+         * @return \KodiCMS\Assets\PackageManager 
+         * @static 
+         */ 
+        public static function tap($callback)
+        {
+            //Method inherited from \Illuminate\Support\Collection            
+                        /** @var \KodiCMS\Assets\PackageManager $instance */
+                        return $instance->tap($callback);
+        }
+        
+        /**
+         * Transform each item in the collection using a callback.
+         *
+         * @param callable $callback
+         * @return \KodiCMS\Assets\PackageManager 
+         * @static 
+         */ 
+        public static function transform($callback)
+        {
+            //Method inherited from \Illuminate\Support\Collection            
+                        /** @var \KodiCMS\Assets\PackageManager $instance */
+                        return $instance->transform($callback);
+        }
+        
+        /**
+         * Return only unique items from the collection array.
+         *
+         * @param string|callable|null $key
+         * @param bool $strict
+         * @return static 
+         * @static 
+         */ 
+        public static function unique($key = null, $strict = false)
+        {
+            //Method inherited from \Illuminate\Support\Collection            
+                        /** @var \KodiCMS\Assets\PackageManager $instance */
+                        return $instance->unique($key, $strict);
+        }
+        
+        /**
+         * Return only unique items from the collection array using strict comparison.
+         *
+         * @param string|callable|null $key
+         * @return static 
+         * @static 
+         */ 
+        public static function uniqueStrict($key = null)
+        {
+            //Method inherited from \Illuminate\Support\Collection            
+                        /** @var \KodiCMS\Assets\PackageManager $instance */
+                        return $instance->uniqueStrict($key);
+        }
+        
+        /**
+         * Reset the keys on the underlying array.
+         *
+         * @return static 
+         * @static 
+         */ 
+        public static function values()
+        {
+            //Method inherited from \Illuminate\Support\Collection            
+                        /** @var \KodiCMS\Assets\PackageManager $instance */
+                        return $instance->values();
+        }
+        
+        /**
+         * Zip the collection together with one or more arrays.
+         * 
+         * e.g. new Collection([1, 2, 3])->zip([4, 5, 6]);
+         *      => [[1, 4], [2, 5], [3, 6]]
+         *
+         * @param mixed $items
+         * @return static 
+         * @static 
+         */ 
+        public static function zip($items)
+        {
+            //Method inherited from \Illuminate\Support\Collection            
+                        /** @var \KodiCMS\Assets\PackageManager $instance */
+                        return $instance->zip($items);
+        }
+        
+        /**
+         * Pad collection to the specified length with a value.
+         *
+         * @param int $size
+         * @param mixed $value
+         * @return static 
+         * @static 
+         */ 
+        public static function pad($size, $value)
+        {
+            //Method inherited from \Illuminate\Support\Collection            
+                        /** @var \KodiCMS\Assets\PackageManager $instance */
+                        return $instance->pad($size, $value);
+        }
+        
+        /**
+         * Get the collection of items as a plain array.
+         *
+         * @return array 
+         * @static 
+         */ 
+        public static function toArray()
+        {
+            //Method inherited from \Illuminate\Support\Collection            
+                        /** @var \KodiCMS\Assets\PackageManager $instance */
+                        return $instance->toArray();
+        }
+        
+        /**
+         * Convert the object into something JSON serializable.
+         *
+         * @return array 
+         * @static 
+         */ 
+        public static function jsonSerialize()
+        {
+            //Method inherited from \Illuminate\Support\Collection            
+                        /** @var \KodiCMS\Assets\PackageManager $instance */
+                        return $instance->jsonSerialize();
+        }
+        
+        /**
+         * Get the collection of items as JSON.
+         *
+         * @param int $options
+         * @return string 
+         * @static 
+         */ 
+        public static function toJson($options = 0)
+        {
+            //Method inherited from \Illuminate\Support\Collection            
+                        /** @var \KodiCMS\Assets\PackageManager $instance */
+                        return $instance->toJson($options);
+        }
+        
+        /**
+         * Get an iterator for the items.
+         *
+         * @return \ArrayIterator 
+         * @static 
+         */ 
+        public static function getIterator()
+        {
+            //Method inherited from \Illuminate\Support\Collection            
+                        /** @var \KodiCMS\Assets\PackageManager $instance */
+                        return $instance->getIterator();
+        }
+        
+        /**
+         * Get a CachingIterator instance.
+         *
+         * @param int $flags
+         * @return \CachingIterator 
+         * @static 
+         */ 
+        public static function getCachingIterator($flags = 1)
+        {
+            //Method inherited from \Illuminate\Support\Collection            
+                        /** @var \KodiCMS\Assets\PackageManager $instance */
+                        return $instance->getCachingIterator($flags);
+        }
+        
+        /**
+         * Count the number of items in the collection.
+         *
+         * @return int 
+         * @static 
+         */ 
+        public static function count()
+        {
+            //Method inherited from \Illuminate\Support\Collection            
+                        /** @var \KodiCMS\Assets\PackageManager $instance */
+                        return $instance->count();
+        }
+        
+        /**
+         * Count the number of items in the collection using a given truth test.
+         *
+         * @param callable|null $callback
+         * @return static 
+         * @static 
+         */ 
+        public static function countBy($callback = null)
+        {
+            //Method inherited from \Illuminate\Support\Collection            
+                        /** @var \KodiCMS\Assets\PackageManager $instance */
+                        return $instance->countBy($callback);
+        }
+        
+        /**
+         * Get a base Support collection instance from this collection.
+         *
+         * @return \Illuminate\Support\Collection 
+         * @static 
+         */ 
+        public static function toBase()
+        {
+            //Method inherited from \Illuminate\Support\Collection            
+                        /** @var \KodiCMS\Assets\PackageManager $instance */
+                        return $instance->toBase();
+        }
+        
+        /**
+         * Determine if an item exists at an offset.
+         *
+         * @param mixed $key
+         * @return bool 
+         * @static 
+         */ 
+        public static function offsetExists($key)
+        {
+            //Method inherited from \Illuminate\Support\Collection            
+                        /** @var \KodiCMS\Assets\PackageManager $instance */
+                        return $instance->offsetExists($key);
+        }
+        
+        /**
+         * Get an item at a given offset.
+         *
+         * @param mixed $key
+         * @return mixed 
+         * @static 
+         */ 
+        public static function offsetGet($key)
+        {
+            //Method inherited from \Illuminate\Support\Collection            
+                        /** @var \KodiCMS\Assets\PackageManager $instance */
+                        return $instance->offsetGet($key);
+        }
+        
+        /**
+         * Set the item at a given offset.
+         *
+         * @param mixed $key
+         * @param mixed $value
+         * @return void 
+         * @static 
+         */ 
+        public static function offsetSet($key, $value)
+        {
+            //Method inherited from \Illuminate\Support\Collection            
+                        /** @var \KodiCMS\Assets\PackageManager $instance */
+                        $instance->offsetSet($key, $value);
+        }
+        
+        /**
+         * Unset the item at a given offset.
+         *
+         * @param string $key
+         * @return void 
+         * @static 
+         */ 
+        public static function offsetUnset($key)
+        {
+            //Method inherited from \Illuminate\Support\Collection            
+                        /** @var \KodiCMS\Assets\PackageManager $instance */
+                        $instance->offsetUnset($key);
+        }
+        
+        /**
+         * Add a method to the list of proxied methods.
+         *
+         * @param string $method
+         * @return void 
+         * @static 
+         */ 
+        public static function proxy($method)
+        {
+            //Method inherited from \Illuminate\Support\Collection            
+                        \KodiCMS\Assets\PackageManager::proxy($method);
+        }
+        
+        /**
+         * Register a custom macro.
+         *
+         * @param string $name
+         * @param object|callable $macro
+         * @return void 
+         * @static 
+         */ 
+        public static function macro($name, $macro)
+        {
+            //Method inherited from \Illuminate\Support\Collection            
+                        \KodiCMS\Assets\PackageManager::macro($name, $macro);
+        }
+        
+        /**
+         * Mix another object into the class.
+         *
+         * @param object $mixin
+         * @param bool $replace
+         * @return void 
+         * @throws \ReflectionException
+         * @static 
+         */ 
+        public static function mixin($mixin, $replace = true)
+        {
+            //Method inherited from \Illuminate\Support\Collection            
+                        \KodiCMS\Assets\PackageManager::mixin($mixin, $replace);
+        }
+        
+        /**
+         * Checks if macro is registered.
+         *
+         * @param string $name
+         * @return bool 
+         * @static 
+         */ 
+        public static function hasMacro($name)
+        {
+            //Method inherited from \Illuminate\Support\Collection            
+                        return \KodiCMS\Assets\PackageManager::hasMacro($name);
+        }
+         
+    }
+
+    /**
+     * 
+     *
+     */ 
+    class Meta {
+        
+        /**
+         * 
+         *
+         * @return \KodiCMS\Assets\AssetsInterface 
+         * @static 
+         */ 
+        public static function assets()
+        {
+            //Method inherited from \KodiCMS\Assets\Meta            
+                        /** @var \SleepingOwl\Admin\Templates\Meta $instance */
+                        return $instance->assets();
+        }
+        
+        /**
+         * 
+         *
+         * @param \KodiCMS\Assets\MetaDataInterface $data
+         * @return \SleepingOwl\Admin\Templates\Meta 
+         * @static 
+         */ 
+        public static function setMetaData($data)
+        {
+            //Method inherited from \KodiCMS\Assets\Meta            
+                        /** @var \SleepingOwl\Admin\Templates\Meta $instance */
+                        return $instance->setMetaData($data);
+        }
+        
+        /**
+         * 
+         *
+         * @param string $title
+         * @return \SleepingOwl\Admin\Templates\Meta 
+         * @static 
+         */ 
+        public static function setTitle($title)
+        {
+            //Method inherited from \KodiCMS\Assets\Meta            
+                        /** @var \SleepingOwl\Admin\Templates\Meta $instance */
+                        return $instance->setTitle($title);
+        }
+        
+        /**
+         * 
+         *
+         * @param string $description
+         * @return \SleepingOwl\Admin\Templates\Meta 
+         * @static 
+         */ 
+        public static function setMetaDescription($description)
+        {
+            //Method inherited from \KodiCMS\Assets\Meta            
+                        /** @var \SleepingOwl\Admin\Templates\Meta $instance */
+                        return $instance->setMetaDescription($description);
+        }
+        
+        /**
+         * 
+         *
+         * @param string|array $keywords
+         * @return \SleepingOwl\Admin\Templates\Meta 
+         * @static 
+         */ 
+        public static function setMetaKeywords($keywords)
+        {
+            //Method inherited from \KodiCMS\Assets\Meta            
+                        /** @var \SleepingOwl\Admin\Templates\Meta $instance */
+                        return $instance->setMetaKeywords($keywords);
+        }
+        
+        /**
+         * 
+         *
+         * @param string $robots
+         * @return \SleepingOwl\Admin\Templates\Meta 
+         * @static 
+         */ 
+        public static function setMetaRobots($robots)
+        {
+            //Method inherited from \KodiCMS\Assets\Meta            
+                        /** @var \SleepingOwl\Admin\Templates\Meta $instance */
+                        return $instance->setMetaRobots($robots);
+        }
+        
+        /**
+         * 
+         *
+         * @param \KodiCMS\Assets\SocialMediaTagsInterface $socialTags
+         * @return \SleepingOwl\Admin\Templates\Meta 
+         * @static 
+         */ 
+        public static function addSocialTags($socialTags)
+        {
+            //Method inherited from \KodiCMS\Assets\Meta            
+                        /** @var \SleepingOwl\Admin\Templates\Meta $instance */
+                        return $instance->addSocialTags($socialTags);
+        }
+        
+        /**
+         * 
+         *
+         * @param array $attributes
+         * @param null|string $group
+         * @return \SleepingOwl\Admin\Templates\Meta 
+         * @static 
+         */ 
+        public static function addMeta($attributes, $group = null)
+        {
+            //Method inherited from \KodiCMS\Assets\Meta            
+                        /** @var \SleepingOwl\Admin\Templates\Meta $instance */
+                        return $instance->addMeta($attributes, $group);
+        }
+        
+        /**
+         * Указание favicon.
+         *
+         * @param string $url
+         * @param string $rel
+         * @param string $type
+         * @return \SleepingOwl\Admin\Templates\Meta 
+         * @static 
+         */ 
+        public static function setFavicon($url, $rel = 'shortcut icon', $type = 'image/x-icon')
+        {
+            //Method inherited from \KodiCMS\Assets\Meta            
+                        /** @var \SleepingOwl\Admin\Templates\Meta $instance */
+                        return $instance->setFavicon($url, $rel, $type);
+        }
+        
+        /**
+         * 
+         *
+         * @param string $handle
+         * @param string $content
+         * @param array $params
+         * @param null|string $dependency
+         * @return \SleepingOwl\Admin\Templates\Meta 
+         * @static 
+         */ 
+        public static function addTagToGroup($handle, $content, $params = array(), $dependency = null)
+        {
+            //Method inherited from \KodiCMS\Assets\Meta            
+                        /** @var \SleepingOwl\Admin\Templates\Meta $instance */
+                        return $instance->addTagToGroup($handle, $content, $params, $dependency);
+        }
+        
+        /**
+         * 
+         *
+         * @param string|null $handle
+         * @return \SleepingOwl\Admin\Templates\Meta 
+         * @static 
+         */ 
+        public static function removeFromGroup($handle = null)
+        {
+            //Method inherited from \KodiCMS\Assets\Meta            
+                        /** @var \SleepingOwl\Admin\Templates\Meta $instance */
+                        return $instance->removeFromGroup($handle);
+        }
+        
+        /**
+         * 
+         *
+         * @return string 
+         * @static 
+         */ 
+        public static function render()
+        {
+            //Method inherited from \KodiCMS\Assets\Meta            
+                        /** @var \SleepingOwl\Admin\Templates\Meta $instance */
+                        return $instance->render();
+        }
+         
+    }
+ 
+}
+
+namespace SleepingOwl\Admin\Facades { 
+
+    /**
+     * 
+     *
+     */ 
+    class WysiwygManager {
+        
+        /**
+         * 
+         *
+         * @return string|null 
+         * @static 
+         */ 
+        public static function getDefaultEditorId()
+        {
+                        /** @var \SleepingOwl\Admin\Wysiwyg\Manager $instance */
+                        return $instance->getDefaultEditorId();
+        }
+        
+        /**
+         * 
+         *
+         * @param string $editorId
+         * @param \SleepingOwl\Admin\Wysiwyg\WysiwygFilterInterface|null $filter
+         * @param string|null $name
+         * @return \SleepingOwl\Admin\Wysiwyg\WysiwygEditorInterface 
+         * @static 
+         */ 
+        public static function register($editorId, $filter = null, $name = null)
+        {
+                        /** @var \SleepingOwl\Admin\Wysiwyg\Manager $instance */
+                        return $instance->register($editorId, $filter, $name);
+        }
+        
+        /**
+         * 
+         *
+         * @return \SleepingOwl\Admin\Wysiwyg\Collection|\SleepingOwl\Admin\Wysiwyg\WysiwygEditorInterface[] 
+         * @static 
+         */ 
+        public static function getFilters()
+        {
+                        /** @var \SleepingOwl\Admin\Wysiwyg\Manager $instance */
+                        return $instance->getFilters();
+        }
+        
+        /**
+         * 
+         *
+         * @param string $editorId
+         * @return \SleepingOwl\Admin\Wysiwyg\WysiwygEditorInterface|null 
+         * @static 
+         */ 
+        public static function getEditor($editorId)
+        {
+                        /** @var \SleepingOwl\Admin\Wysiwyg\Manager $instance */
+                        return $instance->getEditor($editorId);
+        }
+        
+        /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function loadDefaultEditor()
+        {
+                        /** @var \SleepingOwl\Admin\Wysiwyg\Manager $instance */
+                        return $instance->loadDefaultEditor();
+        }
+        
+        /**
+         * 
+         *
+         * @param string $editorId
+         * @return bool 
+         * @static 
+         */ 
+        public static function loadEditor($editorId)
+        {
+                        /** @var \SleepingOwl\Admin\Wysiwyg\Manager $instance */
+                        return $instance->loadEditor($editorId);
+        }
+        
+        /**
+         * 
+         *
+         * @param string $editorId
+         * @param string $text
+         * @return string string
+         * @throws WysiwygException
+         * @static 
+         */ 
+        public static function applyFilter($editorId, $text)
+        {
+                        /** @var \SleepingOwl\Admin\Wysiwyg\Manager $instance */
+                        return $instance->applyFilter($editorId, $text);
+        }
+        
+        /**
+         * 
+         *
+         * @return array 
+         * @static 
+         */ 
+        public static function getFiltersList()
+        {
+                        /** @var \SleepingOwl\Admin\Wysiwyg\Manager $instance */
+                        return $instance->getFiltersList();
+        }
+         
+    }
+
+    /**
+     * 
+     *
+     * @method static \SleepingOwl\Admin\Widgets\Messages\ErrorMessages addError($text)
+     * @method static \SleepingOwl\Admin\Widgets\Messages\InfoMessages addInfo($text)
+     * @method static \SleepingOwl\Admin\Widgets\Messages\SuccessMessages addSuccess($text)
+     * @method static \SleepingOwl\Admin\Widgets\Messages\WarningMessages addWarning($text)
+     */ 
+    class MessageStack {
+         
+    }
+
+    /**
+     * 
+     *
+     */ 
+    class Admin {
+        
+        /**
+         * 
+         *
+         * @param \SleepingOwl\Admin\TemplateInterface $template
+         * @static 
+         */ 
+        public static function setTemplate($template)
+        {
+                        /** @var \SleepingOwl\Admin\Admin $instance */
+                        return $instance->setTemplate($template);
+        }
+        
+        /**
+         * Initialize class.
+         *
+         * @static 
+         */ 
+        public static function initialize()
+        {
+                        /** @var \SleepingOwl\Admin\Admin $instance */
+                        return $instance->initialize();
+        }
+        
+        /**
+         * 
+         *
+         * @param string $class
+         * @param \Closure|null $callback
+         * @return $this|\SleepingOwl\Admin\AdminInterface 
+         * @throws Exceptions\RepositoryException
+         * @static 
+         */ 
+        public static function registerModel($class, $callback = null)
+        {
+                        /** @var \SleepingOwl\Admin\Admin $instance */
+                        return $instance->registerModel($class, $callback);
+        }
+        
+        /**
+         * 
+         *
+         * @param \SleepingOwl\Admin\ModelConfigurationInterface $model
+         * @return \SleepingOwl\Admin\Admin 
+         * @static 
+         */ 
+        public static function register($model)
+        {
+                        /** @var \SleepingOwl\Admin\Admin $instance */
+                        return $instance->register($model);
+        }
+        
+        /**
+         * 
+         *
+         * @param array $sections
+         * @return \SleepingOwl\Admin\Admin 
+         * @static 
+         */ 
+        public static function registerSections($sections)
+        {
+                        /** @var \SleepingOwl\Admin\Admin $instance */
+                        return $instance->registerSections($sections);
+        }
+        
+        /**
+         * 
+         *
+         * @return array 
+         * @static 
+         */ 
+        public static function getMissedSections()
+        {
+                        /** @var \SleepingOwl\Admin\Admin $instance */
+                        return $instance->getMissedSections();
+        }
+        
+        /**
+         * 
+         *
+         * @param string $class
+         * @param \SleepingOwl\Admin\ModelConfigurationInterface $model
+         * @return \SleepingOwl\Admin\Admin 
+         * @static 
+         */ 
+        public static function setModel($class, $model)
+        {
+                        /** @var \SleepingOwl\Admin\Admin $instance */
+                        return $instance->setModel($class, $model);
+        }
+        
+        /**
+         * 
+         *
+         * @param string|object $class
+         * @return mixed|null|\SleepingOwl\Admin\ModelConfigurationInterface 
+         * @throws Exceptions\RepositoryException
+         * @static 
+         */ 
+        public static function getModel($class)
+        {
+                        /** @var \SleepingOwl\Admin\Admin $instance */
+                        return $instance->getModel($class);
+        }
+        
+        /**
+         * 
+         *
+         * @return \SleepingOwl\Admin\ModelConfigurationInterface[]|\SleepingOwl\Admin\ModelCollection 
+         * @static 
+         */ 
+        public static function getModels()
+        {
+                        /** @var \SleepingOwl\Admin\Admin $instance */
+                        return $instance->getModels();
+        }
+        
+        /**
+         * 
+         *
+         * @param string $class
+         * @return bool 
+         * @static 
+         */ 
+        public static function hasModel($class)
+        {
+                        /** @var \SleepingOwl\Admin\Admin $instance */
+                        return $instance->hasModel($class);
+        }
+        
+        /**
+         * 
+         *
+         * @return \SleepingOwl\Admin\NavigationInterface 
+         * @static 
+         */ 
+        public static function navigation()
+        {
+                        /** @var \SleepingOwl\Admin\Admin $instance */
+                        return $instance->navigation();
+        }
+        
+        /**
+         * 
+         *
+         * @return \SleepingOwl\Admin\MetaInterface 
+         * @static 
+         */ 
+        public static function meta()
+        {
+                        /** @var \SleepingOwl\Admin\Admin $instance */
+                        return $instance->meta();
+        }
+        
+        /**
+         * 
+         *
+         * @return \SleepingOwl\Admin\TemplateInterface 
+         * @static 
+         */ 
+        public static function template()
+        {
+                        /** @var \SleepingOwl\Admin\Admin $instance */
+                        return $instance->template();
+        }
+        
+        /**
+         * 
+         *
+         * @param $class
+         * @param int $priority
+         * @return mixed 
+         * @throws Exceptions\RepositoryException
+         * @static 
+         */ 
+        public static function addMenuPage($class = null, $priority = 100)
+        {
+                        /** @var \SleepingOwl\Admin\Admin $instance */
+                        return $instance->addMenuPage($class, $priority);
+        }
+        
+        /**
+         * 
+         *
+         * @param string|\SleepingOwl\Admin\Renderable $content
+         * @param string|null $title
+         * @return \Illuminate\View\View|\Illuminate\Contracts\View\Factory 
+         * @static 
+         */ 
+        public static function view($content, $title = null)
+        {
+                        /** @var \SleepingOwl\Admin\Admin $instance */
+                        return $instance->view($content, $title);
+        }
+        
+        /**
+         * Получение массива глобальных
+         * переменных
+         * для JavaScript.
+         *
+         * @return array 
+         * @static 
+         */ 
+        public static function scriptVariables()
+        {
+                        /** @var \SleepingOwl\Admin\Admin $instance */
+                        return $instance->scriptVariables();
+        }
+         
+    }
+
+    /**
+     * 
+     *
+     */ 
+    class Template {
+        
+        /**
+         * Получение названия текущего шаблона.
+         *
+         * @return string 
+         * @static 
+         */ 
+        public static function name()
+        {
+                        /** @var \SleepingOwl\Admin\Templates\TemplateDefault $instance */
+                        return $instance->name();
+        }
+        
+        /**
+         * Версия темы.
+         *
+         * @return string 
+         * @static 
+         */ 
+        public static function version()
+        {
+                        /** @var \SleepingOwl\Admin\Templates\TemplateDefault $instance */
+                        return $instance->version();
+        }
+        
+        /**
+         * URL проекта.
+         *
+         * @return string 
+         * @static 
+         */ 
+        public static function homepage()
+        {
+                        /** @var \SleepingOwl\Admin\Templates\TemplateDefault $instance */
+                        return $instance->homepage();
+        }
+        
+        /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function initialize()
+        {
+                        /** @var \SleepingOwl\Admin\Templates\TemplateDefault $instance */
+                        return $instance->initialize();
+        }
+        
+        /**
+         * 
+         *
+         * @return string 
+         * @static 
+         */ 
+        public static function getViewNamespace()
+        {
+                        /** @var \SleepingOwl\Admin\Templates\TemplateDefault $instance */
+                        return $instance->getViewNamespace();
+        }
+        
+        /**
+         * Получение относительного пути �
+         * ранения asset файлов.
+         *
+         * @return string 
+         * @static 
+         */ 
+        public static function assetDir()
+        {
+                        /** @var \SleepingOwl\Admin\Templates\TemplateDefault $instance */
+                        return $instance->assetDir();
+        }
+        
+        /**
+         * 
+         *
+         * @return string 
+         * @static 
+         */ 
+        public static function getLogo()
+        {
+                        /** @var \SleepingOwl\Admin\Templates\TemplateDefault $instance */
+                        return $instance->getLogo();
+        }
+        
+        /**
+         * 
+         *
+         * @return string 
+         * @static 
+         */ 
+        public static function getLogoMini()
+        {
+                        /** @var \SleepingOwl\Admin\Templates\TemplateDefault $instance */
+                        return $instance->getLogoMini();
+        }
+        
+        /**
+         * Название с указанием версии.
+         *
+         * @return string 
+         * @static 
+         */ 
+        public static function longName()
+        {
+            //Method inherited from \SleepingOwl\Admin\Templates\Template            
+                        /** @var \SleepingOwl\Admin\Templates\TemplateDefault $instance */
+                        return $instance->longName();
+        }
+        
+        /**
+         * 
+         *
+         * @return \Breadcrumbs 
+         * @static 
+         */ 
+        public static function breadcrumbs()
+        {
+            //Method inherited from \SleepingOwl\Admin\Templates\Template            
+                        /** @var \SleepingOwl\Admin\Templates\TemplateDefault $instance */
+                        return $instance->breadcrumbs();
+        }
+        
+        /**
+         * 
+         *
+         * @return \SleepingOwl\Admin\Templates\MetaInterface 
+         * @static 
+         */ 
+        public static function meta()
+        {
+            //Method inherited from \SleepingOwl\Admin\Templates\Template            
+                        /** @var \SleepingOwl\Admin\Templates\TemplateDefault $instance */
+                        return $instance->meta();
+        }
+        
+        /**
+         * 
+         *
+         * @return \SleepingOwl\Admin\Templates\NavigationInterface 
+         * @static 
+         */ 
+        public static function navigation()
+        {
+            //Method inherited from \SleepingOwl\Admin\Templates\Template            
+                        /** @var \SleepingOwl\Admin\Templates\TemplateDefault $instance */
+                        return $instance->navigation();
+        }
+        
+        /**
+         * Генерация относительно пути до asset файлов для текущей темы.
+         *
+         * @param string $path относительный путь до файла, например `js/app.js`
+         * @return string 
+         * @static 
+         */ 
+        public static function assetPath($path = null)
+        {
+            //Method inherited from \SleepingOwl\Admin\Templates\Template            
+                        /** @var \SleepingOwl\Admin\Templates\TemplateDefault $instance */
+                        return $instance->assetPath($path);
+        }
+        
+        /**
+         * 
+         *
+         * @return string 
+         * @static 
+         */ 
+        public static function getTitle()
+        {
+            //Method inherited from \SleepingOwl\Admin\Templates\Template            
+                        /** @var \SleepingOwl\Admin\Templates\TemplateDefault $instance */
+                        return $instance->getTitle();
+        }
+        
+        /**
+         * 
+         *
+         * @param string $title
+         * @param string $separator
+         * @return string 
+         * @static 
+         */ 
+        public static function makeTitle($title, $separator = '|')
+        {
+            //Method inherited from \SleepingOwl\Admin\Templates\Template            
+                        /** @var \SleepingOwl\Admin\Templates\TemplateDefault $instance */
+                        return $instance->makeTitle($title, $separator);
+        }
+        
+        /**
+         * 
+         *
+         * @param string $view
+         * @return string 
+         * @static 
+         */ 
+        public static function getViewPath($view)
+        {
+            //Method inherited from \SleepingOwl\Admin\Templates\Template            
+                        /** @var \SleepingOwl\Admin\Templates\TemplateDefault $instance */
+                        return $instance->getViewPath($view);
+        }
+        
+        /**
+         * 
+         *
+         * @param string|\View $view
+         * @param array $data
+         * @param array $mergeData
+         * @return \Illuminate\Contracts\View\Factory|\View 
+         * @static 
+         */ 
+        public static function view($view, $data = array(), $mergeData = array())
+        {
+            //Method inherited from \SleepingOwl\Admin\Templates\Template            
+                        /** @var \SleepingOwl\Admin\Templates\TemplateDefault $instance */
+                        return $instance->view($view, $data, $mergeData);
+        }
+        
+        /**
+         * 
+         *
+         * @param string $key
+         * @return string 
+         * @static 
+         */ 
+        public static function renderBreadcrumbs($key)
+        {
+            //Method inherited from \SleepingOwl\Admin\Templates\Template            
+                        /** @var \SleepingOwl\Admin\Templates\TemplateDefault $instance */
+                        return $instance->renderBreadcrumbs($key);
+        }
+        
+        /**
+         * 
+         *
+         * @return string 
+         * @static 
+         */ 
+        public static function renderNavigation()
+        {
+            //Method inherited from \SleepingOwl\Admin\Templates\Template            
+                        /** @var \SleepingOwl\Admin\Templates\TemplateDefault $instance */
+                        return $instance->renderNavigation();
+        }
+        
+        /**
+         * 
+         *
+         * @param string $title
+         * @return string 
+         * @static 
+         */ 
+        public static function renderMeta($title)
+        {
+            //Method inherited from \SleepingOwl\Admin\Templates\Template            
+                        /** @var \SleepingOwl\Admin\Templates\TemplateDefault $instance */
+                        return $instance->renderMeta($title);
+        }
+        
+        /**
+         * Render func.
+         *
+         * @return array 
+         * @static 
+         */ 
+        public static function toArray()
+        {
+            //Method inherited from \SleepingOwl\Admin\Templates\Template            
+                        /** @var \SleepingOwl\Admin\Templates\TemplateDefault $instance */
+                        return $instance->toArray();
+        }
+         
+    }
+
+    /**
+     * 
+     *
+     */ 
+    class Navigation {
+        
+        /**
+         * Overload current page.
+         *
+         * @return \KodiComponents\Navigation\Contracts\PageInterface|null 
+         * @static 
+         */ 
+        public static function getCurrentPage()
+        {
+                        /** @var \SleepingOwl\Admin\Navigation $instance */
+                        return $instance->getCurrentPage();
+        }
+        
+        /**
+         * Set Alias Id to Page.
+         *
+         * @param \SleepingOwl\Admin\Collection $pages
+         * @static 
+         */ 
+        public static function setAliasesId($pages)
+        {
+                        /** @var \SleepingOwl\Admin\Navigation $instance */
+                        return $instance->setAliasesId($pages);
+        }
+        
+        /**
+         * 
+         *
+         * @param array $data
+         * @param string $class
+         * @return \KodiComponents\Navigation\PageInterface 
+         * @static 
+         */ 
+        public static function makePage($data, $class = 'KodiComponents\Navigation\Contracts\PageInterface')
+        {
+            //Method inherited from \KodiComponents\Navigation\Navigation            
+                        return \SleepingOwl\Admin\Navigation::makePage($data, $class);
+        }
+        
+        /**
+         * 
+         *
+         * @return null|string 
+         * @static 
+         */ 
+        public static function getCurrentUrl()
+        {
+            //Method inherited from \KodiComponents\Navigation\Navigation            
+                        /** @var \SleepingOwl\Admin\Navigation $instance */
+                        return $instance->getCurrentUrl();
+        }
+        
+        /**
+         * 
+         *
+         * @param null|string $url
+         * @return \SleepingOwl\Admin\Navigation 
+         * @static 
+         */ 
+        public static function setCurrentUrl($url)
+        {
+            //Method inherited from \KodiComponents\Navigation\Navigation            
+                        /** @var \SleepingOwl\Admin\Navigation $instance */
+                        return $instance->setCurrentUrl($url);
+        }
+        
+        /**
+         * 
+         *
+         * @param array $navigation
+         * @static 
+         */ 
+        public static function setFromArray($navigation)
+        {
+            //Method inherited from \KodiComponents\Navigation\Navigation            
+                        /** @var \SleepingOwl\Admin\Navigation $instance */
+                        return $instance->setFromArray($navigation);
+        }
+        
+        /**
+         * 
+         *
+         * @param string|array|\KodiComponents\Navigation\PageInterface $page
+         * @return \KodiComponents\Navigation\PageInterface|null 
+         * @static 
+         */ 
+        public static function addPage($page)
+        {
+            //Method inherited from \KodiComponents\Navigation\Navigation            
+                        /** @var \SleepingOwl\Admin\Navigation $instance */
+                        return $instance->addPage($page);
+        }
+        
+        /**
+         * 
+         *
+         * @return \KodiComponents\Navigation\PageCollection|\KodiComponents\Navigation\PageInterface[] 
+         * @static 
+         */ 
+        public static function getPages()
+        {
+            //Method inherited from \KodiComponents\Navigation\Navigation            
+                        /** @var \SleepingOwl\Admin\Navigation $instance */
+                        return $instance->getPages();
+        }
+        
+        /**
+         * 
+         *
+         * @return int 
+         * @static 
+         */ 
+        public static function countPages()
+        {
+            //Method inherited from \KodiComponents\Navigation\Navigation            
+                        /** @var \SleepingOwl\Admin\Navigation $instance */
+                        return $instance->countPages();
+        }
+        
+        /**
+         * 
+         *
+         * @param \Closure $accessLogic
+         * @return \SleepingOwl\Admin\Navigation 
+         * @static 
+         */ 
+        public static function setAccessLogic($accessLogic)
+        {
+            //Method inherited from \KodiComponents\Navigation\Navigation            
+                        /** @var \SleepingOwl\Admin\Navigation $instance */
+                        return $instance->setAccessLogic($accessLogic);
+        }
+        
+        /**
+         * 
+         *
+         * @return \Closure 
+         * @static 
+         */ 
+        public static function getAccessLogic()
+        {
+            //Method inherited from \KodiComponents\Navigation\Navigation            
+                        /** @var \SleepingOwl\Admin\Navigation $instance */
+                        return $instance->getAccessLogic();
+        }
+        
+        /**
+         * 
+         *
+         * @return \SleepingOwl\Admin\Navigation 
+         * @static 
+         */ 
+        public static function filterByAccessRights()
+        {
+            //Method inherited from \KodiComponents\Navigation\Navigation            
+                        /** @var \SleepingOwl\Admin\Navigation $instance */
+                        return $instance->filterByAccessRights();
+        }
+        
+        /**
+         * 
+         *
+         * @return \SleepingOwl\Admin\Navigation 
+         * @static 
+         */ 
+        public static function filterEmptyPages()
+        {
+            //Method inherited from \KodiComponents\Navigation\Navigation            
+                        /** @var \SleepingOwl\Admin\Navigation $instance */
+                        return $instance->filterEmptyPages();
+        }
+        
+        /**
+         * 
+         *
+         * @return \SleepingOwl\Admin\Navigation 
+         * @static 
+         */ 
+        public static function sort()
+        {
+            //Method inherited from \KodiComponents\Navigation\Navigation            
+                        /** @var \SleepingOwl\Admin\Navigation $instance */
+                        return $instance->sort();
+        }
+        
+        /**
+         * 
+         *
+         * @return bool 
+         * @static 
+         */ 
+        public static function hasChild()
+        {
+            //Method inherited from \KodiComponents\Navigation\Navigation            
+                        /** @var \SleepingOwl\Admin\Navigation $instance */
+                        return $instance->hasChild();
+        }
+        
+        /**
+         * 
+         *
+         * @return array 
+         * @static 
+         */ 
+        public static function toArray()
+        {
+            //Method inherited from \KodiComponents\Navigation\Navigation            
+                        /** @var \SleepingOwl\Admin\Navigation $instance */
+                        return $instance->toArray();
+        }
+        
+        /**
+         * 
+         *
+         * @param string|null $view
+         * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View 
+         * @static 
+         */ 
+        public static function render($view = null)
+        {
+            //Method inherited from \KodiComponents\Navigation\Navigation            
+                        /** @var \SleepingOwl\Admin\Navigation $instance */
+                        return $instance->render($view);
+        }
+         
+    }
+
+    /**
+     * 
+     *
+     * @method static \SleepingOwl\Admin\Display\Column\Action action($name, $title = null)
+     * @method static \SleepingOwl\Admin\Display\Column\Checkbox checkbox($label = null)
+     * @method static \SleepingOwl\Admin\Display\Column\Control control($label = null)
+     * @method static \SleepingOwl\Admin\Display\Column\Count count($name, $label = null)
+     * @method static \SleepingOwl\Admin\Display\Column\Custom custom($label = null, \Closure $callback = null)
+     * @method static \SleepingOwl\Admin\Display\Column\DateTime datetime($name, $label = null)
+     * @method static \SleepingOwl\Admin\Display\Column\Filter filter($name, $label = null)
+     * @method static \SleepingOwl\Admin\Display\Column\Image image($name, $label = null)
+     * @method static \SleepingOwl\Admin\Display\Column\Lists lists($name, $label = null)
+     * @method static \SleepingOwl\Admin\Display\Column\Order order()
+     * @method static \SleepingOwl\Admin\Display\Column\Text text($name, $label = null)
+     * @method static \SleepingOwl\Admin\Display\Column\Link link($name, $label = null)
+     * @method static \SleepingOwl\Admin\Display\Column\RelatedLink relatedLink($name, $label = null)
+     * @method static \SleepingOwl\Admin\Display\Column\Email email($name, $label = null)
+     * @method static \SleepingOwl\Admin\Display\Column\TreeControl treeControl()
+     * @method static \SleepingOwl\Admin\Display\Column\Url url($name, $label = null)
+     */ 
+    class TableColumn {
+        
+        /**
+         * 
+         *
+         * @param \Illuminate\Contracts\Routing\Registrar $router
+         * @return void 
+         * @static 
+         */ 
+        public static function registerRoutes($router)
+        {
+            //Method inherited from \SleepingOwl\Admin\AliasBinder            
+                        \SleepingOwl\Admin\Factories\DisplayColumnFactory::registerRoutes($router);
+        }
+        
+        /**
+         * Bind new alias.
+         *
+         * @param string $alias
+         * @param string $class
+         * @return \SleepingOwl\Admin\Factories\DisplayColumnFactory 
+         * @static 
+         */ 
+        public static function bind($alias, $class)
+        {
+            //Method inherited from \SleepingOwl\Admin\AliasBinder            
+                        /** @var \SleepingOwl\Admin\Factories\DisplayColumnFactory $instance */
+                        return $instance->bind($alias, $class);
+        }
+        
+        /**
+         * 
+         *
+         * @param string $alias
+         * @param string $class
+         * @return \SleepingOwl\Admin\Factories\DisplayColumnFactory 
+         * @deprecated Use `bind` method
+         * @static 
+         */ 
+        public static function add($alias, $class)
+        {
+            //Method inherited from \SleepingOwl\Admin\AliasBinder            
+                        /** @var \SleepingOwl\Admin\Factories\DisplayColumnFactory $instance */
+                        return $instance->add($alias, $class);
+        }
+        
+        /**
+         * 
+         *
+         * @param array $classes
+         * @return \SleepingOwl\Admin\Factories\DisplayColumnFactory 
+         * @static 
+         */ 
+        public static function register($classes)
+        {
+            //Method inherited from \SleepingOwl\Admin\AliasBinder            
+                        /** @var \SleepingOwl\Admin\Factories\DisplayColumnFactory $instance */
+                        return $instance->register($classes);
+        }
+        
+        /**
+         * 
+         *
+         * @return array 
+         * @static 
+         */ 
+        public static function getAliases()
+        {
+            //Method inherited from \SleepingOwl\Admin\AliasBinder            
+                        /** @var \SleepingOwl\Admin\Factories\DisplayColumnFactory $instance */
+                        return $instance->getAliases();
+        }
+        
+        /**
+         * Get class by alias.
+         *
+         * @param string $alias
+         * @return string 
+         * @static 
+         */ 
+        public static function getAlias($alias)
+        {
+            //Method inherited from \SleepingOwl\Admin\AliasBinder            
+                        /** @var \SleepingOwl\Admin\Factories\DisplayColumnFactory $instance */
+                        return $instance->getAlias($alias);
+        }
+        
+        /**
+         * Check if alias is registered.
+         *
+         * @param string $alias
+         * @return bool 
+         * @static 
+         */ 
+        public static function hasAlias($alias)
+        {
+            //Method inherited from \SleepingOwl\Admin\AliasBinder            
+                        /** @var \SleepingOwl\Admin\Factories\DisplayColumnFactory $instance */
+                        return $instance->hasAlias($alias);
+        }
+        
+        /**
+         * 
+         *
+         * @param string $alias
+         * @param array $arguments
+         * @return object 
+         * @static 
+         */ 
+        public static function makeClass($alias, $arguments)
+        {
+            //Method inherited from \SleepingOwl\Admin\AliasBinder            
+                        /** @var \SleepingOwl\Admin\Factories\DisplayColumnFactory $instance */
+                        return $instance->makeClass($alias, $arguments);
+        }
+         
+    }
+
+    /**
+     * 
+     *
+     * @method static \SleepingOwl\Admin\Display\Column\Editable\Checkbox checkbox($name, $checkedLabel = null, $uncheckedLabel = null, $columnLabel = null)
+     * @method static \SleepingOwl\Admin\Display\Column\Editable\Textarea textarea($name, $label = null)
+     * @method static \SleepingOwl\Admin\Display\Column\Editable\Text text($name, $label = null)
+     * @method static \SleepingOwl\Admin\Display\Column\Editable\Select select($name, $label = null, $options = [])
+     * @method static \SleepingOwl\Admin\Display\Column\Editable\Datetime datetime($name, $label = null)
+     */ 
+    class TableColumnEditable {
+        
+        /**
+         * 
+         *
+         * @param \Illuminate\Contracts\Routing\Registrar $router
+         * @return void 
+         * @static 
+         */ 
+        public static function registerRoutes($router)
+        {
+            //Method inherited from \SleepingOwl\Admin\AliasBinder            
+                        \SleepingOwl\Admin\Factories\DisplayColumnEditableFactory::registerRoutes($router);
+        }
+        
+        /**
+         * Bind new alias.
+         *
+         * @param string $alias
+         * @param string $class
+         * @return \SleepingOwl\Admin\Factories\DisplayColumnEditableFactory 
+         * @static 
+         */ 
+        public static function bind($alias, $class)
+        {
+            //Method inherited from \SleepingOwl\Admin\AliasBinder            
+                        /** @var \SleepingOwl\Admin\Factories\DisplayColumnEditableFactory $instance */
+                        return $instance->bind($alias, $class);
+        }
+        
+        /**
+         * 
+         *
+         * @param string $alias
+         * @param string $class
+         * @return \SleepingOwl\Admin\Factories\DisplayColumnEditableFactory 
+         * @deprecated Use `bind` method
+         * @static 
+         */ 
+        public static function add($alias, $class)
+        {
+            //Method inherited from \SleepingOwl\Admin\AliasBinder            
+                        /** @var \SleepingOwl\Admin\Factories\DisplayColumnEditableFactory $instance */
+                        return $instance->add($alias, $class);
+        }
+        
+        /**
+         * 
+         *
+         * @param array $classes
+         * @return \SleepingOwl\Admin\Factories\DisplayColumnEditableFactory 
+         * @static 
+         */ 
+        public static function register($classes)
+        {
+            //Method inherited from \SleepingOwl\Admin\AliasBinder            
+                        /** @var \SleepingOwl\Admin\Factories\DisplayColumnEditableFactory $instance */
+                        return $instance->register($classes);
+        }
+        
+        /**
+         * 
+         *
+         * @return array 
+         * @static 
+         */ 
+        public static function getAliases()
+        {
+            //Method inherited from \SleepingOwl\Admin\AliasBinder            
+                        /** @var \SleepingOwl\Admin\Factories\DisplayColumnEditableFactory $instance */
+                        return $instance->getAliases();
+        }
+        
+        /**
+         * Get class by alias.
+         *
+         * @param string $alias
+         * @return string 
+         * @static 
+         */ 
+        public static function getAlias($alias)
+        {
+            //Method inherited from \SleepingOwl\Admin\AliasBinder            
+                        /** @var \SleepingOwl\Admin\Factories\DisplayColumnEditableFactory $instance */
+                        return $instance->getAlias($alias);
+        }
+        
+        /**
+         * Check if alias is registered.
+         *
+         * @param string $alias
+         * @return bool 
+         * @static 
+         */ 
+        public static function hasAlias($alias)
+        {
+            //Method inherited from \SleepingOwl\Admin\AliasBinder            
+                        /** @var \SleepingOwl\Admin\Factories\DisplayColumnEditableFactory $instance */
+                        return $instance->hasAlias($alias);
+        }
+        
+        /**
+         * 
+         *
+         * @param string $alias
+         * @param array $arguments
+         * @return object 
+         * @static 
+         */ 
+        public static function makeClass($alias, $arguments)
+        {
+            //Method inherited from \SleepingOwl\Admin\AliasBinder            
+                        /** @var \SleepingOwl\Admin\Factories\DisplayColumnEditableFactory $instance */
+                        return $instance->makeClass($alias, $arguments);
+        }
+         
+    }
+
+    /**
+     * 
+     *
+     * @method static \SleepingOwl\Admin\Display\Column\Filter\Text text()
+     * @method static \SleepingOwl\Admin\Display\Column\Filter\Date date()
+     * @method static \SleepingOwl\Admin\Display\Column\Filter\Select select()
+     * @method static \SleepingOwl\Admin\Display\Column\Filter\Range range()
+     * @method static \SleepingOwl\Admin\Display\Column\Filter\DateRange daterange()
+     */ 
+    class TableColumnFilter {
+        
+        /**
+         * 
+         *
+         * @param \Illuminate\Contracts\Routing\Registrar $router
+         * @return void 
+         * @static 
+         */ 
+        public static function registerRoutes($router)
+        {
+            //Method inherited from \SleepingOwl\Admin\AliasBinder            
+                        \SleepingOwl\Admin\Factories\DisplayColumnFilterFactory::registerRoutes($router);
+        }
+        
+        /**
+         * Bind new alias.
+         *
+         * @param string $alias
+         * @param string $class
+         * @return \SleepingOwl\Admin\Factories\DisplayColumnFilterFactory 
+         * @static 
+         */ 
+        public static function bind($alias, $class)
+        {
+            //Method inherited from \SleepingOwl\Admin\AliasBinder            
+                        /** @var \SleepingOwl\Admin\Factories\DisplayColumnFilterFactory $instance */
+                        return $instance->bind($alias, $class);
+        }
+        
+        /**
+         * 
+         *
+         * @param string $alias
+         * @param string $class
+         * @return \SleepingOwl\Admin\Factories\DisplayColumnFilterFactory 
+         * @deprecated Use `bind` method
+         * @static 
+         */ 
+        public static function add($alias, $class)
+        {
+            //Method inherited from \SleepingOwl\Admin\AliasBinder            
+                        /** @var \SleepingOwl\Admin\Factories\DisplayColumnFilterFactory $instance */
+                        return $instance->add($alias, $class);
+        }
+        
+        /**
+         * 
+         *
+         * @param array $classes
+         * @return \SleepingOwl\Admin\Factories\DisplayColumnFilterFactory 
+         * @static 
+         */ 
+        public static function register($classes)
+        {
+            //Method inherited from \SleepingOwl\Admin\AliasBinder            
+                        /** @var \SleepingOwl\Admin\Factories\DisplayColumnFilterFactory $instance */
+                        return $instance->register($classes);
+        }
+        
+        /**
+         * 
+         *
+         * @return array 
+         * @static 
+         */ 
+        public static function getAliases()
+        {
+            //Method inherited from \SleepingOwl\Admin\AliasBinder            
+                        /** @var \SleepingOwl\Admin\Factories\DisplayColumnFilterFactory $instance */
+                        return $instance->getAliases();
+        }
+        
+        /**
+         * Get class by alias.
+         *
+         * @param string $alias
+         * @return string 
+         * @static 
+         */ 
+        public static function getAlias($alias)
+        {
+            //Method inherited from \SleepingOwl\Admin\AliasBinder            
+                        /** @var \SleepingOwl\Admin\Factories\DisplayColumnFilterFactory $instance */
+                        return $instance->getAlias($alias);
+        }
+        
+        /**
+         * Check if alias is registered.
+         *
+         * @param string $alias
+         * @return bool 
+         * @static 
+         */ 
+        public static function hasAlias($alias)
+        {
+            //Method inherited from \SleepingOwl\Admin\AliasBinder            
+                        /** @var \SleepingOwl\Admin\Factories\DisplayColumnFilterFactory $instance */
+                        return $instance->hasAlias($alias);
+        }
+        
+        /**
+         * 
+         *
+         * @param string $alias
+         * @param array $arguments
+         * @return object 
+         * @static 
+         */ 
+        public static function makeClass($alias, $arguments)
+        {
+            //Method inherited from \SleepingOwl\Admin\AliasBinder            
+                        /** @var \SleepingOwl\Admin\Factories\DisplayColumnFilterFactory $instance */
+                        return $instance->makeClass($alias, $arguments);
+        }
+         
+    }
+
+    /**
+     * 
+     *
+     * @method static \SleepingOwl\Admin\Display\Filter\FilterCustom custom($name, string|\Closure|null $title = null, \Closure $callback)
+     * @method static \SleepingOwl\Admin\Display\Filter\FilterField field($name, string|\Closure|null $title = null)
+     * @method static \SleepingOwl\Admin\Display\Filter\FilterRelated related($name, string|\Closure|null $title = null)
+     * @method static \SleepingOwl\Admin\Display\Filter\FilterScope scope($name, string|\Closure|null $title = null)
+     */ 
+    class DisplayFilter {
+        
+        /**
+         * 
+         *
+         * @param \Illuminate\Contracts\Routing\Registrar $router
+         * @return void 
+         * @static 
+         */ 
+        public static function registerRoutes($router)
+        {
+            //Method inherited from \SleepingOwl\Admin\AliasBinder            
+                        \SleepingOwl\Admin\Factories\DisplayFilterFactory::registerRoutes($router);
+        }
+        
+        /**
+         * Bind new alias.
+         *
+         * @param string $alias
+         * @param string $class
+         * @return \SleepingOwl\Admin\Factories\DisplayFilterFactory 
+         * @static 
+         */ 
+        public static function bind($alias, $class)
+        {
+            //Method inherited from \SleepingOwl\Admin\AliasBinder            
+                        /** @var \SleepingOwl\Admin\Factories\DisplayFilterFactory $instance */
+                        return $instance->bind($alias, $class);
+        }
+        
+        /**
+         * 
+         *
+         * @param string $alias
+         * @param string $class
+         * @return \SleepingOwl\Admin\Factories\DisplayFilterFactory 
+         * @deprecated Use `bind` method
+         * @static 
+         */ 
+        public static function add($alias, $class)
+        {
+            //Method inherited from \SleepingOwl\Admin\AliasBinder            
+                        /** @var \SleepingOwl\Admin\Factories\DisplayFilterFactory $instance */
+                        return $instance->add($alias, $class);
+        }
+        
+        /**
+         * 
+         *
+         * @param array $classes
+         * @return \SleepingOwl\Admin\Factories\DisplayFilterFactory 
+         * @static 
+         */ 
+        public static function register($classes)
+        {
+            //Method inherited from \SleepingOwl\Admin\AliasBinder            
+                        /** @var \SleepingOwl\Admin\Factories\DisplayFilterFactory $instance */
+                        return $instance->register($classes);
+        }
+        
+        /**
+         * 
+         *
+         * @return array 
+         * @static 
+         */ 
+        public static function getAliases()
+        {
+            //Method inherited from \SleepingOwl\Admin\AliasBinder            
+                        /** @var \SleepingOwl\Admin\Factories\DisplayFilterFactory $instance */
+                        return $instance->getAliases();
+        }
+        
+        /**
+         * Get class by alias.
+         *
+         * @param string $alias
+         * @return string 
+         * @static 
+         */ 
+        public static function getAlias($alias)
+        {
+            //Method inherited from \SleepingOwl\Admin\AliasBinder            
+                        /** @var \SleepingOwl\Admin\Factories\DisplayFilterFactory $instance */
+                        return $instance->getAlias($alias);
+        }
+        
+        /**
+         * Check if alias is registered.
+         *
+         * @param string $alias
+         * @return bool 
+         * @static 
+         */ 
+        public static function hasAlias($alias)
+        {
+            //Method inherited from \SleepingOwl\Admin\AliasBinder            
+                        /** @var \SleepingOwl\Admin\Factories\DisplayFilterFactory $instance */
+                        return $instance->hasAlias($alias);
+        }
+        
+        /**
+         * 
+         *
+         * @param string $alias
+         * @param array $arguments
+         * @return object 
+         * @static 
+         */ 
+        public static function makeClass($alias, $arguments)
+        {
+            //Method inherited from \SleepingOwl\Admin\AliasBinder            
+                        /** @var \SleepingOwl\Admin\Factories\DisplayFilterFactory $instance */
+                        return $instance->makeClass($alias, $arguments);
+        }
+         
+    }
+
+    /**
+     * 
+     *
+     * @method static \SleepingOwl\Admin\Form\FormDefault form(array $elements = [])
+     * @method static \SleepingOwl\Admin\Form\FormElements elements(array $elements = [])
+     * @method static \SleepingOwl\Admin\Form\FormTabbed tabbed(array $elements = [])
+     * @method static \SleepingOwl\Admin\Form\FormPanel panel(array $elements = [])
+     */ 
+    class Form {
+        
+        /**
+         * 
+         *
+         * @param \Illuminate\Contracts\Routing\Registrar $router
+         * @return void 
+         * @static 
+         */ 
+        public static function registerRoutes($router)
+        {
+            //Method inherited from \SleepingOwl\Admin\AliasBinder            
+                        \SleepingOwl\Admin\Factories\FormFactory::registerRoutes($router);
+        }
+        
+        /**
+         * Bind new alias.
+         *
+         * @param string $alias
+         * @param string $class
+         * @return \SleepingOwl\Admin\Factories\FormFactory 
+         * @static 
+         */ 
+        public static function bind($alias, $class)
+        {
+            //Method inherited from \SleepingOwl\Admin\AliasBinder            
+                        /** @var \SleepingOwl\Admin\Factories\FormFactory $instance */
+                        return $instance->bind($alias, $class);
+        }
+        
+        /**
+         * 
+         *
+         * @param string $alias
+         * @param string $class
+         * @return \SleepingOwl\Admin\Factories\FormFactory 
+         * @deprecated Use `bind` method
+         * @static 
+         */ 
+        public static function add($alias, $class)
+        {
+            //Method inherited from \SleepingOwl\Admin\AliasBinder            
+                        /** @var \SleepingOwl\Admin\Factories\FormFactory $instance */
+                        return $instance->add($alias, $class);
+        }
+        
+        /**
+         * 
+         *
+         * @param array $classes
+         * @return \SleepingOwl\Admin\Factories\FormFactory 
+         * @static 
+         */ 
+        public static function register($classes)
+        {
+            //Method inherited from \SleepingOwl\Admin\AliasBinder            
+                        /** @var \SleepingOwl\Admin\Factories\FormFactory $instance */
+                        return $instance->register($classes);
+        }
+        
+        /**
+         * 
+         *
+         * @return array 
+         * @static 
+         */ 
+        public static function getAliases()
+        {
+            //Method inherited from \SleepingOwl\Admin\AliasBinder            
+                        /** @var \SleepingOwl\Admin\Factories\FormFactory $instance */
+                        return $instance->getAliases();
+        }
+        
+        /**
+         * Get class by alias.
+         *
+         * @param string $alias
+         * @return string 
+         * @static 
+         */ 
+        public static function getAlias($alias)
+        {
+            //Method inherited from \SleepingOwl\Admin\AliasBinder            
+                        /** @var \SleepingOwl\Admin\Factories\FormFactory $instance */
+                        return $instance->getAlias($alias);
+        }
+        
+        /**
+         * Check if alias is registered.
+         *
+         * @param string $alias
+         * @return bool 
+         * @static 
+         */ 
+        public static function hasAlias($alias)
+        {
+            //Method inherited from \SleepingOwl\Admin\AliasBinder            
+                        /** @var \SleepingOwl\Admin\Factories\FormFactory $instance */
+                        return $instance->hasAlias($alias);
+        }
+        
+        /**
+         * 
+         *
+         * @param string $alias
+         * @param array $arguments
+         * @return object 
+         * @static 
+         */ 
+        public static function makeClass($alias, $arguments)
+        {
+            //Method inherited from \SleepingOwl\Admin\AliasBinder            
+                        /** @var \SleepingOwl\Admin\Factories\FormFactory $instance */
+                        return $instance->makeClass($alias, $arguments);
+        }
+         
+    }
+
+    /**
+     * 
+     *
+     * @method static \SleepingOwl\Admin\Form\Element\Text text($name, $label = null)
+     * @method static \SleepingOwl\Admin\Form\Element\Image image($name, $label = null)
+     * @method static \SleepingOwl\Admin\Form\Element\Images images($name, $label = null)
+     * @method static \SleepingOwl\Admin\Form\Element\File file($name, $label = null)
+     * @method static \SleepingOwl\Admin\Form\Element\Time time($name, $label = null)
+     * @method static \SleepingOwl\Admin\Form\Element\Date date($name, $label = null)
+     * @method static \SleepingOwl\Admin\Form\Element\DateRange daterange($name, $label = null)
+     * @method static \SleepingOwl\Admin\Form\Element\Timestamp timestamp($name, $label = null)
+     * @method static \SleepingOwl\Admin\Form\Element\TextAddon textaddon($name, $label = null)
+     * @method static \SleepingOwl\Admin\Form\Element\Password password($name, $label = null)
+     * @method static \SleepingOwl\Admin\Form\Element\Select select($name, $label = null, array|Model $options)
+     * @method static \SleepingOwl\Admin\Form\Element\MultiSelect multiselect($name, $label = null, array|Model $options)
+     * @method static \SleepingOwl\Admin\Form\Element\SelectAjax selectajax($name, $label = null)
+     * @method static \SleepingOwl\Admin\Form\Element\MultiSelectAjax multiselectajax($name, $label = null)
+     * @method static \SleepingOwl\Admin\Form\Element\DependentSelect dependentselect($name, $label = null, array $depends = [])
+     * @method static \SleepingOwl\Admin\Form\Columns\Columns columns(array $columns = [])
+     * @method static \SleepingOwl\Admin\Form\Element\Hidden hidden($name)
+     * @method static \SleepingOwl\Admin\Form\Element\Custom custom(\Closure $callback = null)
+     * @method static \SleepingOwl\Admin\Form\Element\Html html($html)
+     * @method static \SleepingOwl\Admin\Form\Element\View view($view, array $data, \Closure $callback = null)
+     * @method static \SleepingOwl\Admin\Form\Element\Checkbox checkbox($name, $label = null)
+     * @method static \SleepingOwl\Admin\Form\Element\CKEditor ckeditor($name, $label = null)
+     * @method static \SleepingOwl\Admin\Form\Element\Textarea textarea($name, $label = null)
+     * @method static \SleepingOwl\Admin\Form\Element\Radio radio($name, $label = null)
+     * @method static \SleepingOwl\Admin\Form\Element\Wysiwyg wysiwyg($name, $label = null, $editor = null)
+     * @method static \SleepingOwl\Admin\Form\Element\Upload upload($name, $label = null)
+     * @method static \SleepingOwl\Admin\Form\Element\Number number($name, $label = null)
+     * @method static \SleepingOwl\Admin\Form\Related\Forms\HasMany hasMany(string $relationName, array $elements)
+     * @method static \SleepingOwl\Admin\Form\Related\Forms\ManyToMany manyToMany(string $relationName, array $elements)
+     * @method static \SleepingOwl\Admin\Form\Related\Forms\BelongsTo belongsTo(string $relationName, array $elements)
+     */ 
+    class FormElement {
+        
+        /**
+         * 
+         *
+         * @param \Illuminate\Contracts\Routing\Registrar $router
+         * @return void 
+         * @static 
+         */ 
+        public static function registerRoutes($router)
+        {
+            //Method inherited from \SleepingOwl\Admin\AliasBinder            
+                        \SleepingOwl\Admin\Factories\FormElementFactory::registerRoutes($router);
+        }
+        
+        /**
+         * Bind new alias.
+         *
+         * @param string $alias
+         * @param string $class
+         * @return \SleepingOwl\Admin\Factories\FormElementFactory 
+         * @static 
+         */ 
+        public static function bind($alias, $class)
+        {
+            //Method inherited from \SleepingOwl\Admin\AliasBinder            
+                        /** @var \SleepingOwl\Admin\Factories\FormElementFactory $instance */
+                        return $instance->bind($alias, $class);
+        }
+        
+        /**
+         * 
+         *
+         * @param string $alias
+         * @param string $class
+         * @return \SleepingOwl\Admin\Factories\FormElementFactory 
+         * @deprecated Use `bind` method
+         * @static 
+         */ 
+        public static function add($alias, $class)
+        {
+            //Method inherited from \SleepingOwl\Admin\AliasBinder            
+                        /** @var \SleepingOwl\Admin\Factories\FormElementFactory $instance */
+                        return $instance->add($alias, $class);
+        }
+        
+        /**
+         * 
+         *
+         * @param array $classes
+         * @return \SleepingOwl\Admin\Factories\FormElementFactory 
+         * @static 
+         */ 
+        public static function register($classes)
+        {
+            //Method inherited from \SleepingOwl\Admin\AliasBinder            
+                        /** @var \SleepingOwl\Admin\Factories\FormElementFactory $instance */
+                        return $instance->register($classes);
+        }
+        
+        /**
+         * 
+         *
+         * @return array 
+         * @static 
+         */ 
+        public static function getAliases()
+        {
+            //Method inherited from \SleepingOwl\Admin\AliasBinder            
+                        /** @var \SleepingOwl\Admin\Factories\FormElementFactory $instance */
+                        return $instance->getAliases();
+        }
+        
+        /**
+         * Get class by alias.
+         *
+         * @param string $alias
+         * @return string 
+         * @static 
+         */ 
+        public static function getAlias($alias)
+        {
+            //Method inherited from \SleepingOwl\Admin\AliasBinder            
+                        /** @var \SleepingOwl\Admin\Factories\FormElementFactory $instance */
+                        return $instance->getAlias($alias);
+        }
+        
+        /**
+         * Check if alias is registered.
+         *
+         * @param string $alias
+         * @return bool 
+         * @static 
+         */ 
+        public static function hasAlias($alias)
+        {
+            //Method inherited from \SleepingOwl\Admin\AliasBinder            
+                        /** @var \SleepingOwl\Admin\Factories\FormElementFactory $instance */
+                        return $instance->hasAlias($alias);
+        }
+        
+        /**
+         * 
+         *
+         * @param string $alias
+         * @param array $arguments
+         * @return object 
+         * @static 
+         */ 
+        public static function makeClass($alias, $arguments)
+        {
+            //Method inherited from \SleepingOwl\Admin\AliasBinder            
+                        /** @var \SleepingOwl\Admin\Factories\FormElementFactory $instance */
+                        return $instance->makeClass($alias, $arguments);
+        }
+         
+    }
+
+    /**
+     * 
+     *
+     * @method static \SleepingOwl\Admin\Display\DisplayDatatables datatables()
+     * @method static \SleepingOwl\Admin\Display\DisplayDatatablesAsync datatablesAsync()
+     * @method static \SleepingOwl\Admin\Display\DisplayTab tab(\Illuminate\Contracts\Support\Renderable $display, string $label = null, string $icon = null, $badge = null)
+     * @method static \SleepingOwl\Admin\Display\DisplayTabbed tabbed(\Closure|array $tabs = null)
+     * @method static \SleepingOwl\Admin\Display\DisplayTable table()
+     * @method static \SleepingOwl\Admin\Display\DisplayTree tree(TreeTypeInterface $type = null)
+     * @method static \SleepingOwl\Admin\Navigation\Page page($class)
+     */ 
+    class Display {
+        
+        /**
+         * 
+         *
+         * @param \Illuminate\Contracts\Routing\Registrar $router
+         * @return void 
+         * @static 
+         */ 
+        public static function registerRoutes($router)
+        {
+            //Method inherited from \SleepingOwl\Admin\AliasBinder            
+                        \SleepingOwl\Admin\Factories\DisplayFactory::registerRoutes($router);
+        }
+        
+        /**
+         * Bind new alias.
+         *
+         * @param string $alias
+         * @param string $class
+         * @return \SleepingOwl\Admin\Factories\DisplayFactory 
+         * @static 
+         */ 
+        public static function bind($alias, $class)
+        {
+            //Method inherited from \SleepingOwl\Admin\AliasBinder            
+                        /** @var \SleepingOwl\Admin\Factories\DisplayFactory $instance */
+                        return $instance->bind($alias, $class);
+        }
+        
+        /**
+         * 
+         *
+         * @param string $alias
+         * @param string $class
+         * @return \SleepingOwl\Admin\Factories\DisplayFactory 
+         * @deprecated Use `bind` method
+         * @static 
+         */ 
+        public static function add($alias, $class)
+        {
+            //Method inherited from \SleepingOwl\Admin\AliasBinder            
+                        /** @var \SleepingOwl\Admin\Factories\DisplayFactory $instance */
+                        return $instance->add($alias, $class);
+        }
+        
+        /**
+         * 
+         *
+         * @param array $classes
+         * @return \SleepingOwl\Admin\Factories\DisplayFactory 
+         * @static 
+         */ 
+        public static function register($classes)
+        {
+            //Method inherited from \SleepingOwl\Admin\AliasBinder            
+                        /** @var \SleepingOwl\Admin\Factories\DisplayFactory $instance */
+                        return $instance->register($classes);
+        }
+        
+        /**
+         * 
+         *
+         * @return array 
+         * @static 
+         */ 
+        public static function getAliases()
+        {
+            //Method inherited from \SleepingOwl\Admin\AliasBinder            
+                        /** @var \SleepingOwl\Admin\Factories\DisplayFactory $instance */
+                        return $instance->getAliases();
+        }
+        
+        /**
+         * Get class by alias.
+         *
+         * @param string $alias
+         * @return string 
+         * @static 
+         */ 
+        public static function getAlias($alias)
+        {
+            //Method inherited from \SleepingOwl\Admin\AliasBinder            
+                        /** @var \SleepingOwl\Admin\Factories\DisplayFactory $instance */
+                        return $instance->getAlias($alias);
+        }
+        
+        /**
+         * Check if alias is registered.
+         *
+         * @param string $alias
+         * @return bool 
+         * @static 
+         */ 
+        public static function hasAlias($alias)
+        {
+            //Method inherited from \SleepingOwl\Admin\AliasBinder            
+                        /** @var \SleepingOwl\Admin\Factories\DisplayFactory $instance */
+                        return $instance->hasAlias($alias);
+        }
+        
+        /**
+         * 
+         *
+         * @param string $alias
+         * @param array $arguments
+         * @return object 
+         * @static 
+         */ 
+        public static function makeClass($alias, $arguments)
+        {
+            //Method inherited from \SleepingOwl\Admin\AliasBinder            
+                        /** @var \SleepingOwl\Admin\Factories\DisplayFactory $instance */
+                        return $instance->makeClass($alias, $arguments);
+        }
+         
+    }
+
+    /**
+     * 
+     *
+     */ 
+    class Widgets {
+        
+        /**
+         * 
+         *
+         * @param $widget
+         * @return \SleepingOwl\Admin\Widgets\WidgetsRegistry 
+         * @static 
+         */ 
+        public static function registerWidget($widget)
+        {
+                        /** @var \SleepingOwl\Admin\Widgets\WidgetsRegistry $instance */
+                        return $instance->registerWidget($widget);
+        }
+        
+        /**
+         * 
+         *
+         * @param \SleepingOwl\Admin\Widgets\Factory $factory
+         * @static 
+         */ 
+        public static function placeWidgets($factory)
+        {
+                        /** @var \SleepingOwl\Admin\Widgets\WidgetsRegistry $instance */
+                        return $instance->placeWidgets($factory);
+        }
+        
+        /**
+         * 
+         *
+         * @param mixed $widget
+         * @return mixed 
+         * @static 
+         */ 
+        public static function makeWidget($widget)
+        {
+                        /** @var \SleepingOwl\Admin\Widgets\WidgetsRegistry $instance */
+                        return $instance->makeWidget($widget);
+        }
+        
+        /**
+         * 
+         *
+         * @param $widget
+         * @return \Closure 
+         * @static 
+         */ 
+        public static function createClassWidget($widget)
+        {
+                        /** @var \SleepingOwl\Admin\Widgets\WidgetsRegistry $instance */
+                        return $instance->createClassWidget($widget);
+        }
+         
+    }
+ 
+}
+
 
 namespace  { 
 
@@ -17191,6 +22907,44 @@ namespace  {
     class View extends \Illuminate\Support\Facades\View {}
 
     class Sanitizer extends \Waavi\Sanitizer\Laravel\Facade {}
+
+    class Breadcrumbs extends \DaveJamesMiller\Breadcrumbs\Facades\Breadcrumbs {}
+
+    class Form extends \Collective\Html\FormFacade {}
+
+    class Html extends \Collective\Html\HtmlFacade {}
+
+    class PackageManager extends \KodiCMS\Assets\Facades\PackageManager {}
+
+    class Meta extends \KodiCMS\Assets\Facades\Meta {}
+
+    class HTML extends \Collective\Html\HtmlFacade {}
+
+    class WysiwygManager extends \SleepingOwl\Admin\Facades\WysiwygManager {}
+
+    class MessagesStack extends \SleepingOwl\Admin\Facades\MessageStack {}
+
+    class AdminSection extends \SleepingOwl\Admin\Facades\Admin {}
+
+    class AdminTemplate extends \SleepingOwl\Admin\Facades\Template {}
+
+    class AdminNavigation extends \SleepingOwl\Admin\Facades\Navigation {}
+
+    class AdminColumn extends \SleepingOwl\Admin\Facades\TableColumn {}
+
+    class AdminColumnEditable extends \SleepingOwl\Admin\Facades\TableColumnEditable {}
+
+    class AdminColumnFilter extends \SleepingOwl\Admin\Facades\TableColumnFilter {}
+
+    class AdminDisplayFilter extends \SleepingOwl\Admin\Facades\DisplayFilter {}
+
+    class AdminForm extends \SleepingOwl\Admin\Facades\Form {}
+
+    class AdminFormElement extends \SleepingOwl\Admin\Facades\FormElement {}
+
+    class AdminDisplay extends \SleepingOwl\Admin\Facades\Display {}
+
+    class AdminWidgets extends \SleepingOwl\Admin\Facades\Widgets {}
  
 }
 
