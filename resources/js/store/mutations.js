@@ -12,7 +12,9 @@ export default {
         state.profile = payload.profile
     },
     unsetProfile(state) {
-        state.profile = {};
+        state.profile = {
+            name: ''
+        };
     },
     loadLocalProfile(state, payload) {
         state.profile = payload;

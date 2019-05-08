@@ -39,7 +39,14 @@ class CompanyController extends Controller
      */
     public function index()
     {
-        return Company::all();
+        // все поля select кроме аггрегаций должны дублироваться в groupBy
+        $companies = \DB::table('companies')
+            ->select(['companies.id','companies.name',\DB::raw('AVG(reviews.rating) AS average_rating')])
+            ->leftJoin('reviews', 'companies.id', '=', 'reviews.company_id')
+            ->groupBy('companies.id', 'companies.name')
+            ->orderBy('average_rating', 'desc')
+            ->get();
+        return response()->json($companies);
     }
 
     /**

@@ -2,9 +2,6 @@ import Axios from "axios";
 
 export default {
     path: 'http://127.0.0.1:8000/api/',
-    /**
-     * @return Promise
-     */
     async getCompanies() {
         return Axios.get(this.path + 'companies').then((response) => {
             return response.data;
@@ -20,8 +17,8 @@ export default {
             return response.data
         })
     },
-    signIn(email, password) {
-        Axios.post(this.path + 'login', {email, password}).then((response) => {
+    async signIn(email, password) {
+        return Axios.post(this.path + 'login', {email, password}).then((response) => {
             return response.data.data
         })
     },
@@ -32,7 +29,7 @@ export default {
     signOut(apiToken) {
         Axios.post(this.path + 'logout', null, {
             headers: {
-                'Authentiocation': 'Bearer ' + apiToken
+                'Authorization': 'Bearer ' + apiToken
             }
         })
     },
@@ -54,14 +51,14 @@ export default {
     async addCompany(company, apiToken) {
         return Axios.post( this.path + 'companies', company,{
             headers: {
-                'Authentiocation': 'Bearer ' + apiToken
+                'Authorization': 'Bearer ' + apiToken
             }
         });
     },
     async addReview(review, apiToken) {
         return  Axios.post(this.path + 'reviews', review, {
             headers: {
-                'Authentiocation': 'Bearer ' + apiToken
+                'Authorization': 'Bearer ' + apiToken
             }
         });
     }

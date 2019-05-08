@@ -1,7 +1,9 @@
 import Vue from 'vue';
 import Router from "vue-router";
-import CompanyComponent from "./components/CompanyComponent.vue";
-import RatingListComponent from "./components/RatingListComponent.vue";
+import RatingComponent from './views/RatingComponent';
+import CompanyComponent from "./views/CompanyComponent";
+import LoginComponent from "./views/LoginComponent";
+import RegisterComponent from "./views/RegisterComponent";
 
 Vue.use(Router);
 
@@ -11,13 +13,20 @@ export default new Router({
         {
             path: '/',
             name: 'home',
-            component: RatingListComponent,
+            component: RatingComponent,
         },
         {
             path: '/company/:id',
             name: 'company',
             component: CompanyComponent,
-            props: true
         },
+        {
+            path: '/login',
+            component: LoginComponent
+        },
+        {
+            path: '/register',
+            component: RegisterComponent
+        }
     ]
 });

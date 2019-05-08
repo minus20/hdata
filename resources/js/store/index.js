@@ -12,37 +12,26 @@ export default new Vuex.Store({
         users: [],
         reviews: [],
         profile: {
-            loggedIn: false,
-            name: '',
-            apiToken: '',
+            name: ''
         }
     },
     mutations,
     actions,
     getters: {
-        getCompanyRating: state => id => {
-            let companyReviews = state.reviews.filter(review => review.company_id === id);
-            if (companyReviews.length > 0) {
-                let accumulator = 0;
-                companyReviews.forEach(function (item) {
-                    accumulator += parseInt(item.rating);
-                });
-                return (accumulator / companyReviews.length).toFixed(1);
-                // return companyReviews.reduce((sum, review) => sum + review.rating);
-            } else {
-                return '-';
+        companyAvgRating: state => id => {
+            if (state.reviews.length && state.companies.length) {
+                let relatedReviews = state.reviews.filter((review => {
+                    return (review.company_id === id);
+                }));
+                if (relatedReviews.length < 0) {
+                    let summaryRating = relatedReviews.reduce(function (accumulator, review) {
+                        return accumulator + parseFloat(review.rating);
+                    }, .0);
+                    return (summaryRating / relatedReviews.length).toFixed(1);
+                } else {
+                    return null;
+                }
             }
-        },
-        getCompany: state => id => {
-            if (state.companies === 0 ) {
-                store.dispatch('getCompanies');
-            }
-            let company = store.state.companies;//.find((company) => company['id'] === id);
-            console.log(company);
-            return company;
-        },
-        signedIn: state => {
-            return (state.profile.name);
         }
     }
 });
