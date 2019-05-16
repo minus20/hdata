@@ -10,6 +10,9 @@
                 </router-link>
             </div>
         </div>
+        <div>
+            <router-link to="/company/new" class="btn btn-primary">Заявка на добавление</router-link>
+        </div>
     </div>
 </template>
 

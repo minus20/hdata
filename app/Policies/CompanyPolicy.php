@@ -33,6 +33,11 @@ class CompanyPolicy
         //
     }
 
+    public function approve(User $user)
+    {
+        return $user->role === 'admin';
+    }
+
     /**
      * Determine whether the user can update the company.
      *

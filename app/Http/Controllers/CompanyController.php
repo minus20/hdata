@@ -41,9 +41,15 @@ class CompanyController extends Controller
     {
         // все поля select кроме аггрегаций должны дублироваться в groupBy
         $companies = \DB::table('companies')
-            ->select(['companies.id','companies.name',\DB::raw('AVG(reviews.rating) AS average_rating')])
+            ->select([
+                'companies.id',
+                'companies.name',
+                'companies.description',
+                \DB::raw('AVG(reviews.rating) AS average_rating')
+            ])
             ->leftJoin('reviews', 'companies.id', '=', 'reviews.company_id')
-            ->groupBy('companies.id', 'companies.name')
+            ->where('companies.approved','=', 1)
+            ->groupBy('companies.id', 'companies.name', 'companies.description')
             ->orderBy('average_rating', 'desc')
             ->get();
         return response()->json($companies);
@@ -57,9 +63,15 @@ class CompanyController extends Controller
      */
     public function store(Request $request)
     {
-        $company = $this->sanitize($request->all());
-        $this->validator($company)->validate();
-        return Company::create($company);
+        $this->validator($request->all())->validate();
+        $company = new Company($this->sanitize($request->all()));
+        if (\Auth::user()->can('approve', Company::class)) {
+            $company->approved = 1;
+        } else {
+            $company->approved = 0;
+        }
+        $company->save();
+        return $company;
     }
 
     /**

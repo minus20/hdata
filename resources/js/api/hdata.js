@@ -55,6 +55,16 @@ export default {
             }
         });
     },
+
+    /**
+     * @param review
+     *  {
+     *      company_id: Number,
+     *      rating: 1..5,
+     *      comment: String
+     *  }
+     *  @param apiToken String
+     */
     async addReview(review, apiToken) {
         return  Axios.post(this.path + 'reviews', review, {
             headers: {

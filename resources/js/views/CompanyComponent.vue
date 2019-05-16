@@ -6,9 +6,17 @@
                 {{ company.average_rating }}
             </span>
         </div>
+        <div v-if="company">
+            {{ company.description }}
+        </div>
         <div v-if="reviews">
             <review v-for="review in reviews" :review="review" :key="review.id">
             </review>
+        </div>
+        <div v-if="company">
+            <router-link :to="{name: 'newReview', params: {id: company.id}}" class="btn btn-primary">
+                Написать отзыв
+            </router-link>
         </div>
     </div>
 </template>

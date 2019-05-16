@@ -26,22 +26,12 @@ class CompanyTest extends TestCase
 
     public function testsCompaniesAreListedCorrectly()
     {
-        factory(Company::class)->create([
-            'name' => 'Test company 1'
-        ]);
-
-        factory(Company::class)->create([
-            'name' => 'Test company 2'
-        ]);
+        factory(Company::class, 10)->create();
 
         $this->json('GET', 'api/companies')
             ->assertStatus(200)
-            ->assertJson([
-                ['name' => 'Test company 1'],
-                ['name' => 'Test company 2'],
-            ])
             ->assertJsonStructure([
-                '*' => ['id', 'name', 'created_at', 'updated_at'],
+                '*' => ['id', 'name', 'description', 'average_rating'],
             ]);
     }
 
@@ -76,12 +66,31 @@ class CompanyTest extends TestCase
         $token = $user->generateToken();
         $headers = ['Authorization' => "Bearer $token"];
 
-        $payload = ['name' => 'Скучная компания'];
+        $payload = ['name' => 'Скучная компания', 'approved' => 1];
         $this->json('POST', 'api/companies', $payload, $headers)
             ->assertStatus(201);
 
         $company = Company::find(1);
         self::assertEquals(0, $company->approved);
+    }
+
+    public function testAdminCreateApprovedCompany()
+    {
+        $user = User::create([
+            'name' => 'Admin',
+            'email' => 'admin@admin.com',
+            'role' => 'admin',
+            'password' => bcrypt('password'),
+        ]);
+        $token = $user->generateToken();
+        $headers = ['Authorization' => "Bearer $token"];
+
+        $payload = ['name' => 'Скучная компания', 'approved' => 1];
+        $this->json('POST', 'api/companies', $payload, $headers)
+            ->assertStatus(201);
+
+        $company = Company::find(1);
+        self::assertEquals(1, $company->approved);
     }
 
     public function testUserCanNotCreateApprovedCompany()

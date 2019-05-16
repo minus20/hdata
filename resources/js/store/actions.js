@@ -42,8 +42,17 @@ export default {
             this.dispatch('loadCompanies');
         })
     },
+    /**
+     * @param commit
+     * @param payload
+     *  {
+     *      company_id: Number,
+     *      rating: 1..5,
+     *      comment: String
+     *  }
+     */
     addReview(commit, payload) {
-        Hdata.addReview(payload).then(() => {
+        Hdata.addReview(payload, this.state.profile.api_token).then(() => {
             this.dispatch('loadReviews');
         })
     },

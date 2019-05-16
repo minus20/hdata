@@ -33,7 +33,7 @@
                 return this.$store.state.profile
             }
         },
-        created() {
+        mounted() {
             // загрузить данные с сервера
             this.$store.dispatch('loadCompanies');
             this.$store.dispatch('loadReviews');
