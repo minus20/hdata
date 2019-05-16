@@ -4,7 +4,7 @@ import Hdata from "../api/hdata";
 const api = 'http://127.0.0.1:8000/api/';
 export default {
     loadCompanies() {
-        Hdata.getCompanies().then(companies => {
+        return Hdata.getCompanies().then(companies => {
             this.commit({type: 'setCompanies', companies});
         });
     },

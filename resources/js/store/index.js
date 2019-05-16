@@ -18,6 +18,9 @@ export default new Vuex.Store({
     mutations,
     actions,
     getters: {
+        loggedIn: state =>  {
+            return !!state.profile.name;
+        },
         companyAvgRating: state => id => {
             if (state.reviews.length && state.companies.length) {
                 let relatedReviews = state.reviews.filter((review => {
