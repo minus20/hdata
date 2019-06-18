@@ -16,7 +16,7 @@
                 class="form-control"
             ></textarea>
         </div>
-        <button type="submit" class="btn btn-primary">Отправить</button>
+        <button type="submit" class="btn btn-secondary btn-lg">Отправить</button>
     </form>
 </template>
 

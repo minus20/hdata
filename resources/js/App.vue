@@ -10,9 +10,12 @@
                             </router-link>
                         </h1>
                     </div>
-                    <div v-if="!profile.name" class="col-8 text-right pt-4">
+                    <div v-if="typeof profile === 'undefined' || !profile.name" class="col-8 text-right pt-4">
                         <router-link to="/login" class="btn btn-lg btn-secondary">
                             Войти
+                        </router-link>
+                        <router-link to="/register" class="btn btn-lg btn-secondary">
+                            Зарегистрироваться
                         </router-link>
                     </div>
                     <div v-else class="col-8 text-right pt-4">
@@ -53,7 +56,7 @@
                 opacity: 1,
             });
             // загрузить данные с сервера
-            this.$store.dispatch('loadCompanies').then(() => loader.hide());
+            this.$store.dispatch('loadCompanies').then(() => setTimeout(loader.hide,2000));
             this.$store.dispatch('loadReviews');
             this.$store.dispatch('loadUsers');
             this.$store.dispatch('tryToLoadLocalProfile');

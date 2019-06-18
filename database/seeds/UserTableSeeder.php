@@ -16,7 +16,7 @@ class UserTableSeeder extends Seeder
         foreach(range(0, 10) as $i) {
             \App\User::create([
                 'name' => $faker->name,
-                'email' => $faker->email,
+                'login' => $faker->userName,
                 'password' => bcrypt('password'),
                 'api_token' => uniqid(),
             ]);
@@ -24,7 +24,7 @@ class UserTableSeeder extends Seeder
 
         \App\User::create([
             'name' => 'Administrator',
-            'email' => 'admin@admin.com',
+            'login' => 'admin',
             'password' => bcrypt('admin'),
             'api_token' => uniqid(),
             'role' => 'admin'

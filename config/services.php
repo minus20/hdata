@@ -44,4 +44,10 @@ return [
         ],
     ],
 
+    'vkontakte' => [
+        'client_id'     => env('VKONTAKTE_ID'),
+        'client_secret' => env('VKONTAKTE_SECRET'),
+        'redirect'      => env('VKONTAKTE_URL'),
+    ],
+
 ];

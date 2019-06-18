@@ -38,6 +38,12 @@ export default new Router({
         {
             path: '/register',
             component: RegisterComponent
-        }
+        },
+        {
+            path: '/auth/:provider/callback',
+            component: {
+                template: '<div class="auth-component"></div>'
+            }
+        },
     ]
 });

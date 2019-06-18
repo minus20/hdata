@@ -16,7 +16,4 @@ export default {
             name: ''
         };
     },
-    loadLocalProfile(state, payload) {
-        state.profile = payload;
-    }
 }

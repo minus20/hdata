@@ -36,10 +36,13 @@
                     v-model="password_confirmation"
             >
         </div>
-        <div>
-            <button type="submit" class="btn btn-primary">
+        <div class="mb-3">
+            <button type="submit" class="btn btn-secondary btn-lg">
                 Зарегистрироваться
             </button>
+        </div>
+        <div>
+            <button @click="AuthProvider('vkontakte')" class="btn btn-primary">VK</button>
         </div>
         <div v-if="errors.length > 0" class="alert alert-info">
             <div v-for="error in errors">
@@ -77,7 +80,31 @@
                     password: this.password,
                     password_confirmation: this.password_confirmation
                 }).then(() => this.$router.push('/'));
-            }
+            },
+            AuthProvider(provider) {
+
+                var self = this;
+
+                this.$auth.authenticate(provider).then(response =>{
+
+                    self.SocialLogin(provider,response)
+
+                }).catch(err => {
+                    console.log({err:err})
+                })
+
+            },
+
+            SocialLogin(provider,response){
+
+                this.$http.post('/sociallogin/'+provider,response).then(response => {
+                    console.log(response.data);
+                    this.$store.dispatch('setProfile', response.data);
+
+                }).catch(err => {
+                    console.log({err:err})
+                })
+            },
         }
     }
 </script>

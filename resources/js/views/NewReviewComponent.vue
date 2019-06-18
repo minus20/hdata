@@ -1,7 +1,7 @@
 <template>
     <form v-on:submit.prevent="submit">
         <div class="form-group">
-            <label for="rating">Рейтинг</label>
+            <label for="rating">Рейтинг: {{ rating }}</label>
             <input
                 id="rating"
                 type="range"
@@ -19,10 +19,11 @@
                 id="review"
                 class="form-control"
                 v-model="comment"
+                required
             ></textarea>
         </div>
         <div>
-            <button type="submit" class="btn btn-primary">
+            <button type="submit" class="btn btn-secondary btn-lg">
                 Отправить
             </button>
         </div>
@@ -43,6 +44,8 @@
                     'company_id': this.$route.params.id,
                     'rating' : this.rating,
                     'comment' : this.comment
+                }).then(() => {
+                    this.$router.back();
                 })
             }
         }
@@ -50,5 +53,8 @@
 </script>
 
 <style scoped>
-
+label {
+    color: darkgray;
+    font-size: 16px;
+}
 </style>

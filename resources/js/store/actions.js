@@ -54,12 +54,18 @@ export default {
     addReview(commit, payload) {
         Hdata.addReview(payload, this.state.profile.api_token).then(() => {
             this.dispatch('loadReviews');
+            this.dispatch('loadCompanies')
         })
+
     },
     tryToLoadLocalProfile() {
-        const storageProfile = localStorage.getItem('hdata-profile')
+        const storageProfile = localStorage.getItem('hdata-profile');
         if (storageProfile) {
-            this.commit('loadLocalProfile', JSON.parse(storageProfile));
+            this.commit({'type': 'setProfile', 'profile': JSON.parse(storageProfile)});
         }
     },
+    setProfile(commit, payload) {
+        this.commit({'type': 'setProfile', 'profile': payload});
+        localStorage.setItem('hdata-profile', JSON.stringify(this.state.profile));
+    }
 }

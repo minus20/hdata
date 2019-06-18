@@ -66,6 +66,8 @@ export default {
      *  @param apiToken String
      */
     async addReview(review, apiToken) {
+        console.log(apiToken);
+        review.api_token = apiToken;
         return  Axios.post(this.path + 'reviews', review, {
             headers: {
                 'Authorization': 'Bearer ' + apiToken

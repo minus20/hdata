@@ -30,6 +30,7 @@
 </template>
 
 <script>
+    // import  from '../api/vkopenapi'
     export default {
         data() {
             return {

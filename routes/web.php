@@ -11,6 +11,12 @@
 |
 */
 
+Route::post('sociallogin/{provider}', 'Auth\AuthController@SocialSignup');
+Route::get('auth/{provider}/callback', 'OutController@index')->where('provider', '.*');
+
 Route::get('/', function () {
     return view('welcome');
 });
+//Route::get('/{any}', function() {
+//    return view('welcome');
+//})->where('any', '.*');
