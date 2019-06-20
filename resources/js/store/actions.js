@@ -22,7 +22,7 @@ export default {
         })
     },
     signIn(commit, payload) {
-        Hdata.signIn(payload.email, payload.password).then(user => {
+        Hdata.signIn(payload.login, payload.password).then(user => {
             this.commit({'type': 'setProfile', 'profile': user});
             localStorage.setItem('hdata-profile', JSON.stringify(this.state.profile));
         });

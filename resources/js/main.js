@@ -25,6 +25,20 @@ Vue.use(VueSocialauth, {
             // scopeDelimiter: ',',
             // display: 'popup',
             // popupOptions: { width: 580, height: 400 }
+        },
+        odnoklassniki: {
+            clientId: '1279684352',
+            redirectUri: 'http://127.0.0.1:8000',
+            oauthType: '2.0',
+
+            // name: 'facebook',
+            // url: '/auth/vkontakte',
+            authorizationEndpoint: 'https://connect.ok.ru/oauth/authorize',
+            // requiredUrlParams: ['display', 'scope'],
+            // scope: ['email'],
+            // scopeDelimiter: ',',
+            // display: 'popup',
+            // popupOptions: { width: 580, height: 400 }
         }
     }
 });

@@ -176,7 +176,7 @@ return [
         App\Providers\RouteServiceProvider::class,
 
         Waavi\Sanitizer\Laravel\SanitizerServiceProvider::class,
-//        SocialiteProviders\Manager\ServiceProvider::class,
+        SocialiteProviders\Manager\ServiceProvider::class,
 
     ],
 

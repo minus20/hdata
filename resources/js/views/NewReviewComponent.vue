@@ -1,7 +1,7 @@
 <template>
     <form v-on:submit.prevent="submit">
         <div class="form-group">
-            <label for="rating">Рейтинг: {{ rating }}</label>
+            <label for="rating" class="lead">Рейтинг: {{ rating }}</label>
             <input
                 id="rating"
                 type="range"
@@ -14,10 +14,10 @@
             >
         </div>
         <div class="form-group">
-            <label for="review">Отзыв</label>
+            <label for="review" class="lead">Отзыв</label>
             <textarea
                 id="review"
-                class="form-control"
+                class="form-control form-control-lg"
                 v-model="comment"
                 required
             ></textarea>

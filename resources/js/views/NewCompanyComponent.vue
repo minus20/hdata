@@ -6,14 +6,14 @@
                 placeholder="Название"
                 required
                 v-model="name"
-                class="form-control"
+                class="form-control form-control-lg"
             >
         </div>
         <div class="form-group">
             <textarea
                 placeholder="Описание"
                 v-model="description"
-                class="form-control"
+                class="form-control form-control-lg"
             ></textarea>
         </div>
         <button type="submit" class="btn btn-secondary btn-lg">Отправить</button>

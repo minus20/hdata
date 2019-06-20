@@ -50,4 +50,10 @@ return [
         'redirect'      => env('VKONTAKTE_URL'),
     ],
 
+    'odnoklassniki' => [
+        'client_id' => env('ODNOKLASSNIKI_ID'),
+        'client_secret' => env('ODNOKLASSNIKI_SECRET'),
+        'client_public' => env('ODNOKLASSNIKI_PUBLIC'),
+        'redirect' => env('ODNOKLASSNIKI_REDIRECT'),
+    ],
 ];

@@ -10666,3 +10666,8 @@ a.text-dark:focus {
   color: #e67817;
 }
 
+a,
+a:hover {
+  color: #6c757d;
+}
+

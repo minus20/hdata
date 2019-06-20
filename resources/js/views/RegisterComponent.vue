@@ -4,7 +4,7 @@
             <input
                 type="text"
                 placeholder="Имя"
-                class="form-control"
+                class="form-control form-control-lg"
                 required
                 v-model="name"
             >
@@ -13,7 +13,7 @@
             <input
                     type="email"
                     placeholder="E-mail"
-                    class="form-control"
+                    class="form-control form-control-lg"
                     required
                     v-model="email"
             >
@@ -22,18 +22,20 @@
             <input
                     type="password"
                     placeholder="Пароль"
-                    class="form-control"
+                    class="form-control form-control-lg"
                     required
                     v-model="password"
+                    autocomplete="new-password"
             >
         </div>
         <div class="form-group">
             <input
                     type="password"
                     placeholder="Повторите пароль"
-                    class="form-control"
+                    class="form-control form-control-lg"
                     required
                     v-model="password_confirmation"
+                    autocomplete="new-password"
             >
         </div>
         <div class="mb-3">
@@ -41,9 +43,7 @@
                 Зарегистрироваться
             </button>
         </div>
-        <div>
-            <button @click="AuthProvider('vkontakte')" class="btn btn-primary">VK</button>
-        </div>
+        <social-login-component></social-login-component>
         <div v-if="errors.length > 0" class="alert alert-info">
             <div v-for="error in errors">
                 {{ error }}
@@ -53,7 +53,9 @@
 </template>
 
 <script>
+    import SocialLoginComponent from "../components/SocialLoginComponent";
     export default {
+        components: {SocialLoginComponent},
         data() {
             return {
                 name: 'Иван',
@@ -80,30 +82,6 @@
                     password: this.password,
                     password_confirmation: this.password_confirmation
                 }).then(() => this.$router.push('/'));
-            },
-            AuthProvider(provider) {
-
-                var self = this;
-
-                this.$auth.authenticate(provider).then(response =>{
-
-                    self.SocialLogin(provider,response)
-
-                }).catch(err => {
-                    console.log({err:err})
-                })
-
-            },
-
-            SocialLogin(provider,response){
-
-                this.$http.post('/sociallogin/'+provider,response).then(response => {
-                    console.log(response.data);
-                    this.$store.dispatch('setProfile', response.data);
-
-                }).catch(err => {
-                    console.log({err:err})
-                })
             },
         }
     }
