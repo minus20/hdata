@@ -19,7 +19,10 @@
                         </router-link>
                     </div>
                     <div v-else class="col-8 text-right pt-4">
-                        <span class="lead">{{ profile.name }}</span>
+                        <span v-if="profile.avatar" class="avatar">
+                            <img v-bind:src="profile.avatar">
+                        </span>
+                        <span class="lead mx-2">{{ profile.name }}</span>
                         <button class="btn btn-lg btn-secondary" v-on:click="signOut">
                             Выйти
                         </button>

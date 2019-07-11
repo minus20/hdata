@@ -25,4 +25,7 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::post('reviews', 'ReviewController@store');
 
     Route::put('companies/{company}', 'CompanyController@update');
+
+    Route::delete('companies/{company}', 'CompanyController@destroy');
+    Route::delete('reviews/{review}', 'ReviewController@destroy');
 });

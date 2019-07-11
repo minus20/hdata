@@ -2,7 +2,7 @@
     <div>
         <div v-if="companies.length">
             <div v-for="company in companies" class="rating-company">
-                <router-link :to="{name: 'company', params: {id: company.id}}" >
+                <router-link v-if="company.approved === 1" :to="{name: 'company', params: {id: company.id}}" >
                     {{ company.name }}
                     <span class="float-right rating-number" v-if="company">
                         {{ getRating(company) }}
@@ -10,8 +10,12 @@
                 </router-link>
             </div>
         </div>
+        <div v-else class="rating-company lead p-3">
+            Компании не найдены
+        </div>
         <div class="mb-4 text-right" v-if="loggedIn">
-            <router-link to="/company/new" class="btn btn-secondary btn-lg">Заявка на добавление</router-link>
+                <router-link v-if="isAdmin" to="/company/approve" class="lead">Ожидают одобрения ({{ notApprovedCount }})</router-link>
+                <router-link to="/company/new" class="btn btn-secondary btn-lg">Заявка на добавление</router-link>
         </div>
         <div class="color-block"></div>
         <div class="p-3">
@@ -32,7 +36,13 @@
                 return this.$store.state.companies;
             },
             loggedIn() {
-                return this.$store.getters.loggedIn
+                return this.$store.getters.loggedIn;
+            },
+            isAdmin() {
+                return this.$store.getters.isAdmin;
+            },
+            notApprovedCount() {
+                return this.companies.filter(company => company.approved === 0).length
             }
         },
         methods: {

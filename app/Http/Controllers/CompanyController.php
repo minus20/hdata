@@ -45,11 +45,12 @@ class CompanyController extends Controller
                 'companies.id',
                 'companies.name',
                 'companies.description',
+                'companies.approved',
                 \DB::raw('AVG(reviews.rating) AS average_rating')
             ])
             ->leftJoin('reviews', 'companies.id', '=', 'reviews.company_id')
-            ->where('companies.approved','=', 1)
-            ->groupBy('companies.id', 'companies.name', 'companies.description')
+//            ->where('companies.approved','=', 1)
+            ->groupBy('companies.id', 'companies.name', 'companies.description', 'companies.approved')
             ->orderBy('average_rating', 'desc')
             ->get();
         return response()->json($companies);
@@ -109,8 +110,9 @@ class CompanyController extends Controller
      */
     public function destroy(Company $company)
     {
-        $company->delete();
-
+        if (\Auth::user()->can('delete', $company)) {
+            $company->delete();
+        }
         return response()->json(null, 204);
     }
 }

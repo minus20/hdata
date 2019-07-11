@@ -24,6 +24,6 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Company extends Model
 {
-    protected $fillable = ['name', 'description'];
-    protected $guarded = ['approved'];
+    protected $fillable = ['name', 'description', 'approved'];
+//    protected $guarded = ['approved'];
 }

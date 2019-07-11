@@ -22,7 +22,7 @@ export default {
         })
     },
     signIn(commit, payload) {
-        Hdata.signIn(payload.login, payload.password).then(user => {
+        return Hdata.signIn(payload.login, payload.password).then(user => {
             this.commit({'type': 'setProfile', 'profile': user});
             localStorage.setItem('hdata-profile', JSON.stringify(this.state.profile));
         });
@@ -38,7 +38,7 @@ export default {
         )
     },
     addCompany(commit, payload) {
-        Hdata.addCompany(payload, this.state.profile.api_token).then(() => {
+        return Hdata.addCompany(payload, this.state.profile.api_token).then(() => {
             this.dispatch('loadCompanies');
         })
     },
@@ -54,7 +54,7 @@ export default {
     addReview(commit, payload) {
         Hdata.addReview(payload, this.state.profile.api_token).then(() => {
             this.dispatch('loadReviews');
-            this.dispatch('loadCompanies')
+            this.dispatch('loadCompanies');
         })
 
     },
@@ -67,5 +67,21 @@ export default {
     setProfile(commit, payload) {
         this.commit({'type': 'setProfile', 'profile': payload});
         localStorage.setItem('hdata-profile', JSON.stringify(this.state.profile));
+    },
+    deleteCompany(commit, payload) {
+        Hdata.deleteCompany(payload.id, this.state.profile.api_token).then(() => {
+            this.dispatch('loadCompanies');
+        });
+    },
+    deleteReview(commit, payload) {
+        Hdata.deleteReview(payload.id, this.state.profile.api_token).then(() => {
+            this.dispatch('loadCompanies');
+            this.dispatch('loadReviews');
+        })
+    },
+    approveCompany(commit, payload) {
+        Hdata.approveCompany(payload.id, this.state.profile.api_token).then(() => {
+            this.dispatch('loadCompanies');
+        })
     }
 }

@@ -21,6 +21,9 @@ export default new Vuex.Store({
         loggedIn: state =>  {
             return !!state.profile.name;
         },
+        isAdmin: state => {
+            return !!state.profile.name && state.profile.role === 'admin';
+        },
         companyAvgRating: state => id => {
             if (state.reviews.length && state.companies.length) {
                 let relatedReviews = state.reviews.filter((review => {

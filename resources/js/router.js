@@ -6,6 +6,7 @@ import LoginComponent from "./views/LoginComponent";
 import RegisterComponent from "./views/RegisterComponent";
 import NewCompanyComponent from "./views/NewCompanyComponent";
 import NewReviewComponent from "./views/NewReviewComponent";
+import ApproveCompaniesComponent from "./views/ApproveCompaniesComponent";
 
 Vue.use(Router);
 
@@ -16,6 +17,10 @@ export default new Router({
             path: '/',
             name: 'home',
             component: RatingComponent,
+        },
+        {
+            path: '/company/approve',
+            component: ApproveCompaniesComponent,
         },
         {
             path: '/company/new',

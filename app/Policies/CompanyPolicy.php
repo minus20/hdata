@@ -33,11 +33,6 @@ class CompanyPolicy
         //
     }
 
-    public function approve(User $user)
-    {
-        return $user->role === 'admin';
-    }
-
     /**
      * Determine whether the user can update the company.
      *
@@ -59,7 +54,7 @@ class CompanyPolicy
      */
     public function delete(User $user, Company $company)
     {
-        //
+        return $user->role === 'admin';
     }
 
     /**

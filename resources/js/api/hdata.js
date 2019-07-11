@@ -17,8 +17,8 @@ export default {
             return response.data
         })
     },
-    async signIn(email, password) {
-        return Axios.post(this.path + 'login', {email, password}).then((response) => {
+    async signIn(login, password) {
+        return Axios.post(this.path + 'login', {login: login, password}).then((response) => {
             return response.data.data
         })
     },
@@ -49,6 +49,7 @@ export default {
         });
     },
     async addCompany(company, apiToken) {
+        company.api_token = apiToken;
         return Axios.post( this.path + 'companies', company,{
             headers: {
                 'Authorization': 'Bearer ' + apiToken
@@ -66,12 +67,42 @@ export default {
      *  @param apiToken String
      */
     async addReview(review, apiToken) {
-        console.log(apiToken);
         review.api_token = apiToken;
         return  Axios.post(this.path + 'reviews', review, {
             headers: {
                 'Authorization': 'Bearer ' + apiToken
             }
         });
+    },
+
+    deleteCompany(company, apiToken) {
+        console.log(apiToken);
+        return Axios.delete(this.path + 'companies/' + company, {
+            headers: {
+                'Authorization': 'Bearer ' + apiToken
+            }
+        })
+    },
+
+    deleteReview(review, apiToken) {
+        console.log(apiToken);
+        return Axios.delete(this.path + 'reviews/' + review, {
+            headers: {
+                'Authorization': 'Bearer ' + apiToken
+            }
+        })
+    },
+
+    approveCompany(company, apiToken) {
+        let data = {
+            id: company,
+            approved: 1,
+            api_token: apiToken
+        };
+        return Axios.put(this.path + 'companies/' + company, data, {
+            headers: {
+                'Authorization': 'Bearer ' + apiToken
+            }
+        })
     }
 }

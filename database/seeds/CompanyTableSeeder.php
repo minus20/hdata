@@ -14,12 +14,24 @@ class CompanyTableSeeder extends Seeder
     {
         Company::truncate();
 
-        $faker = \Faker\Factory::create();
-//        factory(Company::class, 10)->create();
-        foreach (range(0, 10) as $i ) {
+        $companies = [
+            'Сокольский Док АО "С-Док"',
+            'Монза ООО «МОНЗА»',
+            'Биоват ООО «Биоват-Профиль»',
+            'Логартхаус ООО "Логартхаус"',
+            'ЛПК-35 ООО ЛПК-35',
+            'Вологодский северный лес ООО "Вологодский Северный Лес»',
+            'AGAX-домостроение ИП Аксеновский',
+            'Новый дом ООО «Новый дом»',
+            'Вологодский ДСК ООО "Вологодский ДСК"',
+            'Объединенная домостроительная компания ООО "ОДК"',
+            'Тардом ООО «Бревенчатый дом»',
+            'Кластер Вологодский Дом',
+        ];
+        foreach ($companies as $company ) {
             $company = new Company([
-                'name' => $faker->company,
-                'description' => $faker->sentence,
+                'name' => $company,
+                'description' => '',
                 'approved' => 1
             ]);
             $company->save();

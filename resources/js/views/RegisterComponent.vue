@@ -1,55 +1,58 @@
 <template>
-    <form v-on:submit.prevent="submit">
-        <div class="form-group">
-            <input
-                type="text"
-                placeholder="Имя"
-                class="form-control form-control-lg"
-                required
-                v-model="name"
-            >
-        </div>
-        <div class="form-group">
-            <input
-                    type="email"
-                    placeholder="E-mail"
+    <div>
+        <form v-on:submit.prevent="submit">
+            <div class="form-group">
+                <input
+                    type="text"
+                    placeholder="Имя"
                     class="form-control form-control-lg"
                     required
-                    v-model="email"
-            >
-        </div>
-        <div class="form-group">
-            <input
-                    type="password"
-                    placeholder="Пароль"
-                    class="form-control form-control-lg"
-                    required
-                    v-model="password"
-                    autocomplete="new-password"
-            >
-        </div>
-        <div class="form-group">
-            <input
-                    type="password"
-                    placeholder="Повторите пароль"
-                    class="form-control form-control-lg"
-                    required
-                    v-model="password_confirmation"
-                    autocomplete="new-password"
-            >
-        </div>
-        <div class="mb-3">
-            <button type="submit" class="btn btn-secondary btn-lg">
-                Зарегистрироваться
-            </button>
-        </div>
-        <social-login-component></social-login-component>
-        <div v-if="errors.length > 0" class="alert alert-info">
-            <div v-for="error in errors">
-                {{ error }}
+                    v-model="name"
+                >
             </div>
-        </div>
-    </form>
+            <div class="form-group">
+                <input
+                        type="text"
+                        placeholder="Логин"
+                        class="form-control form-control-lg"
+                        required
+                        v-model="login"
+                        autocomplete="username"
+                >
+            </div>
+            <div class="form-group">
+                <input
+                        type="password"
+                        placeholder="Пароль"
+                        class="form-control form-control-lg"
+                        required
+                        v-model="password"
+                        autocomplete="new-password"
+                >
+            </div>
+            <div class="form-group">
+                <input
+                        type="password"
+                        placeholder="Повторите пароль"
+                        class="form-control form-control-lg"
+                        required
+                        v-model="password_confirmation"
+                        autocomplete="new-password"
+                >
+            </div>
+            <div class="mb-3">
+                <button type="submit" class="btn btn-secondary btn-lg">
+                    Зарегистрироваться
+                </button>
+            </div>
+            <div v-if="errors.length > 0" class="alert alert-info">
+                <div v-for="error in errors">
+                    {{ error }}
+                </div>
+            </div>
+        </form>
+        <social-login-component></social-login-component>
+    </div>
 </template>
 
 <script>
@@ -58,10 +61,10 @@
         components: {SocialLoginComponent},
         data() {
             return {
-                name: 'Иван',
-                email: 'ivan@ivan.com',
-                password: 'ivan',
-                password_confirmation: 'ivan',
+                name: '',
+                login: '',
+                password: '',
+                password_confirmation: '',
                 errors: []
             }
         },
@@ -78,7 +81,7 @@
                 }
                 this.$store.dispatch('register', {
                     name: this.name,
-                    email: this.email,
+                    login: this.login,
                     password: this.password,
                     password_confirmation: this.password_confirmation
                 }).then(() => this.$router.push('/'));

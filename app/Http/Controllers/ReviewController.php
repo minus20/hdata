@@ -97,8 +97,9 @@ class ReviewController extends Controller
      */
     public function destroy(Review $review)
     {
-        $review->delete();
-
+        if (\Auth::user()->can('delete', $review)) {
+            $review->delete();
+        }
         return response()->json(null, 204);
     }
 }

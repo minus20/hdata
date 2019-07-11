@@ -12,20 +12,20 @@ class UserTableSeeder extends Seeder
     public function run()
     {
         \App\User::truncate();
-        $faker = \Faker\Factory::create();
-        foreach(range(0, 10) as $i) {
-            \App\User::create([
-                'name' => $faker->name,
-                'login' => $faker->userName,
-                'password' => bcrypt('password'),
-                'api_token' => uniqid(),
-            ]);
-        }
+//        $faker = \Faker\Factory::create();
+//        foreach(range(0, 10) as $i) {
+//            \App\User::create([
+//                'name' => $faker->name,
+//                'login' => $faker->userName,
+//                'password' => bcrypt('password'),
+//                'api_token' => uniqid(),
+//            ]);
+//        }
 
         \App\User::create([
             'name' => 'Administrator',
-            'login' => 'admin',
-            'password' => bcrypt('admin'),
+            'login' => 'hdataadmin',
+            'password' => bcrypt('&aR7SUSRK6n*Xk9u'),
             'api_token' => uniqid(),
             'role' => 'admin'
         ]);

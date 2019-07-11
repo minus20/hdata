@@ -10671,3 +10671,16 @@ a:hover {
   color: #6c757d;
 }
 
+.avatar {
+  height: 50px;
+  width: 50px;
+  border-radius: 25px;
+  overflow: hidden;
+  vertical-align: bottom;
+  display: inline-block;
+}
+
+.avatar img {
+  max-width: 100%;
+}
+
