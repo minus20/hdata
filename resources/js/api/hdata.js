@@ -1,7 +1,7 @@
 import Axios from "axios";
 
 export default {
-    path: 'http://127.0.0.1:8000/api/',
+    path: 'http://mmaw.vologda-uni.ru/api/',
     async getCompanies() {
         return Axios.get(this.path + 'companies').then((response) => {
             return response.data;
