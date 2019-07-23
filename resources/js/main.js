@@ -14,7 +14,7 @@ Vue.use(VueSocialauth, {
     providers: {
         vkontakte: {
             clientId: '7000247',
-            redirectUri: 'http://127.0.0.1:8000',
+            redirectUri: 'http://mmaw.vologda-uni.ru',
             oauthType: '2.0',
 
             // name: 'facebook',
@@ -28,7 +28,7 @@ Vue.use(VueSocialauth, {
         },
         odnoklassniki: {
             clientId: '1279684352',
-            redirectUri: 'http://127.0.0.1:8000',
+            redirectUri: 'http://mmaw.vologda-uni.ru',
             oauthType: '2.0',
 
             // name: 'facebook',
