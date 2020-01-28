@@ -17,7 +17,7 @@ class RegisterTest extends TestCase
     {
         $payload = [
             'name' => 'John Snow',
-            'email' => 'john@snow.com',
+            'login' => 'johnsnow',
             'password' => 'starksrock',
             'password_confirmation' => 'starksrock'
         ];
@@ -28,7 +28,7 @@ class RegisterTest extends TestCase
                 'data' => [
                     'id',
                     'name',
-                    'email',
+                    'login',
                     'created_at',
                     'updated_at',
                     'api_token',
@@ -36,16 +36,16 @@ class RegisterTest extends TestCase
             ]);
     }
 
-    public function testsTequiresPasswordEmailAndName()
+    public function testsRequiresPasswordEmailAndName()
     {
         $this->json('POST', 'api/register')
             ->assertStatus(422)
-            ->assertJson([
-                "message"=> "The given data was invalid.",
+            ->assertJsonStructure([
+                "message",
                 "errors" => [
-                    'name' => ['The name field is required.'],
-                    'email' => ['The email field is required.'],
-                    'password' => ['The password field is required.'],
+                    'name',
+                    'login',
+                    'password',
                 ],
             ]);
     }
@@ -54,16 +54,16 @@ class RegisterTest extends TestCase
     {
         $payload = [
           'name' => 'John Snow',
-          'email' => 'john@snow.com',
+          'login' => 'johnsnow',
           'password' => 'starksrock'
         ];
 
         $this->json('POST','api/register', $payload)
             ->assertStatus(422)
-            ->assertJson([
-                'message' => 'The given data was invalid.',
+            ->assertJsonStructure([
+                'message',
                 'errors' => [
-                    'password' => ['The password confirmation does not match.'],
+                    'password',
                 ]
             ]);
     }

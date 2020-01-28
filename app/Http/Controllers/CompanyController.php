@@ -19,7 +19,8 @@ class CompanyController extends Controller
     public function sanitize($data)
     {
         return \Sanitizer::make($data, [
-            'name' => 'strip_tags|escape'
+            'name' => 'strip_tags|escape',
+            'description' => 'strip_tags|escape',
         ])->sanitize();
     }
 
@@ -49,7 +50,6 @@ class CompanyController extends Controller
                 \DB::raw('AVG(reviews.rating) AS average_rating')
             ])
             ->leftJoin('reviews', 'companies.id', '=', 'reviews.company_id')
-//            ->where('companies.approved','=', 1)
             ->groupBy('companies.id', 'companies.name', 'companies.description', 'companies.approved')
             ->orderBy('average_rating', 'desc')
             ->get();
@@ -66,11 +66,7 @@ class CompanyController extends Controller
     {
         $this->validator($request->all())->validate();
         $company = new Company($this->sanitize($request->all()));
-        if (\Auth::user()->can('approve', Company::class)) {
-            $company->approved = 1;
-        } else {
-            $company->approved = 0;
-        }
+        $company->approved = \Auth::user()->can('approve', Company::class) ? 1 : 0;
         $company->save();
         return $company;
     }

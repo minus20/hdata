@@ -69,12 +69,10 @@ class ReviewTest extends TestCase
 
         $this->json('POST', 'api/reviews', $payload, $headers)
             ->assertStatus(422)
-            ->assertJson([
-                "message" => "The given data was invalid.",
+            ->assertJsonStructure([
+                "message",
                     "errors" => [
-                        "company_id" => [
-                            "The selected company id is invalid."
-                        ]
+                        "company_id"
                     ]
             ]);
     }
@@ -94,12 +92,10 @@ class ReviewTest extends TestCase
 
         $this->json('POST', 'api/reviews', $payload, $headers)
             ->assertStatus(422)
-            ->assertJson([
-                "message" => "The given data was invalid.",
+            ->assertJsonStructure([
+                "message",
                 "errors" => [
-                    "rating" => [
-                        "The rating must be between 0 and 5."
-                    ]
+                    "rating"
                 ]
             ]);
     }

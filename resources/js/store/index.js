@@ -4,7 +4,6 @@ import mutations from './mutations';
 import actions from './actions';
 
 Vue.use(Vuex);
-const api = 'http://127.0.0.1:8000/api/';
 export default new Vuex.Store({
     strict: true,
     state: {
@@ -24,20 +23,5 @@ export default new Vuex.Store({
         isAdmin: state => {
             return !!state.profile.name && state.profile.role === 'admin';
         },
-        companyAvgRating: state => id => {
-            if (state.reviews.length && state.companies.length) {
-                let relatedReviews = state.reviews.filter((review => {
-                    return (review.company_id === id);
-                }));
-                if (relatedReviews.length < 0) {
-                    let summaryRating = relatedReviews.reduce(function (accumulator, review) {
-                        return accumulator + parseFloat(review.rating);
-                    }, .0);
-                    return (summaryRating / relatedReviews.length).toFixed(1);
-                } else {
-                    return null;
-                }
-            }
-        }
     }
 });

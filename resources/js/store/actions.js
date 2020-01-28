@@ -1,7 +1,5 @@
-import Axios from "axios";
 import Hdata from "../api/hdata";
 
-const api = 'http://127.0.0.1:8000/api/';
 export default {
     loadCompanies() {
         return Hdata.getCompanies().then(companies => {

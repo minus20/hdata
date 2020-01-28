@@ -12,11 +12,11 @@ class UserTest extends TestCase
     public function testUsersListedCorrectly()
     {
         factory(User::class)->create([
-            'email' => 'testlogin@user.com',
+            'login' => 'testlogin',
             'password' => bcrypt('testpassword123')
         ]);
         factory(User::class)->create([
-            'email' => 'testlogin1@user.com',
+            'login' => 'testlogin1',
             'password' => bcrypt('testpassword123')
         ]);
 
@@ -26,8 +26,7 @@ class UserTest extends TestCase
                 '*' => [
                     "id",
                     "name",
-                    "email",
-                    "email_verified_at",
+                    "login",
                     "created_at",
                     "updated_at",
                 ],

@@ -10,7 +10,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class CompanyTest extends TestCase
 {
-    public function testsCompaniesAreCreaetedCorrectly()
+    public function testsCompaniesAreCreatedCorrectly()
     {
         $user = factory(User::class)->create();
         $token = $user->generateToken();
@@ -78,7 +78,7 @@ class CompanyTest extends TestCase
     {
         $user = User::create([
             'name' => 'Admin',
-            'email' => 'admin@admin.com',
+            'login' => 'admin',
             'role' => 'admin',
             'password' => bcrypt('password'),
         ]);

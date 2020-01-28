@@ -10,15 +10,15 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 class LoginTest extends TestCase
 {
 
-    public function testRequiresEmailAndLogin()
+    public function testRequiresLoginAndPassword()
     {
         $this->json('POST', 'api/login')
             ->assertStatus(422)
-            ->assertJson([
-                "message" => "The given data was invalid.",
+            ->assertJsonStructure([
+                "message",
                 'errors' => [
-                    'email' => ['The email field is required.'],
-                    'password' => ['The password field is required.'],
+                    'login' ,
+                    'password',
                 ]
             ]);
     }
@@ -26,12 +26,12 @@ class LoginTest extends TestCase
     public function testUserLoginsSuccessfuly()
     {
         $user = factory(User::class)->create([
-            'email' => 'testlogin@user.com',
+            'login' => 'testlogin',
             'password' => bcrypt('testpassword123')
         ]);
 
         $payload = [
-            'email' => 'testlogin@user.com',
+            'login' => 'testlogin',
             'password' => 'testpassword123'
         ];
 
@@ -41,7 +41,7 @@ class LoginTest extends TestCase
                 'data' => [
                     'id',
                     'name',
-                    'email',
+                    'login',
                     'created_at',
                     'updated_at',
                     'api_token',

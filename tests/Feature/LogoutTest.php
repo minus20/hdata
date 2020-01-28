@@ -11,7 +11,7 @@ class LogoutTest extends TestCase
 {
     public function testUserInLoggedOutProperly()
     {
-        $user = factory(User::class)->create(['email' => 'user@test.com']);
+        $user = factory(User::class)->create(['login' => 'usertest']);
         $token = $user->generateToken();
         $headers = ['Authorization' => "Bearer $token"];
 
